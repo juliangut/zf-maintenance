@@ -13,5 +13,5 @@ install:
 
 script:
   - phpcs --standard=psr2 ./src
-  - ./vendor/bin/phpmd src/ text ./phpmd.xml.dist
+  - ./vendor/bin/phpmd ./src text ./phpmd.xml.dist
   - phpunit --configuration ./phpunit.xml.dist --coverage-text
