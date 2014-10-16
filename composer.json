@@ -1,0 +1,38 @@
+{
+    "name": "juliangut/zf-maintenance",
+    "type": "zf2-module",
+    "description": "Zend Framework maintenance module.",
+    "keywords": [
+        "zf2",
+        "maintenance"
+    ],
+    "homepage": "https://github.com/juliangut/zf-maintenance",
+    "license": "New BSD",
+    "authors": [
+        {
+            "name": "Julián Gutiérrez",
+            "email": "juliangut@gmail.com",
+            "homepage": "http://juliangut.com",
+            "role": "lead"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.3.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "phpmd/phpmd": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "JgutZfMaintenance\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JgutZfMaintenanceTest\\": "tests/"
+        }
+    }
+}

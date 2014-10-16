@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ruleset name="Custom PHPMD Rule Set"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0
+                        http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+    <description>Custom PHPMD Rule Set</description>
+
+    <!-- Unused code rules -->
+    <!-- Unused private attributes -->
+    <!-- Unused private methods -->
+    <!-- Unused local variables -->
+    <!-- Unused method parameter -->
+    <rule ref="rulesets/unusedcode.xml" />
+
+
+    <!-- Naming rules -->
+    <!-- Class constructors should be __construct -->
+    <rule ref="rulesets/naming.xml/ConstructorWithNameAsEnclosingClass" />
+    <!-- Method minimum length (3) -->
+    <!-- <rule ref="rulesets/naming.xml/ShortMethodName" /> -->
+    <!-- Boolean method should be of the form isX() or hasX() -->
+    <rule ref="rulesets/naming.xml/BooleanGetMethodName" />
+    <!-- Variable minimum length (3), doesn't count variables in for statements -->
+    <!-- <rule ref="rulesets/naming.xml/ShortVariable" /> -->
+
+
+    <!-- Design rules -->
+    <!-- Arbitrary exit code -->
+    <!-- Eval expressions -->
+    <!-- Goto statements -->
+    <!-- Excessive number of children (15) -->
+    <!-- Excessive inheritance depth (6) -->
+    <!-- Excessive class dependencies (13) -->
+    <rule ref="rulesets/design.xml" />
+
+
+    <!-- Controversial rules -->
+    <!-- Avoid superglobals -->
+    <rule ref="rulesets/controversial.xml/Superglobals" />
+    <!-- Use camelCase class name-->
+    <rule ref="rulesets/controversial.xml/CamelCaseClassName" />
+    <!-- Use camelCase class attribute names -->
+    <rule ref="rulesets/controversial.xml/CamelCasePropertyName" />
+    <!-- Use camelCase class method names -->
+    <rule ref="rulesets/controversial.xml/CamelCaseMethodName" />
+    <!-- Use camelCase class method parameter names -->
+    <rule ref="rulesets/controversial.xml/CamelCaseParameterName" />
+    <!-- Use camelCase class method variable names -->
+    <!-- <rule ref="rulesets/controversial.xml/CamelCaseVariableName" /> -->
+
+
+    <!-- Code size rules -->
+    <!-- Complexity: number of decision points in a method plus one for the method entry. 1-4 low, 5-7 moderate, 8-10 high, 11+ very high -->
+    <rule ref="rulesets/codesize.xml/CyclomaticComplexity" />
+    <!-- Acyclic execution paths on a method (threshold is 200) -->
+    <rule ref="rulesets/codesize.xml/NPathComplexity" />
+    <!-- Excessive class length (1000) -->
+    <rule ref="rulesets/codesize.xml/ExcessiveClassLength" />
+    <!-- Excessive method length (150) -->
+    <rule ref="rulesets/codesize.xml/ExcessiveMethodLength">
+        <properties>
+            <property name="minimum" value="150" />
+        </properties>
+    </rule>
+    <!-- Excessive parameters list (8) -->
+    <rule ref="rulesets/codesize.xml/ExcessiveParameterList">
+        <properties>
+            <property name="minimum" value="8" />
+        </properties>
+    </rule>
+    <!-- Excessive class attributes (15) -->
+    <rule ref="rulesets/codesize.xml/TooManyFields" />
+    <!-- Excessive WMC, time and effort required to modify and maintain class (50) -->
+    <rule ref="rulesets/codesize.xml/ExcessiveClassComplexity" />
+</ruleset>
