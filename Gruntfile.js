@@ -8,7 +8,10 @@ module.exports = function(grunt) {
             options: {
                 swapPath: '/tmp'
             },
-            application: ['src/*.php']
+            application: [
+                './src/**/*.php',
+                './tests/**/*.php'
+            ]
         },
         phpcs: {
             options: {
@@ -16,7 +19,10 @@ module.exports = function(grunt) {
                 standard: './phpcs.xml'
             },
             application: {
-                dir: ['./src']
+                dir: [
+                    './src',
+                    './tests'
+                ]
             }
         },
         phpmd: {
@@ -44,7 +50,10 @@ module.exports = function(grunt) {
                 bin: './vendor/bin/phpdcd'
             },
             application: {
-                dir: ['src']
+                dir: [
+                    './src',
+                    './tests'
+                ]
             }
         },
         phpunit: {
