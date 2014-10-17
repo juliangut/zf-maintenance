@@ -23,9 +23,10 @@
     },
     "require-dev": {
         "phpunit/phpunit": "4.*",
+        "squizlabs/php_codesniffer": "*",
         "phpmd/phpmd": "*",
-        "sebastian/phpdcd": "*",
-        "squizlabs/php_codesniffer": "*"
+        "sebastian/phpcpd": "*",
+        "sebastian/phpdcd": "*"
     },
     "autoload": {
         "psr-4": {

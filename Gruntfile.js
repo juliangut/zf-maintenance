@@ -29,6 +29,16 @@ module.exports = function(grunt) {
                 dir: './src'
             }
         },
+        phpcpd: {
+            options: {
+                bin: './vendor/bin/phpcpd',
+                quiet: false,
+                ignoreExitCode: true
+            },
+            application: {
+                dir: './src'
+            }
+        },
         phpdcd: {
             options: {
                 bin: './vendor/bin/phpdcd'
@@ -47,5 +57,6 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('default', ['phplint', 'phpcs', 'phpmd', 'phpdcd', 'phpunit']);
+    grunt.registerTask('default', ['phplint', 'phpcs', 'phpmd']);
+    grunt.registerTask('full', ['default', 'phpcpd', 'phpdcd', 'phpunit']);
 };
