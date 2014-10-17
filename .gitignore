@@ -1,5 +1,3 @@
-
-
 ### IDEs / Editors
 ## Sublime Text
 *.sublime-workspace
@@ -100,9 +98,3 @@ vendor/
 
 ## NodeJS
 node_modules/
-
-## Grunt
-.grunt
-
-## Bower
-bower-components/

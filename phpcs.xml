@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ruleset name="JgutZfMaintenance PHP_CodeSniffer Rule Set">
+    <description>JgutZfMaintenance PHP_CodeSniffer Rule Set</description>
+
+    <!-- Import PSR2 entire rule set -->
+    <rule ref="PSR2"/>
+
+    <!-- exclude files/directories -->
+    <exclude-pattern>*/build/*</exclude-pattern>
+    <exclude-pattern>*/dist/*</exclude-pattern>
+</ruleset>

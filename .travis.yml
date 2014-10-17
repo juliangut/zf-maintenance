@@ -8,10 +8,10 @@ php:
 
 install:
   - composer install --dev --no-interaction
-  - pyrus install pear/PHP_CodeSniffer
   - phpenv rehash
 
 script:
-  - phpcs --standard=psr2 ./src
-  - ./vendor/bin/phpmd ./src text ./phpmd.xml.dist
-  - phpunit --configuration ./phpunit.xml.dist --coverage-text
+  - ./vendor/bin/phpcs --standard=./phpcs.xml ./src
+  - ./vendor/bin/phpmd ./src text ./phpmd.xml
+  - ./vendor/bin/phpdcd ./src
+  - phpunit --configuration ./phpunit.xml --coverage-text
