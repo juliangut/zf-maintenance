@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "df610cef42e940ffa92d6d5a9ce0ed16",
+    "hash": "03407d85f812657746d36c5fb174bd06",
     "packages": [
         {
             "name": "zendframework/zendframework",
@@ -554,12 +554,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a0d821158f305c48ff401c32bec15f60a878d9c1"
+                "reference": "cd4014775069d7d39d20f617037c2c0f9b4bc25b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a0d821158f305c48ff401c32bec15f60a878d9c1",
-                "reference": "a0d821158f305c48ff401c32bec15f60a878d9c1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/cd4014775069d7d39d20f617037c2c0f9b4bc25b",
+                "reference": "cd4014775069d7d39d20f617037c2c0f9b4bc25b",
                 "shasum": ""
             },
             "require": {
@@ -617,7 +617,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-10-15 17:08:28"
+            "time": "2014-10-17 09:28:50"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -908,7 +908,7 @@
         },
         {
             "name": "sebastian/finder-facade",
-            "version": "dev-master",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/finder-facade.git",
@@ -998,24 +998,24 @@
         },
         {
             "name": "sebastian/phpcpd",
-            "version": "2.0.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpcpd.git",
-                "reference": "a9462153f2dd90466a010179901d31fbff598365"
+                "reference": "a7488a03f25aa83e7557a2f9d524c6d40ce3fa39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpcpd/zipball/a9462153f2dd90466a010179901d31fbff598365",
-                "reference": "a9462153f2dd90466a010179901d31fbff598365",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpcpd/zipball/a7488a03f25aa83e7557a2f9d524c6d40ce3fa39",
+                "reference": "a7488a03f25aa83e7557a2f9d524c6d40ce3fa39",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "phpunit/php-timer": ">=1.0.4",
-                "sebastian/finder-facade": ">=1.1.0",
-                "sebastian/version": ">=1.0.3",
-                "symfony/console": ">=2.2.0",
+                "phpunit/php-timer": "~1.0.4",
+                "sebastian/finder-facade": "~1.1",
+                "sebastian/version": "~1.0.3",
+                "symfony/console": "~2.2",
                 "theseer/fdomdocument": "~1.4"
             },
             "bin": [
@@ -1045,7 +1045,7 @@
             ],
             "description": "Copy/Paste Detector (CPD) for PHP code.",
             "homepage": "https://github.com/sebastianbergmann/phpcpd",
-            "time": "2014-03-31 09:25:30"
+            "time": "2014-05-04 17:53:54"
         },
         {
             "name": "sebastian/phpdcd",
