@@ -14,4 +14,4 @@ script:
   - ./vendor/bin/phpcs --standard=./phpcs.xml ./src
   - ./vendor/bin/phpmd ./src text ./phpmd.xml
   - ./vendor/bin/phpdcd ./src
-  - phpunit --configuration ./phpunit.xml --coverage-text
+  - ./vendor/bin/phpunit --configuration ./phpunit.xml --coverage-text
