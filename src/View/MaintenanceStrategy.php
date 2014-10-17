@@ -17,7 +17,7 @@ use Zend\Http\Response;
 use JgutZfMaintenance\Exception\MaintenanceException;
 use Zend\View\Model\ViewModel;
 
-class UnauthorizedStrategy implements ListenerAggregateInterface
+class MaintenanceStrategy implements ListenerAggregateInterface
 {
     /**
      * @var string
