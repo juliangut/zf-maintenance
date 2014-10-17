@@ -7,7 +7,7 @@
         "maintenance"
     ],
     "homepage": "https://github.com/juliangut/zf-maintenance",
-    "license": "New BSD",
+    "license": "BSD-2-Clause",
     "authors": [
         {
             "name": "Julián Gutiérrez",
