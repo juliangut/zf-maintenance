@@ -26,6 +26,6 @@ class MaintenanceStrategyUnauthorizedStrategyServiceFactory implements FactoryIn
     {
         $options = $serviceLocator->get('zf-maintenance-options');
 
-        return new MaintenanceStrategy($config->getTemplate());
+        return new MaintenanceStrategy($options->getTemplate());
     }
 }

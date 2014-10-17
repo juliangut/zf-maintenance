@@ -13,13 +13,6 @@ use Zend\Stdlib\AbstractOptions;
 class ModuleOptions extends AbstractOptions
 {
     /**
-     * Turn off strict options mode
-     *
-     * @var boolean
-     */
-    protected $__strictMode__ = false;
-
-    /**
      * Maintenance strategy.
      *
      * @var string
@@ -32,6 +25,17 @@ class ModuleOptions extends AbstractOptions
      * @var string
      */
     protected $template = 'zf-maintenance/maintenance';
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __construct($options = null)
+    {
+        // Turn off strict options mode
+        $this->__strictMode__ = false;
+
+        parent::__construct($options);
+    }
 
     /**
      * Set maintenance strategy.

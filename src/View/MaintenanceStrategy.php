@@ -102,7 +102,7 @@ class UnauthorizedStrategy implements ListenerAggregateInterface
             return;
         }
 
-        $model    = new ViewModel($viewVariables);
+        $model    = new ViewModel();
         $response = $response ?: new Response();
 
         $model->setTemplate($this->getTemplate());
