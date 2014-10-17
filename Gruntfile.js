@@ -47,5 +47,5 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('default', ['phplint', 'phpcs', 'phpmd', 'phpdcd']);
+    grunt.registerTask('default', ['phplint', 'phpcs', 'phpmd', 'phpdcd', 'phpunit']);
 };
