@@ -9,7 +9,6 @@
 namespace JgutZfMaintenanceTest\View;
 
 use PHPUnit_Framework_TestCase;
-use JgutZfMaintenance\Options\ModuleOptions;
 use JgutZfMaintenance\View\MaintenanceStrategy;
 
 /**
@@ -21,16 +20,12 @@ class MaintenanceStrategyTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        parent::setUpBeforeClass();
-
-        $options  = new ModuleOptions(array());
-        $this->strategy = new maintenanceStrategy($options->getTemplate());
+        $this->strategy = new maintenanceStrategy('zf-maintenance/maintenance');
     }
 
     /**
      * @covers JgutZfMaintenance\View\MaintenanceStrategy::setTemplate
      * @covers JgutZfMaintenance\View\MaintenanceStrategy::getTemplate
-     * @uses JgutZfMaintenance\Options\ModuleOptions
      */
     public function testTemplate()
     {
@@ -43,7 +38,6 @@ class MaintenanceStrategyTest extends PHPUnit_Framework_TestCase
     /**
      * @covers JgutZfMaintenance\View\MaintenanceStrategy::attach
      * @covers JgutZfMaintenance\View\MaintenanceStrategy::detach
-     * @uses JgutZfMaintenance\Options\ModuleOptions
      */
     public function testAttachDetach()
     {
@@ -63,5 +57,27 @@ class MaintenanceStrategyTest extends PHPUnit_Framework_TestCase
             ->with($callbackMock)
             ->will($this->returnValue(true));
         $this->strategy->detach($eventManager);
+    }
+
+    public function testNoRoute()
+    {
+        $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
+        $event->expects($this->any())->method('getRouteMatch')->will($this->returnValue(false));
+
+        $this->assertNull($this->strategy->onRoute($event));
+    }
+
+    public function testOnRoute()
+    {
+        $serviceManager = $this->getMock('Zend\\serviceManager\\ServiceLocatorInterface');
+
+        $application = $this->getMock('«end\\Mvc\\ApplicationInterface');
+        $application->expects($this->any())->method('getServiceManager')->will($this->returnValue($serviceManager));
+
+        $routeMatch = $this->getMock('Zend\\Mvc\\Router\\RouteMatch', array(), array(), '', false);
+
+        $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
+        $event->expects($this->any())->method('getRouteMatch')->will($this->returnValue($routeMatch));
+        $event->expects($this->any())->method('getApplication')->will($this->returnValue($application));
     }
 }
