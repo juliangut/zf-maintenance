@@ -6,11 +6,14 @@
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenance\Exception;
+namespace JgutZfMaintenance\Exclusion;
 
-/**
- * Exception to be thrown in case of maintenance
- */
-class MaintenanceException extends \BadMethodCallException
+interface ExclusionInterface
 {
+    /**
+     * Determines if is excluded from maintenance mode.
+     *
+     * @return boolean
+     */
+    public function isExcluded();
 }

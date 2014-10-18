@@ -9,8 +9,11 @@
 return array(
     'service_manager' => array(
         'invokables' => array(
-            'JgutZfMaintenance\Options' =>
-                'JgutZfMaintenance\Service\ModuleOptionsServiceFactory',
+            'JgutZfMaintenance\Options'                  => 'JgutZfMaintenance\Service\ModuleOptionsServiceFactory',
+            'JgutZfMaintenance\Provider\ConfigProvider'  => 'JgutZfMaintenance\Service\ProviderConfigServiceFactory',
+            'JgutZfMaintenance\Provider\TimeProvider'    => 'JgutZfMaintenance\Service\ProviderTimeServiceFactory',
+            'JgutZfMaintenance\Exclusion\IpExclusion'    => 'JgutZfMaintenance\Service\ExclusionIpServiceFactory',
+            'JgutZfMaintenance\Exclusion\RouteExclusion' => 'JgutZfMaintenance\Service\ExclusionRouteServiceFactory',
             'JgutZfMaintenance\View\MaintenanceStrategy' =>
                 'JgutZfMaintenance\Service\MaintenanceStrategyServiceFactory',
         ),
@@ -25,5 +28,11 @@ return array(
 
         // Template for the maintenance strategy
         'template' => 'zf-maintenance/maintenance',
+
+        // Maintenance providers
+        'providers' => array(),
+
+        // Exceptions to maintenance mode
+        'exclusions' => array(),
     ),
 );

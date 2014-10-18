@@ -13,5 +13,22 @@ return array(
 
         // Template for the maintenance strategy
         'template' => 'zf-maintenance/maintenance',
+
+        // Maintenance providers
+        'providers' => array(
+            'JgutZfMaintenance\Provider\ConfigProvider' => array(
+                'active' => false,
+            ),
+        ),
+
+        // Exceptions to maintenance mode
+        'exclusions' => array(
+            'JgutZfMaintenance\Exclusion\IpExclusion'    => array(
+                '127.0.0.1',
+            ),
+            'JgutZfMaintenance\Exclusion\RouteExclusion' => array(
+                'home',
+            ),
+        ),
     ),
 );

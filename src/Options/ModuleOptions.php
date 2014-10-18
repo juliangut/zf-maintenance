@@ -27,6 +27,20 @@ class ModuleOptions extends AbstractOptions
     protected $template = 'zf-maintenance/maintenance';
 
     /**
+     * Maintenance providers list.
+     *
+     * @var array
+     **/
+    protected $providers = array();
+
+    /**
+     * Exclusions to maintenance mode.
+     *
+     * @var array
+     */
+    protected $exclusions = array();
+
+    /**
      * {@inheritDoc}
      */
     public function __construct($options = null)
@@ -75,5 +89,45 @@ class ModuleOptions extends AbstractOptions
     public function getTemplate()
     {
         return $this->template;
+    }
+
+    /**
+     * Set maintenance providers.
+     *
+     * @param array $providers
+     */
+    public function setProviders(array $providers)
+    {
+        $this->providers = $providers;
+    }
+
+    /**
+     * Get maintenance providers.
+     *
+     * @return array
+     */
+    public function getProviders()
+    {
+        return $this->providers;
+    }
+
+    /**
+     * Set maintenance exclusions.
+     *
+     * @param array $exclusions
+     */
+    public function setExclusions(array $exclusions)
+    {
+        $this->exclusions = $exclusions;
+    }
+
+    /**
+     * Get maintenance exclusions.
+     *
+     * @return array
+     */
+    public function getExclusions()
+    {
+        return $this->exclusions;
     }
 }
