@@ -8,12 +8,20 @@
 
 namespace JgutZfMaintenance\Provider;
 
+use Zend\Mvc\MvcEvent;
+
 interface ProviderInterface
 {
     /**
-     * Determines if in maintenance mode.
-     *
-     * @return boolean
+     * Marker for invalid route errors
      */
-    public function isActive();
+    const ERROR = 'error-maintenance';
+
+    /**
+     * Verifies maintenance mode.
+     *
+     * @param  MvcEvent $event
+     * @return void
+     */
+    public function onRoute(MvcEvent $event);
 }

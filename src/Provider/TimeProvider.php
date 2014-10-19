@@ -8,7 +8,9 @@
 
 namespace JgutZfMaintenance\Provider;
 
-class TimeProvider implements ScheduledProviderInterface
+use Zend\Mvc\MvcEvent;
+
+class TimeProvider extends AbstractProvider implements ScheduledProviderInterface
 {
     /**
      * Maintenance start time.
@@ -69,22 +71,22 @@ class TimeProvider implements ScheduledProviderInterface
     /**
      * {@inheritDoc}
      */
-    public function isActive()
+    public function onRoute(MvcEvent $event)
     {
         $now = new \DateTime('now');
 
         if (!$this->start && !$this->end) {
-            return false;
+            return;
         }
 
         if ($this->start && $now < $this->start) {
-            return false;
+            return;
         }
         if ($this->end && $now > $this->end) {
-            return false;
+            return;
         }
 
-        return true;
+        parent::onRoute($event);
     }
 
     /**
@@ -92,6 +94,23 @@ class TimeProvider implements ScheduledProviderInterface
      */
     public function isScheduled()
     {
-        return $this->start || $this->end;
+        $now = new \DateTime('now');
+
+        return $this->start && $now < $this->start;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getScheduleTimes()
+    {
+        if (!$this->isScheduled()) {
+            return array();
+        }
+
+        return array(
+            'start' => $this->start,
+            'end'   => $this->end,
+        );
     }
 }

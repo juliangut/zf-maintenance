@@ -22,6 +22,15 @@ return array(
         ),
     ),
 
+    'view_manager' => array(
+        'template_map'             => array(
+            'zf-maintenance/maintenance' => __DIR__ . '/../view/zf-maintenance/maintenance.phtml',
+        ),
+        'template_path_stack' => array(
+            __DIR__ . '/../view',
+        ),
+    ),
+
     'zf-maintenance' => array(
         // Strategy service to be used on maintenance
         'maintenance_strategy' => 'JgutZfMaintenance\View\MaintenanceStrategy',

@@ -16,4 +16,11 @@ interface ScheduledProviderInterface extends ProviderInterface
      * @return boolean
      */
     public function isScheduled();
+
+    /**
+     * Get schedule time span.
+     *
+     * @return array()
+     */
+    public function getScheduleTimes();
 }

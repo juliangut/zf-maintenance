@@ -8,7 +8,9 @@
 
 namespace JgutZfMaintenance\Provider;
 
-class ConfigProvider implements ProviderInterface
+use Zend\Mvc\MvcEvent;
+
+class ConfigProvider extends AbstractProvider
 {
     /**
      * Maintenance mode active.
@@ -29,10 +31,24 @@ class ConfigProvider implements ProviderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Get maintenance mode active.
+     *
+     * @return boolean
      */
     public function isActive()
     {
         return $this->active;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function onRoute(MvcEvent $event)
+    {
+        if (!$this->active) {
+            return;
+        }
+
+        parent::onRoute($event);
     }
 }

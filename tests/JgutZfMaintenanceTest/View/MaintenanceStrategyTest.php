@@ -10,6 +10,7 @@ namespace JgutZfMaintenanceTest\View;
 
 use PHPUnit_Framework_TestCase;
 use JgutZfMaintenance\View\MaintenanceStrategy;
+use JgutZfMaintenance\Provider\ProviderInterface;
 
 /**
  * @covers JgutZfMaintenance\View\MaintenanceStrategy
@@ -59,25 +60,47 @@ class MaintenanceStrategyTest extends PHPUnit_Framework_TestCase
         $this->strategy->detach($eventManager);
     }
 
-    public function testNoRoute()
+    /**
+     * @covers JgutZfMaintenance\View\MaintenanceStrategy::onDispatchError
+     */
+    public function testAlreadyResponse()
     {
-        $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
-        $event->expects($this->any())->method('getRouteMatch')->will($this->returnValue(false));
+        $result = $this->getMock('Zend\\Http\\Response', array(), array(), '', false);
+        $event  = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
+        $event->expects($this->once())->method('getResult')->will($this->returnValue($result));
+        $event->expects($this->once())->method('getResponse')->will($this->returnValue(null));
 
-        $this->assertNull($this->strategy->onRoute($event));
+        $event->expects($this->never())->method('setResponse');
+        $this->strategy->onDispatchError($event);
     }
 
-    public function testOnRoute()
+    /**
+     * @covers JgutZfMaintenance\View\MaintenanceStrategy::onDispatchError
+     */
+    public function testWrongError()
     {
-        $serviceManager = $this->getMock('Zend\\serviceManager\\ServiceLocatorInterface');
+        $event  = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
+        $event->expects($this->once())->method('getResult')->will($this->returnValue(null));
+        $event->expects($this->once())->method('getResponse')->will($this->returnValue(null));
+        $event->expects($this->once())->method('getError')->will($this->returnValue('not_correct_error'));
 
-        $application = $this->getMock('«end\\Mvc\\ApplicationInterface');
-        $application->expects($this->any())->method('getServiceManager')->will($this->returnValue($serviceManager));
+        $event->expects($this->never())->method('setResponse');
+        $this->strategy->onDispatchError($event);
+    }
 
-        $routeMatch = $this->getMock('Zend\\Mvc\\Router\\RouteMatch', array(), array(), '', false);
+    /**
+     * @covers JgutZfMaintenance\View\MaintenanceStrategy::onDispatchError
+     */
+    public function testSetResponse()
+    {
+        $viewModel = $this->getMock('Zend\\View\\Model\\ViewModel', array(), array(), '', false);
+        $event  = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
+        $event->expects($this->once())->method('getResult')->will($this->returnValue(null));
+        $event->expects($this->once())->method('getResponse')->will($this->returnValue(null));
+        $event->expects($this->once())->method('getError')->will($this->returnValue(ProviderInterface::ERROR));
+        $event->expects($this->once())->method('getViewModel')->will($this->returnValue($viewModel));
 
-        $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
-        $event->expects($this->any())->method('getRouteMatch')->will($this->returnValue($routeMatch));
-        $event->expects($this->any())->method('getApplication')->will($this->returnValue($application));
+        $event->expects($this->once())->method('setResponse');
+        $this->strategy->onDispatchError($event);
     }
 }

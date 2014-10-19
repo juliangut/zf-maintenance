@@ -16,6 +16,19 @@ use JgutZfMaintenance\Module;
  */
 class ModuleTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @covers JgutZfMaintenance\Module::getConfig
+     */
+    public function testGetConfig()
+    {
+        $module = new Module();
+
+        $this->assertInternalType('array', $module->getConfig());
+    }
+
+    /**
+     * @covers JgutZfMaintenance\Module::getAutoloaderConfig
+     */
     public function testGetAutoloaderConfig()
     {
         $module = new Module();
@@ -23,10 +36,13 @@ class ModuleTest extends PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $module->getAutoloaderConfig());
     }
 
-    public function testGetConfig()
+    /**
+     * @covers JgutZfMaintenance\Module::getViewHelperConfig
+     */
+    public function testGetViewHelperConfig()
     {
         $module = new Module();
 
-        $this->assertInternalType('array', $module->getConfig());
+        $this->assertInternalType('array', $module->getViewHelperConfig());
     }
 }
