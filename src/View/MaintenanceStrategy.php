@@ -77,13 +77,14 @@ class MaintenanceStrategy implements ListenerAggregateInterface
             return;
         }
 
-        $model    = new ViewModel();
-        $response = $response ?: new Response();
-
+        $model = new ViewModel();
         $model->setTemplate($this->getTemplate());
         $event->getViewModel()->addChild($model);
+
+        $response = $response ?: new Response();
         $response->setStatusCode(Response::STATUS_CODE_503);
         $response->getHeaders()->addHeaderLine('Retry-After', 3600);
+
         $event->setResponse($response);
     }
 
