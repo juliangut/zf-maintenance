@@ -14,7 +14,8 @@ use Zend\Mvc\MvcEvent;
 use JgutZfMaintenance\Provider\ProviderInterface;
 use JgutZfMaintenance\Exclusion\ExclusionInterface;
 use Zend\Stdlib\ResponseInterface;
-use Zend\Http\Response;
+use Zend\Stdlib\ResponseInterface as Response;
+use Zend\Http\Response as HttpResponse;
 use Zend\View\Model\ViewModel;
 
 class MaintenanceStrategy implements ListenerAggregateInterface
