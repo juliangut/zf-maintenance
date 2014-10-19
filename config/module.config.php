@@ -33,7 +33,7 @@ return array(
 
     'zf-maintenance' => array(
         // Strategy service to be used on maintenance
-        'maintenance_strategy' => 'JgutZfMaintenance\\View\\MaintenanceStrategy',
+        'maintenance_strategy' => 'JgutZfMaintenance\View\MaintenanceStrategy',
 
         // Template for the maintenance strategy
         'template' => 'zf-maintenance/maintenance',
