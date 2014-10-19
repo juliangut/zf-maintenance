@@ -8,7 +8,7 @@
 
 return array(
     'service_manager' => array(
-        'invokables' => array(
+        'factories' => array(
             'JgutZfMaintenance\Options'                  => 'JgutZfMaintenance\Service\ModuleOptionsServiceFactory',
             'JgutZfMaintenance\Provider\ConfigProvider'  => 'JgutZfMaintenance\Service\ProviderConfigServiceFactory',
             'JgutZfMaintenance\Provider\TimeProvider'    => 'JgutZfMaintenance\Service\ProviderTimeServiceFactory',
@@ -33,7 +33,7 @@ return array(
 
     'zf-maintenance' => array(
         // Strategy service to be used on maintenance
-        'maintenance_strategy' => 'JgutZfMaintenance\View\MaintenanceStrategy',
+        'maintenance_strategy' => 'JgutZfMaintenance\\View\\MaintenanceStrategy',
 
         // Template for the maintenance strategy
         'template' => 'zf-maintenance/maintenance',

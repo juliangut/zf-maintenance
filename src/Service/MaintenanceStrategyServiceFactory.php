@@ -15,7 +15,7 @@ use JgutZfMaintenance\View\MaintenanceStrategy;
 /**
  * Factory responsible of instantiating {@see \JgutZfMaintenance\View\MaintenanceStrategy}
  */
-class MaintenanceStrategyUnauthorizedStrategyServiceFactory implements FactoryInterface
+class MaintenanceStrategyServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
