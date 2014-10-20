@@ -16,6 +16,8 @@ return array(
             'JgutZfMaintenance\Exclusion\RouteExclusion' => 'JgutZfMaintenance\Service\ExclusionRouteServiceFactory',
             'JgutZfMaintenance\View\MaintenanceStrategy' =>
                 'JgutZfMaintenance\Service\MaintenanceStrategyServiceFactory',
+            'JgutZfMaintenance\Collector\MaintenanceCollector' =>
+                'JgutZfMaintenance\Service\MaintenanceCollectorServiceFactory',
         ),
         'aliases' => array(
             'zf-maintenance-options' => 'JgutZfMaintenance\Options',
@@ -43,5 +45,18 @@ return array(
 
         // Exceptions to maintenance mode
         'exclusions' => array(),
+    ),
+
+    'zenddevelopertools' => array(
+        'profiler' => array(
+            'collectors' => array(
+                'jgut-zf-maintenance-collector' => 'JgutZfMaintenance\Collector\MaintenanceCollector',
+            ),
+        ),
+        'toolbar' => array(
+            'entries' => array(
+                'jgut-zf-maintenance-collector' => 'zend-developer-tools/toolbar/jgut-zf-maintenance',
+            ),
+        ),
     ),
 );

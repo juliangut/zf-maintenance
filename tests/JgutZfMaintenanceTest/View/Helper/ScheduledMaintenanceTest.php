@@ -31,7 +31,7 @@ class ScheduledMaintenanceTest extends PHPUnit_Framework_TestCase
      * @covers JgutZfMaintenance\View\Helper\ScheduledMaintenance::getServiceLocator
      * @covers JgutZfMaintenance\View\Helper\ScheduledMaintenance::__invoke
      */
-    public function testReturnTimes()
+    public function testReturnSchedule()
     {
         $scheduleTimes = array('start' => new \DateTime('now'), 'end' => null);
 
