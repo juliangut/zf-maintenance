@@ -82,7 +82,7 @@ class MaintenanceStrategy implements ListenerAggregateInterface
         $event->getViewModel()->addChild($model);
 
         $response = $response ?: new Response();
-        $response->setStatusCode(Response::STATUS_CODE_503);
+        $response->setStatusCode(HttpResponse::STATUS_CODE_503);
         $response->getHeaders()->addHeaderLine('Retry-After', 3600);
 
         $event->setResponse($response);
