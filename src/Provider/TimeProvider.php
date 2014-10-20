@@ -40,6 +40,10 @@ class TimeProvider extends AbstractProvider implements ScheduledProviderInterfac
      */
     public function setStart(\DateTime $start)
     {
+        if ($this->end && $start > $this->end) {
+            throw new \InvalidArgumentException('Start time should come before end time');
+        }
+
         $this->start = $start;
     }
 
@@ -61,6 +65,10 @@ class TimeProvider extends AbstractProvider implements ScheduledProviderInterfac
      */
     public function setEnd(\DateTime $end)
     {
+        if ($this->start && $end < $this->start) {
+            throw new \InvalidArgumentException('End time should come after start time');
+        }
+
         $this->end = $end;
     }
 
@@ -77,22 +85,32 @@ class TimeProvider extends AbstractProvider implements ScheduledProviderInterfac
     /**
      * {@inheritDoc}
      */
-    public function onRoute(MvcEvent $event)
+    public function isActive()
     {
         $now = new \DateTime('now');
 
         if (!$this->start && !$this->end) {
-            return;
+            return false;
         }
 
         if ($this->start && $now < $this->start) {
-            return;
+            return false;
         }
         if ($this->end && $now > $this->end) {
-            return;
+            return false;
         }
 
-        parent::onRoute($event);
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function onRoute(MvcEvent $event)
+    {
+        if ($this->isActive()) {
+            parent::onRoute($event);
+        }
     }
 
     /**

@@ -43,6 +43,7 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers JgutZfMaintenance\Provider\TimeProvider::isActive
      * @covers JgutZfMaintenance\Provider\TimeProvider::isScheduled
      * @covers JgutZfMaintenance\Provider\TimeProvider::getScheduleTimes
      * @covers JgutZfMaintenance\Provider\TimeProvider::onRoute
@@ -53,6 +54,7 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
 
         $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
 
+        $this->assertFalse($provider->isActive());
         $this->assertFalse($provider->isScheduled());
         $this->assertEquals(array(), $provider->getScheduleTimes());
         $this->assertNull($provider->onRoute($event));
@@ -63,6 +65,7 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
      * @covers JgutZfMaintenance\Provider\TimeProvider::getStart
      * @covers JgutZfMaintenance\Provider\TimeProvider::setEnd
      * @covers JgutZfMaintenance\Provider\TimeProvider::getEnd
+     * @covers JgutZfMaintenance\Provider\TimeProvider::isActive
      * @covers JgutZfMaintenance\Provider\TimeProvider::isScheduled
      * @covers JgutZfMaintenance\Provider\TimeProvider::getScheduleTimes
      */
@@ -75,6 +78,7 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
 
         $provider->setStart($start);
         $this->assertEquals($start, $provider->getStart());
+        $this->assertFalse($provider->isActive());
         $this->assertTrue($provider->isScheduled());
         $this->assertEquals(array('start' => $start, 'end' => null), $provider->getScheduleTimes());
 
@@ -85,12 +89,44 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
 
         $provider->setEnd($end);
         $this->assertEquals($end, $provider->getEnd());
+        $this->assertTrue($provider->isActive());
         $this->assertFalse($provider->isScheduled());
         $this->assertEquals(array(), $provider->getScheduleTimes());
 
         $provider->setStart($start);
+        $this->assertFalse($provider->isActive());
         $this->assertTrue($provider->isScheduled());
         $this->assertEquals(array('start' => $start, 'end' => $end), $provider->getScheduleTimes());
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testInvalidEndDate()
+    {
+        $provider = new TimeProvider();
+
+        $start = new \DateTime('now');
+        $provider->setStart($start);
+
+        $end = new \DateTime('now');
+        $end->sub(new \DateInterval('P2D'));
+        $provider->setEnd($end);
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testInvalidStartDate()
+    {
+        $provider = new TimeProvider();
+
+        $end = new \DateTime('now');
+        $provider->setEnd($end);
+
+        $start = new \DateTime('now');
+        $start->add(new \DateInterval('P2D'));
+        $provider->setStart($start);
     }
 
     /**

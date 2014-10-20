@@ -14,7 +14,7 @@ use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use JgutZfMaintenance\Exception\MaintenanceException;
 
-class AbstractProvider implements ProviderInterface, ListenerAggregateInterface
+abstract class AbstractProvider implements ProviderInterface, ListenerAggregateInterface
 {
     /**
      * Maintenance description.

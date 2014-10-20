@@ -36,9 +36,7 @@ class ConfigProvider extends AbstractProvider
     }
 
     /**
-     * Get maintenance mode active.
-     *
-     * @return boolean
+     * {@inheritDoc}
      */
     public function isActive()
     {

@@ -18,6 +18,13 @@ interface ProviderInterface
     const ERROR = 'error-maintenance-mode-on';
 
     /**
+     * Get maintenance mode active.
+     *
+     * @return boolean
+     */
+    public function isActive();
+
+    /**
      * Verifies maintenance mode.
      *
      * @param  MvcEvent $event
