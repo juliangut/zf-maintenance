@@ -53,6 +53,8 @@ class ScheduledMaintenanceTest extends PHPUnit_Framework_TestCase
         $helper = new ScheduledMaintenance($providers);
         $helper->setServiceLocator($helperManager);
 
+        $this->assertEquals($helperManager, $helper->getServiceLocator());
+
         $this->assertEquals($scheduleTimes, $helper->__invoke());
     }
 }
