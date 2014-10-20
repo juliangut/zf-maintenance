@@ -76,10 +76,6 @@ class MaintenanceCollector implements CollectorInterface
                     $this->active = $provider->isActive();
                 }
             }
-
-            if ($this->active && count($this->scheduleTimes)) {
-                break;
-            }
         }
     }
 
