@@ -41,7 +41,12 @@ class ScheduledMaintenance extends AbstractHelper implements ServiceLocatorAware
      */
     public function __invoke()
     {
-        $serviceManager = $this->getServiceLocator();
+        if (!count($this->providers)) {
+            return false;
+        }
+
+        $helperManager  = $this->getServiceLocator();
+        $serviceManager = $helperManager->getServiceLocator();
 
         foreach (array_keys($this->providers) as $providerName) {
             if ($serviceManager->has($providerName)) {

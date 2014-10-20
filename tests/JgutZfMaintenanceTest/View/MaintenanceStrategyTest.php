@@ -94,11 +94,14 @@ class MaintenanceStrategyTest extends PHPUnit_Framework_TestCase
     public function testSetResponse()
     {
         $viewModel = $this->getMock('Zend\\View\\Model\\ViewModel', array(), array(), '', false);
+        $viewModel->expects($this->once())->method('clearChildren');
+        $viewModel->expects($this->once())->method('addChild');
+
         $event  = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
         $event->expects($this->once())->method('getResult')->will($this->returnValue(null));
         $event->expects($this->once())->method('getResponse')->will($this->returnValue(null));
         $event->expects($this->once())->method('getError')->will($this->returnValue(ProviderInterface::ERROR));
-        $event->expects($this->once())->method('getViewModel')->will($this->returnValue($viewModel));
+        $event->expects($this->any())->method('getViewModel')->will($this->returnValue($viewModel));
 
         $event->expects($this->once())->method('setResponse');
         $this->strategy->onDispatchError($event);

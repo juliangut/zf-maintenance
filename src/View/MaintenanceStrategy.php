@@ -13,7 +13,6 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\Mvc\MvcEvent;
 use JgutZfMaintenance\Provider\ProviderInterface;
 use JgutZfMaintenance\Exclusion\ExclusionInterface;
-use Zend\Stdlib\ResponseInterface;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Http\Response as HttpResponse;
 use Zend\View\Model\ViewModel;
@@ -77,11 +76,17 @@ class MaintenanceStrategy implements ListenerAggregateInterface
             return;
         }
 
-        $model = new ViewModel();
+        $viewVariables = array(
+           'error'  => $event->getParam('error'),
+        );
+
+        $model = new ViewModel($viewVariables);
         $model->setTemplate($this->getTemplate());
+
+        $event->getViewModel()->clearChildren();
         $event->getViewModel()->addChild($model);
 
-        $response = $response ?: new Response();
+        $response = $response ?: new HttpResponse();
         $response->setStatusCode(HttpResponse::STATUS_CODE_503);
         $response->getHeaders()->addHeaderLine('Retry-After', 3600);
 

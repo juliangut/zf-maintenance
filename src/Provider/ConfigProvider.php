@@ -13,6 +13,11 @@ use Zend\Mvc\MvcEvent;
 class ConfigProvider extends AbstractProvider
 {
     /**
+     * {@inheritDoc}
+     */
+    protected $maintenanceDescription = 'Manual maintenance mode active on JgutZfMaintenance\Provider\ConfigProvider';
+
+    /**
      * Maintenance mode active.
      *
      * @var boolean

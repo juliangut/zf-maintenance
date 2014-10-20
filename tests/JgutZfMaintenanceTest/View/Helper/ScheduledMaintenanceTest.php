@@ -41,14 +41,17 @@ class ScheduledMaintenanceTest extends PHPUnit_Framework_TestCase
             $this->returnValue($scheduleTimes)
         );
 
-        $serviceManager = $this->getMock('Zend\\serviceManager\\ServiceLocatorInterface');
+        $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
         $serviceManager->expects($this->any())->method('has')->will($this->returnValue(true));
         $serviceManager->expects($this->any())->method('get')->will($this->returnValue($provider));
+
+        $helperManager = $this->getMock('Zend\\View\\HelperPluginManager', array(), array(), '', false);
+        $helperManager->expects($this->once())->method('getServiceLocator')->will($this->returnValue($serviceManager));
 
         $providers = array('JgutZfMaintenance\\Provider\\TimeProvider' => '');
 
         $helper = new ScheduledMaintenance($providers);
-        $helper->setServiceLocator($serviceManager);
+        $helper->setServiceLocator($helperManager);
 
         $this->assertEquals($scheduleTimes, $helper->__invoke());
     }

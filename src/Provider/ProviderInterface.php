@@ -15,7 +15,7 @@ interface ProviderInterface
     /**
      * Marker for invalid route errors
      */
-    const ERROR = 'error-maintenance';
+    const ERROR = 'error-maintenance-mode-on';
 
     /**
      * Verifies maintenance mode.

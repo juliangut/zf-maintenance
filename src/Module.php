@@ -11,6 +11,7 @@ namespace JgutZfMaintenance;
 use Zend\Mvc\MvcEvent;
 use JgutZfMaintenance\Provider\AbstractProvider;
 use JgutZfMaintenance\View\Helper\ScheduledMaintenance;
+use Zend\View\HelperPluginManager;
 
 class Module
 {
@@ -66,8 +67,8 @@ class Module
     {
         return array(
             'factories' => array(
-                'scheduledMaintenance' => function (AbstractPluginManager $pluginManager) {
-                    $serviceLocator = $pluginManager->getServiceLocator();
+                'scheduledMaintenance' => function (HelperPluginManager $helperPluginManager) {
+                    $serviceLocator = $helperPluginManager->getServiceLocator();
                     $options        = $serviceLocator->get('zf-maintenance-options');
 
                     return new ScheduledMaintenance($options->getProviders());

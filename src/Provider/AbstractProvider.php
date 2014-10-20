@@ -17,6 +17,13 @@ use JgutZfMaintenance\Exception\MaintenanceException;
 class AbstractProvider implements ProviderInterface, ListenerAggregateInterface
 {
     /**
+     * Maintenance description.
+     *
+     * @var string
+     */
+    protected $maintenanceDescription = 'Maintenance mode active on JgutZfMaintenance\Provider\ProviderInterface';
+
+    /**
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
@@ -57,8 +64,8 @@ class AbstractProvider implements ProviderInterface, ListenerAggregateInterface
 
         $event->setError(static::ERROR);
 
-        $errorMessage = sprintf('Maintenance mode is on');
-        $event->setParam('exception', new MaintenanceException($errorMessage));
+        $event->setParam('exception', new MaintenanceException($this->maintenanceDescription));
+
 
         $application = $event->getApplication();
         $application->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $event);
