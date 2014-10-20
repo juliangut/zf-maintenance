@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6ab58fdcbf3a885d7e2340b3225972f2",
+    "hash": "54275e7b17f6dae350e26b0c1096037c",
     "packages": [
         {
             "name": "zendframework/zendframework",
@@ -745,12 +745,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "5843509fed39dee4b356a306401e9dd1a931fec7"
+                "reference": "92d423df43b160006907ea4297b916fdf00415d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/5843509fed39dee4b356a306401e9dd1a931fec7",
-                "reference": "5843509fed39dee4b356a306401e9dd1a931fec7",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/92d423df43b160006907ea4297b916fdf00415d8",
+                "reference": "92d423df43b160006907ea4297b916fdf00415d8",
                 "shasum": ""
             },
             "require": {
@@ -789,7 +789,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2014-08-15 10:29:00"
+            "time": "2014-10-19 13:19:30"
         },
         {
             "name": "sebastian/environment",
@@ -1002,19 +1002,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpcpd.git",
-                "reference": "a7488a03f25aa83e7557a2f9d524c6d40ce3fa39"
+                "reference": "0874c9455e73af847ef91adbaeee0f61a700ba3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpcpd/zipball/a7488a03f25aa83e7557a2f9d524c6d40ce3fa39",
-                "reference": "a7488a03f25aa83e7557a2f9d524c6d40ce3fa39",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpcpd/zipball/0874c9455e73af847ef91adbaeee0f61a700ba3d",
+                "reference": "0874c9455e73af847ef91adbaeee0f61a700ba3d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "phpunit/php-timer": "~1.0.4",
+                "phpunit/php-timer": "~1.0",
                 "sebastian/finder-facade": "~1.1",
-                "sebastian/version": "~1.0.3",
+                "sebastian/version": "~1.0",
                 "symfony/console": "~2.2",
                 "theseer/fdomdocument": "~1.4"
             },
@@ -1045,7 +1045,7 @@
             ],
             "description": "Copy/Paste Detector (CPD) for PHP code.",
             "homepage": "https://github.com/sebastianbergmann/phpcpd",
-            "time": "2014-05-04 17:53:54"
+            "time": "2014-10-19 17:48:47"
         },
         {
             "name": "sebastian/phpdcd",
@@ -1053,21 +1053,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpdcd.git",
-                "reference": "c2a4ccc557c668afddf66c64eda18e305dc02ac9"
+                "reference": "fc917d021793138fbc118bcabd75abaff1423170"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpdcd/zipball/c2a4ccc557c668afddf66c64eda18e305dc02ac9",
-                "reference": "c2a4ccc557c668afddf66c64eda18e305dc02ac9",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpdcd/zipball/fc917d021793138fbc118bcabd75abaff1423170",
+                "reference": "fc917d021793138fbc118bcabd75abaff1423170",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "phpunit/php-timer": ">=1.0.4",
-                "phpunit/php-token-stream": ">=1.1.3",
-                "sebastian/finder-facade": ">=1.1.0",
-                "sebastian/version": ">=1.0.3",
-                "symfony/console": ">=2.2.0"
+                "phpunit/php-timer": "~1.0",
+                "phpunit/php-token-stream": "~1.1",
+                "sebastian/finder-facade": "~1.1",
+                "sebastian/version": "~1.0",
+                "symfony/console": "~2.2"
             },
             "require-dev": {
                 "phpunit/phpunit": "~3.7"
@@ -1099,7 +1099,7 @@
             ],
             "description": "Dead Code Detector (DCD) for PHP code.",
             "homepage": "https://github.com/sebastianbergmann/phpdcd",
-            "time": "2014-04-27 07:20:11"
+            "time": "2014-10-19 17:48:27"
         },
         {
             "name": "sebastian/version",
@@ -1553,15 +1553,76 @@
             "description": "The classes contained within this repository extend the standard DOM to use exceptions at all occasions of errors instead of PHP warnings or notices. They also add various custom methods and shortcuts for convenience and to simplify the usage of DOM.",
             "homepage": "https://github.com/theseer/fDOMDocument",
             "time": "2014-09-13 10:57:19"
+        },
+        {
+            "name": "zendframework/zend-developer-tools",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/ZendDeveloperTools.git",
+                "reference": "6468ed1c58a65ad797f04ebe794ca85fef0ff142"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/ZendDeveloperTools/zipball/6468ed1c58a65ad797f04ebe794ca85fef0ff142",
+                "reference": "6468ed1c58a65ad797f04ebe794ca85fef0ff142",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zend-debug": "2.*",
+                "zendframework/zend-eventmanager": "2.*",
+                "zendframework/zend-mvc": "2.*",
+                "zendframework/zend-servicemanager": "2.*",
+                "zendframework/zend-stdlib": "2.*",
+                "zendframework/zend-version": "2.*"
+            },
+            "suggest": {
+                "bjyoungblood/bjy-profiler": "Version: dev-master, allows the usage of the (Zend) Db collector.",
+                "ocramius/ocra-service-manager": "OcraServiceManager can help you track dependencies within your application."
+            },
+            "type": "zf-module",
+            "autoload": {
+                "psr-0": {
+                    "ZendDeveloperTools": "src/"
+                },
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Evan Coury",
+                    "email": "me@evancoury.com",
+                    "homepage": "http://blog.evan.pro/"
+                },
+                {
+                    "name": "Eric Boh",
+                    "email": "cossish@gmail.com"
+                }
+            ],
+            "description": "Module for developer and debug tools for working with the ZF2 MVC layer.",
+            "homepage": "https://github.com/zendframework/ZendDeveloperTools",
+            "keywords": [
+                "debug",
+                "developer",
+                "module",
+                "zf2"
+            ],
+            "time": "2014-08-13 19:03:31"
         }
     ],
     "aliases": [
 
     ],
     "minimum-stability": "dev",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "zendframework/zend-developer-tools": 20
+    },
     "prefer-stable": false,
     "platform": {
         "php": ">=5.3.3"

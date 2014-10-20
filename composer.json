@@ -22,6 +22,7 @@
         "zendframework/zendframework": "2.3.*"
     },
     "require-dev": {
+        "zendframework/zend-developer-tools": "dev-master",
         "phpunit/phpunit": "4.*",
         "squizlabs/php_codesniffer": "*",
         "phpmd/phpmd": "*",
