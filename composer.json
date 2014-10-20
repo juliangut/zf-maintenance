@@ -29,6 +29,9 @@
         "sebastian/phpcpd": "*",
         "sebastian/phpdcd": "*"
     },
+    "suggest": {
+        "zendframework/zend-developer-tools": "If you want to see maintanenace status and schedule"
+    },
     "autoload": {
         "psr-4": {
             "JgutZfMaintenance\\": "src/"
