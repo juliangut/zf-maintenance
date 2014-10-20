@@ -24,6 +24,12 @@ return array(
         ),
     ),
 
+    'view_helpers' => array(
+        'factories' => array(
+            'scheduledMaintenance' => 'JgutZfMaintenance\Service\ViewScheduleMaintenanceServiceFactory',
+        )
+    ),
+
     'view_manager' => array(
         'template_map'             => array(
             'zf-maintenance/maintenance' => __DIR__ . '/../view/zf-maintenance/maintenance.phtml',

@@ -35,14 +35,4 @@ class ModuleTest extends PHPUnit_Framework_TestCase
 
         $this->assertInternalType('array', $module->getAutoloaderConfig());
     }
-
-    /**
-     * @covers JgutZfMaintenance\Module::getViewHelperConfig
-     */
-    public function testGetViewHelperConfig()
-    {
-        $module = new Module();
-
-        $this->assertInternalType('array', $module->getViewHelperConfig());
-    }
 }
