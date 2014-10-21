@@ -21,9 +21,10 @@ class ProviderTimeServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $options = $serviceLocator->get('zf-maintenance-options');
+        $options   = $serviceLocator->get('zf-maintenance-options');
+        $providers = $options->getProviders();
 
-        if (!isset($options->getProviders()['JgutZfMaintenance\Provider\TimeProvider'])) {
+        if (!isset($providers['JgutZfMaintenance\Provider\TimeProvider'])) {
             throw new \InvalidArgumentException(
                 'Config for "JgutZfMaintenance\Provider\TimeProvider" not set'
             );
@@ -31,7 +32,7 @@ class ProviderTimeServiceFactory implements FactoryInterface
 
         $provider = new TimeProvider();
 
-        $providerConfig = $options->getProviders()['JgutZfMaintenance\Provider\TimeProvider'];
+        $providerConfig = $providers['JgutZfMaintenance\Provider\TimeProvider'];
 
         if (isset($providerConfig['start'])) {
             $provider->setStart(new \DateTime($providerConfig['start']));
