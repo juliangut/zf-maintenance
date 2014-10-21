@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/juliangut/zf-maintenance.svg?branch=develop)](https://travis-ci.org/juliangut/zf-maintenance)
-[![Coverage Status](https://coveralls.io/repos/juliangut/zf-maintenance/badge.png)](https://coveralls.io/r/juliangut/zf-maintenance)
+[![Coverage Status](https://coveralls.io/repos/juliangut/zf-maintenance/badge.png?branch=develop)](https://coveralls.io/r/juliangut/zf-maintenance)
 [![Latest Stable Version](https://poser.pugx.org/juliangut/zf-maintenance/v/stable.svg)](https://packagist.org/packages/juliangut/zf-maintenance)
 [![Total Downloads](https://poser.pugx.org/juliangut/zf-maintenance/downloads.svg)](https://packagist.org/packages/juliangut/zf-maintenance)
 
