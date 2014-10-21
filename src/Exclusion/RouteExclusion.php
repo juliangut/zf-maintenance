@@ -39,21 +39,31 @@ class RouteExclusion implements ExclusionInterface
     {
         $matchedRouteName   = $this->routeMatch->getMatchedRouteName();
         $matchedRouteParams = $this->routeMatch->getParams();
+        $matchedRoutePath   = $this->getRoutePath($matchedRouteParams);
 
         foreach ($this->routes as $route) {
             if (is_string($route) && $route == $matchedRouteName) {
                 return true;
             } elseif (is_array($route)) {
-                if ($route['controller'] == $matchedRouteParams['controller'] && !isset($route['action'])) {
+                if (isset($route['action']) && $this->getRoutePath($route) == $matchedRoutePath) {
                     return true;
-                } elseif ($route['controller'] == $matchedRouteParams['controller']
-                    && $route['action'] == $matchedRouteParams['action']
-                ) {
+                } elseif (!isset($route['action']) && $route['controller'] == $matchedRouteParams['controller']) {
                     return true;
                 }
             }
         }
 
         return false;
+    }
+
+    /**
+     * Canonize route parameters
+     *
+     * @param  array  $route
+     * @return string
+     */
+    protected function getRoutePath(array $route)
+    {
+        return $route['controller'] . '/' . (isset($route['action']) ? $route['action'] : '');
     }
 }

@@ -66,7 +66,6 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
 
         $event->setParam('exception', new MaintenanceException($this->maintenanceDescription));
 
-
         $application = $event->getApplication();
         $application->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $event);
     }
