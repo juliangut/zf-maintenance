@@ -85,7 +85,7 @@ maintenance time period
 
 ```php
 array(
-    'start' => \DateTime, //null if no start time
+    'start' => \DateTime,
     'end'   => \DateTime, //null if no end time
 );
 ```
@@ -95,7 +95,7 @@ ZendDeveloperTools integration
 ------------------------------
 
 A collector `zf-mainenance-collector` is present for ZendDeveloperTools showing current maintenance status and future
-scheduled maintenance time period
+scheduled maintenance period times
 
 
 License
