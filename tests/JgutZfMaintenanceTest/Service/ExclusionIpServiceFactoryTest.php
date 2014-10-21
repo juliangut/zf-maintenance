@@ -23,8 +23,10 @@ class ExclusionIpServiceFactoryTest extends PHPUnit_Framework_TestCase
      */
     public function testNoCreation()
     {
+        $exclusions = array();
+
         $options = $this->getMock('JgutZfMaintenance\\Options\\ModuleOptions', array(), array(), '', false);
-        $options->expects($this->any())->method('getExclusions')->will($this->returnValue(array()));
+        $options->expects($this->any())->method('getExclusions')->will($this->returnValue($exclusions));
 
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
         $serviceManager->expects($this->once())->method('get')->will($this->returnValue($options));
