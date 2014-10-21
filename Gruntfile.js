@@ -47,7 +47,8 @@ module.exports = function(grunt) {
         },
         phpunit: {
             options: {
-                bin: './vendor/bin/phpunit'
+                bin: './vendor/bin/phpunit',
+                coverage: true
             },
             application: {
                 configuration: './phpunit.xml'

@@ -38,7 +38,7 @@ class ScheduledMaintenanceTest extends PHPUnit_Framework_TestCase
         $helperManager = $this->getMock('Zend\\View\\HelperPluginManager', array(), array(), '', false);
         $helperManager->expects($this->once())->method('getServiceLocator')->will($this->returnValue($serviceManager));
 
-        $providers = array('JgutZfMaintenance\\Provider\\TimeProvider' => '');
+        $providers = array('JgutZfMaintenance\\Provider\\ConfigScheduledProvider' => '');
 
         $helper = new ScheduledMaintenance($providers);
         $helper->setServiceLocator($helperManager);
@@ -70,7 +70,7 @@ class ScheduledMaintenanceTest extends PHPUnit_Framework_TestCase
         $helperManager = $this->getMock('Zend\\View\\HelperPluginManager', array(), array(), '', false);
         $helperManager->expects($this->once())->method('getServiceLocator')->will($this->returnValue($serviceManager));
 
-        $providers = array('JgutZfMaintenance\\Provider\\TimeProvider' => '');
+        $providers = array('JgutZfMaintenance\\Provider\\ConfigScheduledProvider' => '');
 
         $helper = new ScheduledMaintenance($providers);
         $helper->setServiceLocator($helperManager);

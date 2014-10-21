@@ -11,7 +11,8 @@ return array(
         'factories' => array(
             'JgutZfMaintenance\Options'                  => 'JgutZfMaintenance\Service\ModuleOptionsServiceFactory',
             'JgutZfMaintenance\Provider\ConfigProvider'  => 'JgutZfMaintenance\Service\ProviderConfigServiceFactory',
-            'JgutZfMaintenance\Provider\TimeProvider'    => 'JgutZfMaintenance\Service\ProviderTimeServiceFactory',
+            'JgutZfMaintenance\Provider\ConfigScheduledProvider' =>
+                'JgutZfMaintenance\Service\ProviderConfigScheduledServiceFactory',
             'JgutZfMaintenance\Exclusion\IpExclusion'    => 'JgutZfMaintenance\Service\ExclusionIpServiceFactory',
             'JgutZfMaintenance\Exclusion\RouteExclusion' => 'JgutZfMaintenance\Service\ExclusionRouteServiceFactory',
             'JgutZfMaintenance\View\MaintenanceStrategy' =>
