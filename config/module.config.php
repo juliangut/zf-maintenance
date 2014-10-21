@@ -26,7 +26,7 @@ return array(
 
     'view_helpers' => array(
         'factories' => array(
-            'scheduledMaintenance' => 'JgutZfMaintenance\Service\ViewScheduleMaintenanceServiceFactory',
+            'scheduledMaintenance' => 'JgutZfMaintenance\Service\ViewScheduledMaintenanceServiceFactory',
         )
     ),
 

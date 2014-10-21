@@ -12,7 +12,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use JgutZfMaintenance\View\Helper\ScheduledMaintenance;
 
-class ViewScheduleMaintenanceServiceFactory implements FactoryInterface
+class ViewScheduledMaintenanceServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
