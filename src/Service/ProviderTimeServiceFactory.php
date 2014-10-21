@@ -24,7 +24,7 @@ class ProviderTimeServiceFactory implements FactoryInterface
         $options = $serviceLocator->get('zf-maintenance-options');
 
         if (!isset($options->getProviders()['JgutZfMaintenance\Provider\TimeProvider'])) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Config for "JgutZfMaintenance\Provider\TimeProvider" not set'
             );
         }

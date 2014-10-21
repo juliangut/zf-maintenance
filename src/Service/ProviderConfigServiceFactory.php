@@ -24,7 +24,7 @@ class ProviderConfigServiceFactory implements FactoryInterface
         $options = $serviceLocator->get('zf-maintenance-options');
 
         if (!isset($options->getProviders()['JgutZfMaintenance\Provider\ConfigProvider'])) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Config for "JgutZfMaintenance\Provider\ConfigProvider" not set'
             );
         }
