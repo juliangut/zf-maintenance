@@ -10,6 +10,8 @@ namespace JgutZfMaintenance\Exception;
 
 /**
  * Exception to be thrown in case of maintenance mode on.
+ *
+ * @codeCoverageIgnore
  */
 class MaintenanceException extends \BadMethodCallException
 {
