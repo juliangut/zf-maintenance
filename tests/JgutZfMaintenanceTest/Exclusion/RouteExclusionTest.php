@@ -20,8 +20,7 @@ class RouteExclusionTest extends PHPUnit_Framework_TestCase
         'home',
         'login',
         array(
-            'controller' => 'JgutZfMaintenance\\Controller\\Index',
-            'action'     => 'index'
+            'controller' => 'JgutZfMaintenance\\Controller\\Index'
         ),
     );
 
@@ -43,6 +42,16 @@ class RouteExclusionTest extends PHPUnit_Framework_TestCase
         $routeProvider = $this->getMock('Zend\\Mvc\\Router\\RouteMatch', array(), array(), '', false);
         $routeProvider->expects($this->once())->method('getMatchedRouteName')->will($this->returnValue(''));
         $routeProvider->expects($this->once())->method('getParams')->will(
+            $this->returnValue(array('controller' => 'JgutZfMaintenance\\Controller\\Index'))
+        );
+
+        $exclusion = new RouteExclusion($this->excludedRoutes, $routeProvider);
+
+        $this->assertTrue($exclusion->isExcluded());
+
+        $routeProvider = $this->getMock('Zend\\Mvc\\Router\\RouteMatch', array(), array(), '', false);
+        $routeProvider->expects($this->any())->method('getMatchedRouteName')->will($this->returnValue(''));
+        $routeProvider->expects($this->once())->method('getParams')->will(
             $this->returnValue(array('controller' => 'JgutZfMaintenance\\Controller\\Index', 'action' => 'index'))
         );
 
@@ -60,6 +69,16 @@ class RouteExclusionTest extends PHPUnit_Framework_TestCase
         $routeProvider->expects($this->once())->method('getMatchedRouteName')->will($this->returnValue('admin'));
         $routeProvider->expects($this->once())->method('getParams')->will(
             $this->returnValue(array('controller' => '', 'action' => ''))
+        );
+
+        $exclusion = new RouteExclusion($this->excludedRoutes, $routeProvider);
+
+        $this->assertFalse($exclusion->isExcluded());
+
+        $routeProvider = $this->getMock('Zend\\Mvc\\Router\\RouteMatch', array(), array(), '', false);
+        $routeProvider->expects($this->once())->method('getMatchedRouteName')->will($this->returnValue(''));
+        $routeProvider->expects($this->once())->method('getParams')->will(
+            $this->returnValue(array('controller' => 'Admin\\Controller\\Index'))
         );
 
         $exclusion = new RouteExclusion($this->excludedRoutes, $routeProvider);
