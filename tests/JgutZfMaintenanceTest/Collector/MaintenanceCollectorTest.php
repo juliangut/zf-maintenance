@@ -46,10 +46,11 @@ class MaintenanceCollectorTest extends PHPUnit_Framework_TestCase
     {
         $scheduleTimes = array('start' => new \DateTime('now'), 'end' => null);
 
-        $timeProvider = $this->getMock('JgutZfMaintenance\\Provider\\TimeProvider', array(), array(), '', false);
-        $timeProvider->expects($this->any())->method('isActive')->will($this->returnValue(false));
-        $timeProvider->expects($this->once())->method('isScheduled')->will($this->returnValue(true));
-        $timeProvider->expects($this->once())->method('getScheduleTimes')->will(
+        $scheduledProvider =
+            $this->getMock('JgutZfMaintenance\\Provider\\ConfigScheduledProvider', array(), array(), '', false);
+        $scheduledProvider->expects($this->any())->method('isActive')->will($this->returnValue(false));
+        $scheduledProvider->expects($this->once())->method('isScheduled')->will($this->returnValue(true));
+        $scheduledProvider->expects($this->once())->method('getScheduleTimes')->will(
             $this->returnValue($scheduleTimes)
         );
 
@@ -60,10 +61,10 @@ class MaintenanceCollectorTest extends PHPUnit_Framework_TestCase
         $serviceManager->expects($this->any())->method('has')->will($this->returnValue(true));
         $serviceManager->expects($this->any())->method('get')->will(
             $this->returnCallback(
-                function () use ($configProvider, $timeProvider) {
+                function () use ($configProvider, $scheduledProvider) {
                     $args = array(
-                        'JgutZfMaintenance\\Provider\\ConfigProvider' => $configProvider,
-                        'JgutZfMaintenance\\Provider\\TimeProvider'   => $timeProvider
+                        'JgutZfMaintenance\\Provider\\ConfigProvider'          => $configProvider,
+                        'JgutZfMaintenance\\Provider\\ConfigScheduledProvider' => $scheduledProvider
                     );
                     return $args[func_get_arg(0)];
                 }
@@ -77,8 +78,8 @@ class MaintenanceCollectorTest extends PHPUnit_Framework_TestCase
         $event->expects($this->once())->method('getApplication')->will($this->returnValue($application));
 
         $providers = array(
-            'JgutZfMaintenance\\Provider\\ConfigProvider' => '',
-            'JgutZfMaintenance\\Provider\\TimeProvider' => '',
+            'JgutZfMaintenance\\Provider\\ConfigProvider'          => '',
+            'JgutZfMaintenance\\Provider\\ConfigScheduledProvider' => '',
         );
 
         $collector = new MaintenanceCollector($providers);

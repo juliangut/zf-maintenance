@@ -10,29 +10,29 @@ namespace JgutZfMaintenance\Service;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use JgutZfMaintenance\Provider\TimeProvider;
+use JgutZfMaintenance\Provider\ConfigScheduledProvider;
 
-class ProviderTimeServiceFactory implements FactoryInterface
+class ProviderConfigScheduledServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \JgutZfMaintenance\Provider\TimeProvider
+     * @return \JgutZfMaintenance\Provider\ConfigScheduledProvider
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $options   = $serviceLocator->get('zf-maintenance-options');
         $providers = $options->getProviders();
 
-        if (!isset($providers['JgutZfMaintenance\Provider\TimeProvider'])) {
+        if (!isset($providers['JgutZfMaintenance\Provider\ConfigScheduledProvider'])) {
             throw new \InvalidArgumentException(
-                'Config for "JgutZfMaintenance\Provider\TimeProvider" not set'
+                'Config for "JgutZfMaintenance\Provider\ConfigScheduledProvider" not set'
             );
         }
 
-        $provider = new TimeProvider();
+        $provider = new ConfigScheduledProvider();
 
-        $providerConfig = $providers['JgutZfMaintenance\Provider\TimeProvider'];
+        $providerConfig = $providers['JgutZfMaintenance\Provider\ConfigScheduledProvider'];
 
         if (isset($providerConfig['start'])) {
             $provider->setStart(new \DateTime($providerConfig['start']));

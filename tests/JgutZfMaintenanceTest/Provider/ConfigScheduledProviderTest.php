@@ -9,12 +9,12 @@
 namespace JgutZfMaintenanceTest\Exclusion;
 
 use PHPUnit_Framework_TestCase;
-use JgutZfMaintenance\Provider\TimeProvider;
+use JgutZfMaintenance\Provider\ConfigScheduledProvider;
 
 /**
- * @covers JgutZfMaintenance\Provider\TimeProvider
+ * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider
  */
-class TimeProviderTest extends PHPUnit_Framework_TestCase
+class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @covers JgutZfMaintenance\Provider\AbstractProvider::attach
@@ -25,7 +25,7 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
         $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
         $callbackMock = $this->getMock('Zend\\Stdlib\\CallbackHandler', array(), array(), '', false);
 
-        $provider = new TimeProvider();
+        $provider = new ConfigScheduledProvider();
 
         $eventManager
             ->expects($this->once())
@@ -43,14 +43,14 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Provider\TimeProvider::isActive
-     * @covers JgutZfMaintenance\Provider\TimeProvider::isScheduled
-     * @covers JgutZfMaintenance\Provider\TimeProvider::getScheduleTimes
-     * @covers JgutZfMaintenance\Provider\TimeProvider::onRoute
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::isActive
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::isScheduled
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::getScheduleTimes
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::onRoute
      */
     public function testDefaults()
     {
-        $provider = new TimeProvider();
+        $provider = new ConfigScheduledProvider();
 
         $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
 
@@ -61,17 +61,17 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Provider\TimeProvider::setStart
-     * @covers JgutZfMaintenance\Provider\TimeProvider::getStart
-     * @covers JgutZfMaintenance\Provider\TimeProvider::setEnd
-     * @covers JgutZfMaintenance\Provider\TimeProvider::getEnd
-     * @covers JgutZfMaintenance\Provider\TimeProvider::isActive
-     * @covers JgutZfMaintenance\Provider\TimeProvider::isScheduled
-     * @covers JgutZfMaintenance\Provider\TimeProvider::getScheduleTimes
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setStart
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::getStart
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setEnd
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::getEnd
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::isActive
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::isScheduled
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::getScheduleTimes
      */
     public function testTimes()
     {
-        $provider = new TimeProvider();
+        $provider = new ConfigScheduledProvider();
 
         $start = new \DateTime('now');
         $start->add(new \DateInterval('P1D'));
@@ -82,7 +82,7 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($provider->isScheduled());
         $this->assertEquals(array('start' => $start, 'end' => null), $provider->getScheduleTimes());
 
-        $provider = new TimeProvider();
+        $provider = new ConfigScheduledProvider();
 
         $end = new \DateTime('now');
         $end->add(new \DateInterval('P2D'));
@@ -104,7 +104,7 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidEndDate()
     {
-        $provider = new TimeProvider();
+        $provider = new ConfigScheduledProvider();
 
         $start = new \DateTime('now');
         $provider->setStart($start);
@@ -119,7 +119,7 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidStartDate()
     {
-        $provider = new TimeProvider();
+        $provider = new ConfigScheduledProvider();
 
         $end = new \DateTime('now');
         $provider->setEnd($end);
@@ -130,13 +130,13 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Provider\TimeProvider::setStart
-     * @covers JgutZfMaintenance\Provider\TimeProvider::setEnd
-     * @covers JgutZfMaintenance\Provider\TimeProvider::onRoute
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setStart
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setEnd
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::onRoute
      */
     public function testBeforeTime()
     {
-        $provider = new TimeProvider();
+        $provider = new ConfigScheduledProvider();
 
         $start = new \DateTime('now');
         $start->add(new \DateInterval('P1D'));
@@ -154,13 +154,13 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Provider\TimeProvider::setStart
-     * @covers JgutZfMaintenance\Provider\TimeProvider::setEnd
-     * @covers JgutZfMaintenance\Provider\TimeProvider::onRoute
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setStart
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setEnd
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::onRoute
      */
     public function testAfterTime()
     {
-        $provider = new TimeProvider();
+        $provider = new ConfigScheduledProvider();
 
         $end = new \DateTime('now');
         $end->sub(new \DateInterval('P1D'));
@@ -178,14 +178,14 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Provider\TimeProvider::setStart
-     * @covers JgutZfMaintenance\Provider\TimeProvider::setEnd
-     * @covers JgutZfMaintenance\Provider\TimeProvider::onRoute
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setStart
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setEnd
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::onRoute
      * @covers JgutZfMaintenance\Provider\AbstractProvider::onRoute
      */
     public function testNoRouteMatch()
     {
-        $provider = new TimeProvider();
+        $provider = new ConfigScheduledProvider();
 
         $start = new \DateTime('now');
         $start->sub(new \DateInterval('P1D'));
@@ -243,7 +243,7 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
 
         $event->expects($this->never())->method('setError');
 
-        $provider = new TimeProvider();
+        $provider = new ConfigScheduledProvider();
 
         $start = new \DateTime('now');
         $start->sub(new \DateInterval('P1D'));
@@ -283,7 +283,7 @@ class TimeProviderTest extends PHPUnit_Framework_TestCase
         $event->expects($this->once())->method('getRouteMatch')->will($this->returnValue($routeMatch));
         $event->expects($this->any())->method('getApplication')->will($this->returnValue($application));
 
-        $provider = new TimeProvider();
+        $provider = new ConfigScheduledProvider();
 
         $start = new \DateTime('now');
         $start->sub(new \DateInterval('P1D'));

@@ -10,13 +10,13 @@ namespace JgutZfMaintenance\Provider;
 
 use Zend\Mvc\MvcEvent;
 
-class TimeProvider extends AbstractProvider implements ScheduledProviderInterface
+class ConfigScheduledProvider extends AbstractProvider implements ScheduledProviderInterface
 {
     /**
      * {@inheritDoc}
      */
     protected $maintenanceDescription =
-        'Schdeuled maintenance mode active on JgutZfMaintenance\Provider\TimeProvider';
+        'Schdeuled maintenance mode active on JgutZfMaintenance\Provider\ConfigScheduledProvider';
 
     /**
      * Maintenance start time.

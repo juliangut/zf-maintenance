@@ -9,16 +9,16 @@
 namespace JgutZfMaintenanceTest\Service;
 
 use PHPUnit_Framework_TestCase;
-use JgutZfMaintenance\Service\ProviderTimeServiceFactory;
-use JgutZfMaintenance\Provider\TimeProvider;
+use JgutZfMaintenance\Service\ProviderConfigScheduledServiceFactory;
+use JgutZfMaintenance\Provider\ConfigScheduledProvider;
 
 /**
- * @covers JgutZfMaintenance\Service\ProviderTimeServiceFactory
+ * @covers JgutZfMaintenance\Service\ProviderConfigScheduledServiceFactory
  */
-class ProviderTimeServiceFactoryTest extends PHPUnit_Framework_TestCase
+class ProviderConfigScheduledServiceFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers JgutZfMaintenance\Service\ProviderTimeServiceFactory::createService
+     * @covers JgutZfMaintenance\Service\ProviderConfigScheduledServiceFactory::createService
      * @expectedException InvalidArgumentException
      */
     public function testNoCreation()
@@ -29,19 +29,19 @@ class ProviderTimeServiceFactoryTest extends PHPUnit_Framework_TestCase
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
         $serviceManager->expects($this->once())->method('get')->will($this->returnValue($options));
 
-        $factory = new ProviderTimeServiceFactory();
-        $timeProvider = $factory->createService($serviceManager);
+        $factory = new ProviderConfigScheduledServiceFactory();
+        $factory->createService($serviceManager);
     }
 
     /**
-     * @covers JgutZfMaintenance\Service\ProviderTimeServiceFactory::createService
-     * @covers JgutZfMaintenance\Provider\TimeProvider::setStart
-     * @covers JgutZfMaintenance\Provider\TimeProvider::setEnd
+     * @covers JgutZfMaintenance\Service\ProviderConfigScheduledServiceFactory::createService
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setStart
+     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setEnd
      */
     public function testCreation()
     {
         $providers = array(
-            'JgutZfMaintenance\Provider\TimeProvider' => array(
+            'JgutZfMaintenance\Provider\ConfigScheduledProvider' => array(
                 'start' => 'now',
                 'end'   => 'now',
             ),
@@ -53,9 +53,9 @@ class ProviderTimeServiceFactoryTest extends PHPUnit_Framework_TestCase
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
         $serviceManager->expects($this->once())->method('get')->will($this->returnValue($options));
 
-        $factory = new ProviderTimeServiceFactory();
-        $timeProvider = $factory->createService($serviceManager);
+        $factory = new ProviderConfigScheduledServiceFactory();
+        $scheduledProvider = $factory->createService($serviceManager);
 
-        $this->assertTrue($timeProvider instanceof TimeProvider);
+        $this->assertTrue($scheduledProvider instanceof ConfigScheduledProvider);
     }
 }

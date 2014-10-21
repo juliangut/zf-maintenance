@@ -52,7 +52,7 @@ return [
          * Different means to activate maintenance mod.
          * Two manual providers comes bundled with the module:
          *   ConfigProvider, the simplest possible
-         *   TimeProvider, sets a time span, start - end strings as accepted by \DateTime
+         *   ConfigScheduledProvider, sets a time span, start - end strings as accepted by \DateTime
          * Any provider implementing JgutZfMaintenance\Provider\ScheduledProviderInterface will be used to determine
          * future maintenance situations and used on view helper as well as in zend-developer-tools
          */
