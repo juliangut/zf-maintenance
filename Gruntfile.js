@@ -45,17 +45,6 @@ module.exports = function(grunt) {
                 dir: './src'
             }
         },
-        phpdcd: {
-            options: {
-                bin: './vendor/bin/phpdcd'
-            },
-            application: {
-                dir: [
-                    './src',
-                    './tests'
-                ]
-            }
-        },
         phpunit: {
             options: {
                 bin: './vendor/bin/phpunit'
@@ -67,5 +56,5 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', ['phplint', 'phpcs', 'phpmd']);
-    grunt.registerTask('full', ['default', 'phpcpd', 'phpdcd', 'phpunit']);
+    grunt.registerTask('all', ['default', 'phpcpd', 'phpunit']);
 };

@@ -27,7 +27,7 @@
         "squizlabs/php_codesniffer": "*",
         "phpmd/phpmd": "*",
         "sebastian/phpcpd": "*",
-        "sebastian/phpdcd": "*"
+        "satooshi/php-coveralls": "~0.6"
     },
     "suggest": {
         "zendframework/zend-developer-tools": "If you want to see maintanenace status and schedule"
@@ -39,7 +39,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "JgutZfMaintenanceTest\\": "tests/"
+            "JgutZfMaintenanceTest\\": "tests/JgutZfMaintenanceTest/"
         }
     }
 }

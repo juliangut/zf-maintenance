@@ -43,11 +43,14 @@ class RouteExclusion implements ExclusionInterface
         foreach ($this->routes as $route) {
             if (is_string($route) && $route == $matchedRouteName) {
                 return true;
-            } elseif (is_array($route)
-                && $route['controller'] == $matchedRouteParams['controller']
-                && $route['action']     == $matchedRouteParams['action']
-            ) {
-                return true;
+            } elseif (is_array($route)) {
+                if ($route['controller'] == $matchedRouteParams['controller'] && !isset($route['action'])) {
+                    return true;
+                } elseif ($route['controller'] == $matchedRouteParams['controller']
+                    && $route['action'] == $matchedRouteParams['action']
+                ) {
+                    return true;
+                }
             }
         }
 
