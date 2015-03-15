@@ -1,18 +1,18 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenanceTest\Exclusion;
+namespace Jgut\Zf\MaintenanceTests\Exclusion;
 
 use PHPUnit_Framework_TestCase;
-use JgutZfMaintenance\Exclusion\RouteExclusion;
+use Jgut\Zf\Maintenance\Exclusion\RouteExclusion;
 
 /**
- * @covers JgutZfMaintenance\Exclusion\RouteExclusion
+ * @covers Jgut\Zf\Maintenance\Exclusion\RouteExclusion
  */
 class RouteExclusionTest extends PHPUnit_Framework_TestCase
 {
@@ -20,16 +20,16 @@ class RouteExclusionTest extends PHPUnit_Framework_TestCase
         'home',
         'login',
         array(
-            'controller' => 'JgutZfMaintenance\\Controller\\Index',
+            'controller' => 'Jgut\\Zf\\Maintenance\\Controller\\Index',
         ),
         array(
-            'controller' => 'JgutZfMaintenance\\Controller\\Admin',
+            'controller' => 'Jgut\\Zf\\Maintenance\\Controller\\Admin',
             'action'     => 'index',
         ),
     );
 
     /**
-     * @covers JgutZfMaintenance\Exclusion\RouteExclusion::isExcluded
+     * @covers Jgut\Zf\Maintenance\Exclusion\RouteExclusion::isExcluded
      */
     public function testIsExcluded()
     {
@@ -46,7 +46,7 @@ class RouteExclusionTest extends PHPUnit_Framework_TestCase
         $routeProvider = $this->getMock('Zend\\Mvc\\Router\\RouteMatch', array(), array(), '', false);
         $routeProvider->expects($this->once())->method('getMatchedRouteName')->will($this->returnValue(''));
         $routeProvider->expects($this->once())->method('getParams')->will(
-            $this->returnValue(array('controller' => 'JgutZfMaintenance\\Controller\\Index'))
+            $this->returnValue(array('controller' => 'Jgut\\Zf\\Maintenance\\Controller\\Index'))
         );
 
         $exclusion = new RouteExclusion($this->excludedRoutes, $routeProvider);
@@ -56,7 +56,7 @@ class RouteExclusionTest extends PHPUnit_Framework_TestCase
         $routeProvider = $this->getMock('Zend\\Mvc\\Router\\RouteMatch', array(), array(), '', false);
         $routeProvider->expects($this->any())->method('getMatchedRouteName')->will($this->returnValue(''));
         $routeProvider->expects($this->once())->method('getParams')->will(
-            $this->returnValue(array('controller' => 'JgutZfMaintenance\\Controller\\Admin', 'action' => 'index'))
+            $this->returnValue(array('controller' => 'Jgut\\Zf\\Maintenance\\Controller\\Admin', 'action' => 'index'))
         );
 
         $exclusion = new RouteExclusion($this->excludedRoutes, $routeProvider);
@@ -65,7 +65,7 @@ class RouteExclusionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Exclusion\RouteExclusion::isExcluded
+     * @covers Jgut\Zf\Maintenance\Exclusion\RouteExclusion::isExcluded
      */
     public function testNotIsExcluded()
     {

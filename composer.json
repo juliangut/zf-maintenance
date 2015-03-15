@@ -1,45 +1,42 @@
 {
     "name": "juliangut/zf-maintenance",
-    "type": "zf2-module",
-    "description": "Zend Framework maintenance module.",
+    "description": "Zend Framework maintenance module",
     "keywords": [
         "zf2",
         "maintenance"
     ],
     "homepage": "https://github.com/juliangut/zf-maintenance",
-    "license": "BSD-2-Clause",
+    "type": "library",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Julián Gutiérrez",
             "email": "juliangut@gmail.com",
-            "homepage": "http://juliangut.com",
-            "role": "lead"
+            "homepage": "http://juliangut.com"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.3",
-        "zendframework/zendframework": "2.3.*"
+        "php": ">=5.4",
+        "zendframework/zendframework": "~2.3"
     },
     "require-dev": {
         "zendframework/zend-developer-tools": "dev-master",
-        "phpunit/phpunit": "4.*",
-        "squizlabs/php_codesniffer": "*",
-        "phpmd/phpmd": "*",
-        "sebastian/phpcpd": "*",
-        "satooshi/php-coveralls": "~0.6"
+        "phpunit/phpunit": "~4.5",
+        "squizlabs/php_codesniffer": "~2",
+        "phpmd/phpmd": "~2.2",
+        "sebastian/phpcpd": "~2.0"
     },
     "suggest": {
         "zendframework/zend-developer-tools": "If you want to see maintanenace status and schedule"
     },
     "autoload": {
         "psr-4": {
-            "JgutZfMaintenance\\": "src/"
+            "Jgut\\Zf\\Maintenance\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "JgutZfMaintenanceTest\\": "tests/JgutZfMaintenanceTest/"
+            "Jgut\\Zf\\MaintenanceTests\\": "tests/MaintenanceTests/"
         }
     }
 }

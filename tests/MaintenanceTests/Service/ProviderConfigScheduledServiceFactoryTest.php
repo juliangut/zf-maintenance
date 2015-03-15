@@ -1,29 +1,29 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenanceTest\Service;
+namespace Jgut\Zf\MaintenanceTests\Service;
 
 use PHPUnit_Framework_TestCase;
-use JgutZfMaintenance\Service\ProviderConfigScheduledServiceFactory;
-use JgutZfMaintenance\Provider\ConfigScheduledProvider;
+use Jgut\Zf\Maintenance\Service\ProviderConfigScheduledServiceFactory;
+use Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider;
 
 /**
- * @covers JgutZfMaintenance\Service\ProviderConfigScheduledServiceFactory
+ * @covers Jgut\Zf\Maintenance\Service\ProviderConfigScheduledServiceFactory
  */
 class ProviderConfigScheduledServiceFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers JgutZfMaintenance\Service\ProviderConfigScheduledServiceFactory::createService
+     * @covers Jgut\Zf\Maintenance\Service\ProviderConfigScheduledServiceFactory::createService
      * @expectedException InvalidArgumentException
      */
     public function testNoCreation()
     {
-        $options = $this->getMock('JgutZfMaintenance\\Options\\ModuleOptions', array(), array(), '', false);
+        $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);
         $options->expects($this->any())->method('getProviders')->will($this->returnValue(array()));
 
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
@@ -34,20 +34,20 @@ class ProviderConfigScheduledServiceFactoryTest extends PHPUnit_Framework_TestCa
     }
 
     /**
-     * @covers JgutZfMaintenance\Service\ProviderConfigScheduledServiceFactory::createService
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setStart
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setEnd
+     * @covers Jgut\Zf\Maintenance\Service\ProviderConfigScheduledServiceFactory::createService
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setStart
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setEnd
      */
     public function testCreation()
     {
         $providers = array(
-            'JgutZfMaintenance\Provider\ConfigScheduledProvider' => array(
+            'Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider' => array(
                 'start' => 'now',
                 'end'   => 'now',
             ),
         );
 
-        $options = $this->getMock('JgutZfMaintenance\\Options\\ModuleOptions', array(), array(), '', false);
+        $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);
         $options->expects($this->any())->method('getProviders')->will($this->returnValue($providers));
 
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);

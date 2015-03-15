@@ -1,29 +1,29 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenanceTest\Service;
+namespace Jgut\Zf\MaintenanceTests\Service;
 
 use PHPUnit_Framework_TestCase;
-use JgutZfMaintenance\Service\ViewScheduledMaintenanceServiceFactory;
-use JgutZfMaintenance\View\Helper\ScheduledMaintenance;
+use Jgut\Zf\Maintenance\Service\ViewScheduledMaintenanceServiceFactory;
+use Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance;
 
 /**
- * @covers JgutZfMaintenance\Service\ViewScheduledMaintenanceServiceFactory
+ * @covers Jgut\Zf\Maintenance\Service\ViewScheduledMaintenanceServiceFactory
  */
 class ViewScheduledMaintenanceServiceFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers JgutZfMaintenance\Service\ViewScheduledMaintenanceServiceFactory::createService
-     * @covers JgutZfMaintenance\View\Helper\ScheduledMaintenance::__construct
+     * @covers Jgut\Zf\Maintenance\Service\ViewScheduledMaintenanceServiceFactory::createService
+     * @covers Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance::__construct
      */
     public function testCreation()
     {
-        $options = $this->getMock('JgutZfMaintenance\\Options\\ModuleOptions', array(), array(), '', false);
+        $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);
         $options->expects($this->any())->method('getProviders')->will($this->returnValue(array()));
 
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);

@@ -1,17 +1,17 @@
 <?php
 /**
- * BjyAuthorize Module (https://github.com/bjyoungblood/BjyAuthorize)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
- * @link https://github.com/bjyoungblood/BjyAuthorize for the canonical source repository
- * @license http://framework.zend.com/license/new-bsd New BSD License
+ * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
+ * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenance\Collector;
+namespace Jgut\Zf\Maintenance\Collector;
 
 use ZendDeveloperTools\Collector\CollectorInterface;
 use Zend\Mvc\MvcEvent;
-use JgutZfMaintenance\Provider\ScheduledProviderInterface;
-use JgutZfMaintenance\Provider\ProviderInterface;
+use Jgut\Zf\Maintenance\Provider\ScheduledProviderInterface;
+use Jgut\Zf\Maintenance\Provider\ProviderInterface;
 
 /**
  * Collects maintenance mode status and values

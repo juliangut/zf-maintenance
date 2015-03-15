@@ -1,18 +1,18 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenanceTest\Exclusion;
+namespace Jgut\Zf\MaintenanceTests\Exclusion;
 
 use PHPUnit_Framework_TestCase;
-use JgutZfMaintenance\Exclusion\IpExclusion;
+use Jgut\Zf\Maintenance\Exclusion\IpExclusion;
 
 /**
- * @covers JgutZfMaintenance\Exclusion\IpExclusion
+ * @covers Jgut\Zf\Maintenance\Exclusion\IpExclusion
  */
 class IpExclusionTest extends PHPUnit_Framework_TestCase
 {
@@ -23,7 +23,7 @@ class IpExclusionTest extends PHPUnit_Framework_TestCase
     );
 
     /**
-     * @covers JgutZfMaintenance\Exclusion\IpExclusion::isExcluded
+     * @covers Jgut\Zf\Maintenance\Exclusion\IpExclusion::isExcluded
      */
     public function testIsExcluded()
     {
@@ -36,7 +36,7 @@ class IpExclusionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Exclusion\IpExclusion::isExcluded
+     * @covers Jgut\Zf\Maintenance\Exclusion\IpExclusion::isExcluded
      */
     public function testNotIsExcluded()
     {

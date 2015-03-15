@@ -1,18 +1,18 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenance\View;
+namespace Jgut\Zf\Maintenance\View;
 
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Mvc\MvcEvent;
-use JgutZfMaintenance\Provider\ProviderInterface;
-use JgutZfMaintenance\Exclusion\ExclusionInterface;
+use Jgut\Zf\Maintenance\Provider\ProviderInterface;
+use Jgut\Zf\Maintenance\Exclusion\ExclusionInterface;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Http\Response as HttpResponse;
 use Zend\View\Model\ViewModel;

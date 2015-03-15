@@ -1,38 +1,38 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenance\Service;
+namespace Jgut\Zf\Maintenance\Service;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use JgutZfMaintenance\Provider\ConfigProvider;
+use Jgut\Zf\Maintenance\Provider\ConfigProvider;
 
 class ProviderConfigServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \JgutZfMaintenance\Provider\ConfigProvider
+     * @return \Jgut\Zf\Maintenance\Provider\ConfigProvider
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $options   = $serviceLocator->get('zf-maintenance-options');
         $providers = $options->getProviders();
 
-        if (!isset($providers['JgutZfMaintenance\Provider\ConfigProvider'])) {
+        if (!isset($providers['Jgut\Zf\Maintenance\Provider\ConfigProvider'])) {
             throw new \InvalidArgumentException(
-                'Config for "JgutZfMaintenance\Provider\ConfigProvider" not set'
+                'Config for "Jgut\Zf\Maintenance\Provider\ConfigProvider" not set'
             );
         }
 
         $provider = new ConfigProvider();
 
-        $providerConfig = $providers['JgutZfMaintenance\Provider\ConfigProvider'];
+        $providerConfig = $providers['Jgut\Zf\Maintenance\Provider\ConfigProvider'];
 
         if (isset($providerConfig['active'])) {
             $provider->setActive($providerConfig['active']);

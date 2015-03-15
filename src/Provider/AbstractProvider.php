@@ -1,18 +1,18 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenance\Provider;
+namespace Jgut\Zf\Maintenance\Provider;
 
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
-use JgutZfMaintenance\Exception\MaintenanceException;
+use Jgut\Zf\Maintenance\Exception\MaintenanceException;
 
 abstract class AbstractProvider implements ProviderInterface, ListenerAggregateInterface
 {
@@ -21,7 +21,7 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
      *
      * @var string
      */
-    protected $maintenanceDescription = 'Maintenance mode active on JgutZfMaintenance\Provider\ProviderInterface';
+    protected $maintenanceDescription = 'Maintenance mode active on Jgut\Zf\Maintenance\Provider\ProviderInterface';
 
     /**
      * @var \Zend\Stdlib\CallbackHandler[]

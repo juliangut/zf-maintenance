@@ -1,12 +1,12 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenance\Provider;
+namespace Jgut\Zf\Maintenance\Provider;
 
 use Zend\Mvc\MvcEvent;
 
@@ -15,7 +15,7 @@ class ConfigProvider extends AbstractProvider
     /**
      * {@inheritDoc}
      */
-    protected $maintenanceDescription = 'Manual maintenance mode active on JgutZfMaintenance\Provider\ConfigProvider';
+    protected $maintenanceDescription = 'Manual maintenance mode active on Jgut\Zf\Maintenance\Provider\ConfigProvider';
 
     /**
      * Maintenance mode active.

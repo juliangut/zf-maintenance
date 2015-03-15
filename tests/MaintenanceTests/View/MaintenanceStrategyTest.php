@@ -1,19 +1,19 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenanceTest\View;
+namespace Jgut\Zf\MaintenanceTests\View;
 
 use PHPUnit_Framework_TestCase;
-use JgutZfMaintenance\View\MaintenanceStrategy;
-use JgutZfMaintenance\Provider\ProviderInterface;
+use Jgut\Zf\Maintenance\View\MaintenanceStrategy;
+use Jgut\Zf\Maintenance\Provider\ProviderInterface;
 
 /**
- * @covers JgutZfMaintenance\View\MaintenanceStrategy
+ * @covers Jgut\Zf\Maintenance\View\MaintenanceStrategy
  */
 class MaintenanceStrategyTest extends PHPUnit_Framework_TestCase
 {
@@ -25,8 +25,8 @@ class MaintenanceStrategyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\View\MaintenanceStrategy::setTemplate
-     * @covers JgutZfMaintenance\View\MaintenanceStrategy::getTemplate
+     * @covers Jgut\Zf\Maintenance\View\MaintenanceStrategy::setTemplate
+     * @covers Jgut\Zf\Maintenance\View\MaintenanceStrategy::getTemplate
      */
     public function testTemplate()
     {
@@ -37,8 +37,8 @@ class MaintenanceStrategyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\View\MaintenanceStrategy::attach
-     * @covers JgutZfMaintenance\View\MaintenanceStrategy::detach
+     * @covers Jgut\Zf\Maintenance\View\MaintenanceStrategy::attach
+     * @covers Jgut\Zf\Maintenance\View\MaintenanceStrategy::detach
      */
     public function testAttachDetach()
     {
@@ -61,7 +61,7 @@ class MaintenanceStrategyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\View\MaintenanceStrategy::onDispatchError
+     * @covers Jgut\Zf\Maintenance\View\MaintenanceStrategy::onDispatchError
      */
     public function testAlreadyResponse()
     {
@@ -75,7 +75,7 @@ class MaintenanceStrategyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\View\MaintenanceStrategy::onDispatchError
+     * @covers Jgut\Zf\Maintenance\View\MaintenanceStrategy::onDispatchError
      */
     public function testWrongError()
     {
@@ -89,7 +89,7 @@ class MaintenanceStrategyTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\View\MaintenanceStrategy::onDispatchError
+     * @covers Jgut\Zf\Maintenance\View\MaintenanceStrategy::onDispatchError
      */
     public function testSetResponse()
     {

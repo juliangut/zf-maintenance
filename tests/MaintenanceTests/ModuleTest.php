@@ -1,23 +1,23 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenanceTest;
+namespace Jgut\Zf\MaintenanceTests;
 
 use PHPUnit_Framework_TestCase;
-use JgutZfMaintenance\Module;
+use Jgut\Zf\Maintenance\Module;
 
 /**
- * @covers JgutZfMaintenance\Module
+ * @covers Jgut\Zf\Maintenance\Module
  */
 class ModuleTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers JgutZfMaintenance\Module::getConfig
+     * @covers Jgut\Zf\Maintenance\Module::getConfig
      */
     public function testGetConfig()
     {
@@ -27,7 +27,7 @@ class ModuleTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Module::getAutoloaderConfig
+     * @covers Jgut\Zf\Maintenance\Module::getAutoloaderConfig
      */
     public function testGetAutoloaderConfig()
     {

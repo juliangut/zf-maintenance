@@ -1,17 +1,17 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenance\View\Helper;
+namespace Jgut\Zf\Maintenance\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use JgutZfMaintenance\Provider\ScheduledProviderInterface;
+use Jgut\Zf\Maintenance\Provider\ScheduledProviderInterface;
 
 /**
  * Allows to retrieve scheduled maintenance period times in views.

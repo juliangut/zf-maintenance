@@ -1,16 +1,16 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenance\Service;
+namespace Jgut\Zf\Maintenance\Service;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use JgutZfMaintenance\Exclusion\IpExclusion;
+use Jgut\Zf\Maintenance\Exclusion\IpExclusion;
 use Zend\Http\PhpEnvironment\RemoteAddress;
 
 class ExclusionIpServiceFactory implements FactoryInterface
@@ -18,20 +18,20 @@ class ExclusionIpServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return \JgutZfMaintenance\Exclusion\IpExclusion
+     * @return \Jgut\Zf\Maintenance\Exclusion\IpExclusion
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $options    = $serviceLocator->get('zf-maintenance-options');
         $exclusions = $options->getExclusions();
 
-        if (!isset($exclusions['JgutZfMaintenance\Exclusion\IpExclusion'])) {
+        if (!isset($exclusions['Jgut\Zf\Maintenance\Exclusion\IpExclusion'])) {
             throw new \InvalidArgumentException(
-                'Config for "JgutZfMaintenance\Exclusion\IpExclusion" not set'
+                'Config for "Jgut\Zf\Maintenance\Exclusion\IpExclusion" not set'
             );
         }
 
-        $ips = $exclusions['JgutZfMaintenance\Exclusion\IpExclusion'];
+        $ips = $exclusions['Jgut\Zf\Maintenance\Exclusion\IpExclusion'];
         return new IpExclusion($ips, new RemoteAddress());
     }
 }

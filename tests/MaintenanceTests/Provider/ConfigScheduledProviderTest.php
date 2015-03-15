@@ -1,24 +1,24 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenanceTest\Exclusion;
+namespace Jgut\Zf\MaintenanceTests\Exclusion;
 
 use PHPUnit_Framework_TestCase;
-use JgutZfMaintenance\Provider\ConfigScheduledProvider;
+use Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider;
 
 /**
- * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider
+ * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider
  */
 class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers JgutZfMaintenance\Provider\AbstractProvider::attach
-     * @covers JgutZfMaintenance\Provider\AbstractProvider::detach
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::attach
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::detach
      */
     public function testAttachDetach()
     {
@@ -43,10 +43,10 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::isActive
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::isScheduled
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::getScheduleTimes
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::isActive
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::isScheduled
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::getScheduleTimes
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::onRoute
      */
     public function testDefaults()
     {
@@ -61,13 +61,13 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setStart
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::getStart
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setEnd
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::getEnd
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::isActive
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::isScheduled
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::getScheduleTimes
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setStart
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::getStart
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setEnd
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::getEnd
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::isActive
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::isScheduled
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::getScheduleTimes
      */
     public function testTimes()
     {
@@ -130,9 +130,9 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setStart
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setEnd
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setStart
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setEnd
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::onRoute
      */
     public function testBeforeTime()
     {
@@ -154,9 +154,9 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setStart
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setEnd
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setStart
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setEnd
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::onRoute
      */
     public function testAfterTime()
     {
@@ -178,10 +178,10 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setStart
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::setEnd
-     * @covers JgutZfMaintenance\Provider\ConfigScheduledProvider::onRoute
-     * @covers JgutZfMaintenance\Provider\AbstractProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setStart
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setEnd
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
      */
     public function testNoRouteMatch()
     {
@@ -203,19 +203,19 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Provider\ConfigProvider::setActive
-     * @covers JgutZfMaintenance\Provider\ConfigProvider::onRoute
-     * @covers JgutZfMaintenance\Provider\AbstractProvider::onRoute
-     * @covers JgutZfMaintenance\Provider\AbstractProvider::isExcluded
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::setActive
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::isExcluded
      */
     public function testIsExcluded()
     {
-        $exclusion = $this->getMock('JgutZfMaintenance\\Exclusion\\IpExclusion', array(), array(), '', false);
+        $exclusion = $this->getMock('Jgut\\Zf\\Maintenance\\Exclusion\\IpExclusion', array(), array(), '', false);
         $exclusion->expects($this->once())->method('isExcluded')->will($this->returnValue(true));
 
-        $options = $this->getMock('JgutZfMaintenance\\Options\\ModuleOptions', array(), array(), '', false);
+        $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);
         $options->expects($this->once())->method('getExclusions')->will(
-            $this->returnValue(array('JgutZfMaintenance\\Exclusion\\IpExclusion' => ''))
+            $this->returnValue(array('Jgut\\Zf\\Maintenance\\Exclusion\\IpExclusion' => ''))
         );
 
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
@@ -225,7 +225,7 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
                 function () use ($options, $exclusion) {
                     $args = array(
                         'zf-maintenance-options'                    => $options,
-                        'JgutZfMaintenance\\Exclusion\\IpExclusion' => $exclusion
+                        'Jgut\\Zf\\Maintenance\\Exclusion\\IpExclusion' => $exclusion
                     );
                     return $args[func_get_arg(0)];
                 }
@@ -257,17 +257,17 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers JgutZfMaintenance\Provider\ConfigProvider::setActive
-     * @covers JgutZfMaintenance\Provider\ConfigProvider::onRoute
-     * @covers JgutZfMaintenance\Provider\AbstractProvider::onRoute
-     * @covers JgutZfMaintenance\Provider\AbstractProvider::isExcluded
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::setActive
+     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::isExcluded
      */
     public function testIsNotExcluded()
     {
         $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
         $eventManager->expects($this->once())->method('trigger');
 
-        $options = $this->getMock('JgutZfMaintenance\\Options\\ModuleOptions', array(), array(), '', false);
+        $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);
         $options->expects($this->once())->method('getExclusions')->will($this->returnValue(array()));
 
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);

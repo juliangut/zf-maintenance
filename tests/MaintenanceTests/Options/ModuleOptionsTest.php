@@ -1,18 +1,18 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenanceTest\Options;
+namespace Jgut\Zf\MaintenanceTests\Options;
 
 use PHPUnit_Framework_TestCase;
-use JgutZfMaintenance\Options\ModuleOptions;
+use Jgut\Zf\Maintenance\Options\ModuleOptions;
 
 /**
- * @covers JgutZfMaintenance\Options\ModuleOptions
+ * @covers Jgut\Zf\Maintenance\Options\ModuleOptions
  */
 class ModuleOptionsTest extends PHPUnit_Framework_TestCase
 {
@@ -20,41 +20,41 @@ class ModuleOptionsTest extends PHPUnit_Framework_TestCase
         'maintenance_strategy' => 'myStrategy',
         'template'             => 'myTemplate',
         'providers'            => array(
-            'JgutZfMaintenance\Provider\ConfigProvider' => array(
+            'Jgut\Zf\Maintenance\Provider\ConfigProvider' => array(
                 'active' => false,
             ),
         ),
         'exclusions'           => array(
-            'JgutZfMaintenance\Exclusion\IpExclusion'    => array(
+            'Jgut\Zf\Maintenance\Exclusion\IpExclusion'    => array(
                 '127.0.0.1',
             ),
-            'JgutZfMaintenance\Exclusion\RouteExclusion' => array(
+            'Jgut\Zf\Maintenance\Exclusion\RouteExclusion' => array(
                 'home',
             ),
         ),
     );
 
     /**
-     * @covers JgutZfMaintenance\Options\ModuleOptions::getMaintenanceStrategy
-     * @covers JgutZfMaintenance\Options\ModuleOptions::getTemplate
-     * @covers JgutZfMaintenance\Options\ModuleOptions::getProviders
-     * @covers JgutZfMaintenance\Options\ModuleOptions::getExclusions
+     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getMaintenanceStrategy
+     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getTemplate
+     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getProviders
+     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getExclusions
      */
     public function testDefaultModuleOptions()
     {
         $options = new ModuleOptions(array());
 
-        $this->assertEquals('JgutZfMaintenance\View\maintenanceStrategy', $options->getMaintenanceStrategy());
+        $this->assertEquals('Jgut\Zf\Maintenance\View\maintenanceStrategy', $options->getMaintenanceStrategy());
         $this->assertEquals('zf-maintenance/maintenance', $options->getTemplate());
         $this->assertInternalType('array', $options->getProviders());
         $this->assertInternalType('array', $options->getExclusions());
     }
 
     /**
-     * @covers JgutZfMaintenance\Options\ModuleOptions::getMaintenanceStrategy
-     * @covers JgutZfMaintenance\Options\ModuleOptions::getTemplate
-     * @covers JgutZfMaintenance\Options\ModuleOptions::getProviders
-     * @covers JgutZfMaintenance\Options\ModuleOptions::getExclusions
+     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getMaintenanceStrategy
+     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getTemplate
+     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getProviders
+     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getExclusions
      */
     public function testCustomModuleOptions()
     {

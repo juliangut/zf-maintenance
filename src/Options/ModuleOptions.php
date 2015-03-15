@@ -1,12 +1,12 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenance\Options;
+namespace Jgut\Zf\Maintenance\Options;
 
 use Zend\Stdlib\AbstractOptions;
 
@@ -17,7 +17,7 @@ class ModuleOptions extends AbstractOptions
      *
      * @var string
      */
-    protected $maintenanceStrategy = 'JgutZfMaintenance\View\maintenanceStrategy';
+    protected $maintenanceStrategy = 'Jgut\Zf\Maintenance\View\maintenanceStrategy';
 
     /**
      * Maintenance page template.

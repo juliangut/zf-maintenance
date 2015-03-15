@@ -1,19 +1,19 @@
 <?php
 /**
- * JgutZfMaintenance Module (https://github.com/juliangut/zf-maintenance)
+ * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace JgutZfMaintenanceTest\Service;
+namespace Jgut\Zf\MaintenanceTests\Service;
 
 use PHPUnit_Framework_TestCase;
-use JgutZfMaintenance\Service\ModuleOptionsServiceFactory;
-use JgutZfMaintenance\Options\ModuleOptions;
+use Jgut\Zf\Maintenance\Service\ModuleOptionsServiceFactory;
+use Jgut\Zf\Maintenance\Options\ModuleOptions;
 
 /**
- * @covers JgutZfMaintenance\Service\ModuleOptionsServiceFactory
+ * @covers Jgut\Zf\Maintenance\Service\ModuleOptionsServiceFactory
  */
 class ModuleOptionsServiceFactoryTest extends PHPUnit_Framework_TestCase
 {
@@ -22,8 +22,8 @@ class ModuleOptionsServiceFactoryTest extends PHPUnit_Framework_TestCase
     );
 
     /**
-     * @covers JgutZfMaintenance\Service\ModuleOptionsServiceFactory::createService
-     * @covers JgutZfMaintenance\Options\ModuleOptions::__construct
+     * @covers Jgut\Zf\Maintenance\Service\ModuleOptionsServiceFactory::createService
+     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::__construct
      */
     public function testCreation()
     {
