@@ -30,7 +30,7 @@ class ProviderConfigServiceFactoryTest extends PHPUnit_Framework_TestCase
         $serviceManager->expects($this->once())->method('get')->will($this->returnValue($options));
 
         $factory = new ProviderConfigServiceFactory();
-        $configProvider = $factory->createService($serviceManager);
+        $factory->createService($serviceManager);
     }
 
     /**

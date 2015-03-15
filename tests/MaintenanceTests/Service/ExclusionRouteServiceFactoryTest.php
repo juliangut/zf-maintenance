@@ -32,7 +32,7 @@ class ExclusionRouteServiceFactoryTest extends PHPUnit_Framework_TestCase
         $serviceManager->expects($this->once())->method('get')->will($this->returnValue($options));
 
         $factory = new ExclusionRouteServiceFactory();
-        $routeExclusion = $factory->createService($serviceManager);
+        $factory->createService($serviceManager);
     }
 
     /**
