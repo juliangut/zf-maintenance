@@ -29,7 +29,7 @@ class ScheduledMaintenance extends AbstractHelper implements ServiceLocatorAware
     protected $serviceLocator;
 
     /**
-     * @param Authorize $authorizeService
+     * @param array $providers
      */
     public function __construct(array $providers = array())
     {
