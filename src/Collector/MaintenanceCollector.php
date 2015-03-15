@@ -42,7 +42,7 @@ class MaintenanceCollector implements CollectorInterface
     protected $providers = array();
 
     /**
-     * @param Authorize $authorizeService
+     * @param array $providers
      */
     public function __construct(array $providers = array())
     {

@@ -54,7 +54,7 @@ class ModuleOptions extends AbstractOptions
     /**
      * Set maintenance strategy.
      *
-     * @param string $template
+     * @param string $maintenanceStrategy
      */
     public function setMaintenanceStrategy($maintenanceStrategy)
     {
