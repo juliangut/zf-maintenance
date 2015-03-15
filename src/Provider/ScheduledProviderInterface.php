@@ -20,7 +20,7 @@ interface ScheduledProviderInterface extends ProviderInterface
     /**
      * Get schedule time span.
      *
-     * @return array()
+     * @return array
      */
     public function getScheduleTimes();
 }
