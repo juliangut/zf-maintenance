@@ -107,7 +107,7 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
             $this->returnCallback(
                 function () use ($options, $exclusion) {
                     $args = array(
-                        'zf-maintenance-options'                    => $options,
+                        'zf-maintenance-options'                        => $options,
                         'Jgut\\Zf\\Maintenance\\Exclusion\\IpExclusion' => $exclusion
                     );
                     return $args[func_get_arg(0)];
