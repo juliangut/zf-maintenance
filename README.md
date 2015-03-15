@@ -16,7 +16,7 @@ Maintenance module for Zend Framework 2.
 php composer.phar require juliangut/zf-maintenance
 ```
 
-    or download it directly from github and place it in your application's `module/` directory.
+or download it directly from github and place it in your application's `module/` directory.
 
 2. Add `Jgut\Zf\Maintenance` module to the module section of your `config/application.config.php`
 
@@ -39,8 +39,7 @@ return [
         /* Strategy service to be used on maintenance
          * Will return 503 (service unavailable) error code when maintenance mode is on
          */
-        'maintenance_strategy'
-            => 'Jgut\Zf\Maintenance\View\MaintenanceStrategy',
+        'maintenance_strategy' => 'Jgut\Zf\Maintenance\View\MaintenanceStrategy',
 
         // Template for the maintenance strategy
         'template' => 'zf-maintenance/maintenance',
@@ -65,7 +64,7 @@ return [
          *   RouteExclusion, sets routes not affected by maintenance mode
          */
         'exclusions' => array(
-            'Jgut\Zf\Maintenance\Exclusion\IpExclusion'    => array(
+            'Jgut\Zf\Maintenance\Exclusion\IpExclusion' => array(
                 '127.0.0.1',
             ),
             'Jgut\Zf\Maintenance\Exclusion\RouteExclusion' => array(
