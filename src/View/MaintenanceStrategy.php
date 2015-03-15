@@ -12,7 +12,6 @@ use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\Mvc\MvcEvent;
 use Jgut\Zf\Maintenance\Provider\ProviderInterface;
-use Jgut\Zf\Maintenance\Exclusion\ExclusionInterface;
 use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Http\Response as HttpResponse;
 use Zend\View\Model\ViewModel;
