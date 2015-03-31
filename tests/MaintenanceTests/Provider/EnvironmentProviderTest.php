@@ -20,12 +20,12 @@ class EnvironmentProviderTest extends PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
-        $_ENV['zf-maintenance'] = 'On';
+        putenv('zf-maintenance=On');
     }
 
     public static function tearDownAfterClass()
     {
-        unset($_ENV['zf-maintenance']);
+        putenv('zf-maintenance');
     }
 
     public function setUp()

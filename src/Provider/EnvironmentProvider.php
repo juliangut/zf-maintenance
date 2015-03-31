@@ -74,10 +74,10 @@ class EnvironmentProvider extends AbstractProvider
      */
     public function isActive()
     {
-        if ($this->var === null || !isset($_ENV[$this->var])) {
+        if ($this->var === null || getenv($this->var) === false) {
             return false;
         }
 
-        return $this->value === null ? true : $_ENV[$this->var] === $this->value;
+        return $this->value === null ? true : getenv($this->var) === $this->value;
     }
 }
