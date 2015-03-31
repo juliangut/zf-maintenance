@@ -3,7 +3,7 @@
  * Juliangut Zend Framework Maintenance Module Module (https://github.com/juliangut/zf-maintenance)
  *
  * @link https://github.com/juliangut/zf-maintenance for the canonical source repository
- * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
+ * @license https://github.com/juliangut/zf-maintenance/blob/master/LICENSE
  */
 
 return array(
