@@ -30,7 +30,7 @@ class FileProvider extends AbstractProvider
     protected $file;
 
     /**
-     * @param string $path
+     * @param string $file
      * @return void
      */
     public function setFile($file)
