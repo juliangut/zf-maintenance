@@ -25,9 +25,7 @@ class ExclusionRouteServiceFactory implements FactoryInterface
         $exclusions = $options->getExclusions();
 
         if (!isset($exclusions['Jgut\Zf\Maintenance\Exclusion\RouteExclusion'])) {
-            throw new \InvalidArgumentException(
-                'Config for "Jgut\Zf\Maintenance\Exclusion\RouteExclusion" not set'
-            );
+            throw new \InvalidArgumentException('Config for "Jgut\Zf\Maintenance\Exclusion\RouteExclusion" not set');
         }
 
         $routes     = $exclusions['Jgut\Zf\Maintenance\Exclusion\RouteExclusion'];

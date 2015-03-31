@@ -34,9 +34,12 @@ Configuration example can be found in `config\zf-maintenance.global.php.dist`
 
 Annotated example:
 ```php
-return [
-    'zf-maintenance' => [
-        /* Strategy service to be used on maintenance
+use DateTime:
+
+return array(
+    'zf-maintenance' => array(
+        /*
+         * Strategy service to be used on maintenance
          * Will return 503 (service unavailable) error code when maintenance mode is on
          */
         'maintenance_strategy' => 'Jgut\Zf\Maintenance\View\MaintenanceStrategy',
@@ -44,11 +47,12 @@ return [
         // Template for the maintenance strategy
         'template' => 'zf-maintenance/maintenance',
 
-        /* Maintenance providers
+        /*
+         * Maintenance providers
          * Different means to activate maintenance mod.
          * Two manual providers comes bundled with the module:
          *   ConfigProvider, the simplest possible
-         *   ConfigScheduledProvider, sets a time span, start - end strings as accepted by \DateTime
+         *   ConfigScheduledProvider, sets a time span, start-end strings as accepted by \DateTime or \DateTime objects
          * Any provider implementing Jgut\Zf\Maintenance\Provider\ScheduledProviderInterface will be used to determine
          * future maintenance situations and used on view helper as well as in zend-developer-tools
          */
@@ -56,23 +60,29 @@ return [
             'Jgut\Zf\Maintenance\Provider\ConfigProvider' => array(
                 'active' => false,
             ),
+            'Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider' => array(
+                'start' => '2020-01-01 00:00:00',
+                'end'   => new DateTime('2020-01-02 05:00:00'),
+            ),
         ),
 
-        /* Exceptions to maintenance mode
+        /*
+         * Exceptions to maintenance mode
          * Provides a way to bypass maintenance mode by fulfilling any of the conditions provided:
-         *   IpExclusion, sets a list of IPs from which access is granted
+         *   IpExclusion, sets a list of IPs from which access is granted, user's IP is calculated using \Zend\Http\PhpEnvironment\RemoteAddress
          *   RouteExclusion, sets routes not affected by maintenance mode
          */
         'exclusions' => array(
             'Jgut\Zf\Maintenance\Exclusion\IpExclusion' => array(
-                '127.0.0.1',
+                '127.0.0.1',    // Localhost
+                '192.168.1.10', // Private network
             ),
             'Jgut\Zf\Maintenance\Exclusion\RouteExclusion' => array(
                 'home',
             ),
         ),
-    ],
-]
+    ),
+);
 ```
 
 ## View helper
@@ -83,8 +93,9 @@ maintenance time period
 ```php
 array(
     'start' => \DateTime,
-    'end'   => \DateTime, //null if no end time
+    'end'   => \DateTime,
 );
+// Start or end can be null if not provided
 ```
 
 ## ZendDeveloperTools integration

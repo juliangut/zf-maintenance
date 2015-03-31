@@ -8,6 +8,7 @@
 
 namespace Jgut\Zf\Maintenance\Service;
 
+use DateTime;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider;
@@ -35,11 +36,15 @@ class ProviderConfigScheduledServiceFactory implements FactoryInterface
         $providerConfig = $providers['Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider'];
 
         if (isset($providerConfig['start'])) {
-            $provider->setStart(new \DateTime($providerConfig['start']));
+            $start = $providerConfig['start'];
+
+            $provider->setStart($start instanceof DateTime ? $start : new DateTime($start));
         }
 
         if (isset($providerConfig['end'])) {
-            $provider->setEnd(new \DateTime($providerConfig['end']));
+            $end = $providerConfig['end'];
+
+            $provider->setEnd($end instanceof DateTime ? $end : new DateTime($end));
         }
 
         return $provider;

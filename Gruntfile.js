@@ -56,6 +56,6 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('default', ['phplint', 'phpcs', 'phpmd']);
-    grunt.registerTask('all', ['default', 'phpcpd', 'phpunit']);
+    grunt.registerTask('default', ['phplint', 'phpcs', 'phpmd', 'phpcpd']);
+    grunt.registerTask('all', ['default', 'phpunit']);
 };

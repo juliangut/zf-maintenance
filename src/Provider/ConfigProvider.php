@@ -15,7 +15,8 @@ class ConfigProvider extends AbstractProvider
     /**
      * {@inheritDoc}
      */
-    protected $maintenanceDescription = 'Manual maintenance mode active on Jgut\Zf\Maintenance\Provider\ConfigProvider';
+    protected $maintenanceDescription =
+        'Manual maintenance mode active on Jgut\Zf\Maintenance\Provider\ConfigProvider';
 
     /**
      * Maintenance mode active.
@@ -48,10 +49,8 @@ class ConfigProvider extends AbstractProvider
      */
     public function onRoute(MvcEvent $event)
     {
-        if (!$this->active) {
-            return;
+        if ($this->isActive()) {
+            parent::onRoute($event);
         }
-
-        parent::onRoute($event);
     }
 }

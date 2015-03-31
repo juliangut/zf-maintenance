@@ -26,9 +26,7 @@ class ExclusionIpServiceFactory implements FactoryInterface
         $exclusions = $options->getExclusions();
 
         if (!isset($exclusions['Jgut\Zf\Maintenance\Exclusion\IpExclusion'])) {
-            throw new \InvalidArgumentException(
-                'Config for "Jgut\Zf\Maintenance\Exclusion\IpExclusion" not set'
-            );
+            throw new \InvalidArgumentException('Config for "Jgut\Zf\Maintenance\Exclusion\IpExclusion" not set');
         }
 
         $ips = $exclusions['Jgut\Zf\Maintenance\Exclusion\IpExclusion'];

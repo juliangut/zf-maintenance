@@ -25,9 +25,7 @@ class ProviderConfigServiceFactory implements FactoryInterface
         $providers = $options->getProviders();
 
         if (!isset($providers['Jgut\Zf\Maintenance\Provider\ConfigProvider'])) {
-            throw new \InvalidArgumentException(
-                'Config for "Jgut\Zf\Maintenance\Provider\ConfigProvider" not set'
-            );
+            throw new \InvalidArgumentException('Config for "Jgut\Zf\Maintenance\Provider\ConfigProvider" not set');
         }
 
         $provider = new ConfigProvider();
