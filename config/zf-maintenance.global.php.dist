@@ -19,6 +19,9 @@ return array(
             'Jgut\Zf\Maintenance\Provider\ConfigProvider' => array(
                 'active' => false,
             ),
+            'Jgut\Zf\Maintenance\Provider\FileProvider' => array(
+                'file' => __DIR__ . '/maintenance',
+            ),
         ),
 
         // Exceptions to maintenance mode

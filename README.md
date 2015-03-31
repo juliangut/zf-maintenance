@@ -51,7 +51,8 @@ return array(
          * Maintenance providers
          * Different means to activate maintenance mod.
          * Two manual providers comes bundled with the module:
-         *   ConfigProvider, the simplest possible
+         *   ConfigProvider, simplest possible, manual maintenance activation
+         *   FileProvider, maintenance is determined by the presence of a file
          *   ConfigScheduledProvider, sets a time span, start-end strings as accepted by \DateTime or \DateTime objects
          * Any provider implementing Jgut\Zf\Maintenance\Provider\ScheduledProviderInterface will be used to determine
          * future maintenance situations and used on view helper as well as in zend-developer-tools
@@ -59,6 +60,9 @@ return array(
         'providers' => array(
             'Jgut\Zf\Maintenance\Provider\ConfigProvider' => array(
                 'active' => false,
+            ),
+            'Jgut\Zf\Maintenance\Provider\FileProvider' => array(
+                'file' => __DIR__ . '/maintenance',
             ),
             'Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider' => array(
                 'start' => '2020-01-01 00:00:00',

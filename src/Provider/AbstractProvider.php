@@ -53,6 +53,10 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
      */
     public function onRoute(MvcEvent $event)
     {
+        if (!$this->isActive()) {
+            return;
+        }
+
         // Do nothing if no route matched (404)
         if (!$event->getRouteMatch() instanceof RouteMatch) {
             return;
@@ -81,17 +85,15 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
         $serviceManager = $event->getApplication()->getServiceManager();
         $options        = $serviceManager->get('zf-maintenance-options');
 
-        $isExcluded = false;
         foreach (array_keys($options->getExclusions()) as $exclusionName) {
             if ($serviceManager->has($exclusionName)) {
                 $exclusion = $serviceManager->get($exclusionName);
                 if ($exclusion->isExcluded()) {
-                    $isExcluded = true;
-                    break;
+                    return true;
                 }
             }
         }
 
-        return $isExcluded;
+        return false;
     }
 }

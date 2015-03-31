@@ -10,6 +10,14 @@ namespace Jgut\Zf\Maintenance\Provider;
 
 use Zend\Mvc\MvcEvent;
 
+/**
+ * Scheduled maintenance provider.
+ *
+ * Maintenance mode is considered to be On if current date is
+ *   - higher than start if only start is defined
+ *   - lower than end if only end is defined
+ *   - higher than start and lower than end if both are defined
+ */
 class ConfigScheduledProvider extends AbstractProvider implements ScheduledProviderInterface
 {
     /**
@@ -33,8 +41,6 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
     protected $end;
 
     /**
-     * Set maintenance start time.
-     *
      * @param \DateTime $start
      * @return void
      */
@@ -48,8 +54,6 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
     }
 
     /**
-     * Get maintenance start time.
-     *
      * @return \DateTime
      */
     public function getStart()
@@ -58,8 +62,6 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
     }
 
     /**
-     * Set maintenance end time.
-     *
      * @param \DateTime $end
      * @return void
      */
@@ -73,8 +75,6 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
     }
 
     /**
-     * Get maintenance end time.
-     *
      * @return \DateTime
      */
     public function getEnd()
@@ -101,16 +101,6 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
         }
 
         return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function onRoute(MvcEvent $event)
-    {
-        if ($this->isActive()) {
-            parent::onRoute($event);
-        }
     }
 
     /**

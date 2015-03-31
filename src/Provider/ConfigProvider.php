@@ -10,6 +10,9 @@ namespace Jgut\Zf\Maintenance\Provider;
 
 use Zend\Mvc\MvcEvent;
 
+/**
+ * Basic manual maintenance provider.
+ */
 class ConfigProvider extends AbstractProvider
 {
     /**
@@ -42,15 +45,5 @@ class ConfigProvider extends AbstractProvider
     public function isActive()
     {
         return $this->active;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function onRoute(MvcEvent $event)
-    {
-        if ($this->isActive()) {
-            parent::onRoute($event);
-        }
     }
 }

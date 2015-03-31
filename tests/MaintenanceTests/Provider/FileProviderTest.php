@@ -9,18 +9,32 @@
 namespace Jgut\Zf\MaintenanceTests\Provider;
 
 use PHPUnit_Framework_TestCase;
-use Jgut\Zf\Maintenance\Provider\ConfigProvider;
+use Jgut\Zf\Maintenance\Provider\FileProvider;
 
 /**
- * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider
+ * @covers Jgut\Zf\Maintenance\Provider\FileProvider
  */
-class ConfigProviderTest extends PHPUnit_Framework_TestCase
+class FileProviderTest extends PHPUnit_Framework_TestCase
 {
     protected $provider;
 
+    protected static $tmpFile;
+
+    public static function setUpBeforeClass()
+    {
+        self::$tmpFile = sys_get_temp_dir() . '/maintenance';
+
+        touch(self::$tmpFile);
+    }
+
+    public static function tearDownAfterClass()
+    {
+        unlink(self::$tmpFile);
+    }
+
     public function setUp()
     {
-        $this->provider = new ConfigProvider();
+        $this->provider = new FileProvider();
     }
 
     /**
@@ -48,8 +62,19 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::isActive
-     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\FileProvider::setFile
+     * @covers Jgut\Zf\Maintenance\Provider\FileProvider::getFile
+     */
+    public function testMutatorAccessor()
+    {
+        $this->provider->setFile(self::$tmpFile);
+
+        $this->assertEquals(self::$tmpFile, $this->provider->getFile());
+    }
+
+    /**
+     * @covers Jgut\Zf\Maintenance\Provider\FileProvider::isActive
+     * @covers Jgut\Zf\Maintenance\Provider\FileProvider::onRoute
      */
     public function testNotIsActive()
     {
@@ -57,26 +82,32 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->provider->isActive());
         $this->assertNull($this->provider->onRoute($event));
+
+        $this->provider->setFile('ficticious-file');
+
+        $this->assertFalse($this->provider->isActive());
+        $this->assertNull($this->provider->onRoute($event));
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::setActive
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::isActive
+     * @covers Jgut\Zf\Maintenance\Provider\FileProvider::setFile
+     * @covers Jgut\Zf\Maintenance\Provider\FileProvider::getFile
+     * @covers Jgut\Zf\Maintenance\Provider\FileProvider::isActive
      */
     public function testIsActive()
     {
-        $this->provider->setActive(true);
+        $this->provider->setFile(self::$tmpFile);
 
         $this->assertTrue($this->provider->isActive());
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::setActive
+     * @covers Jgut\Zf\Maintenance\Provider\FileProvider::setFile
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
      */
     public function testNoRouteMatch()
     {
-        $this->provider->setActive(true);
+        $this->provider->setFile(self::$tmpFile);
 
         $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
         $event->expects($this->any())->method('getRouteMatch')->will($this->returnValue(false));
@@ -86,11 +117,11 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::setActive
+     * @covers Jgut\Zf\Maintenance\Provider\FileProvider::setFile
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::isExcluded
      */
-    public function testIsExcluded()
+    public function tetIsExcluded()
     {
         $exclusion = $this->getMock('Jgut\\Zf\\Maintenance\\Exclusion\\IpExclusion', array(), array(), '', false);
         $exclusion->expects($this->once())->method('isExcluded')->will($this->returnValue(true));
@@ -125,13 +156,13 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
 
         $event->expects($this->never())->method('setError');
 
-        $this->provider->setActive(true);
+        $this->provider->setFile(self::$tmpFile);
 
         $this->provider->onRoute($event);
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::setActive
+     * @covers Jgut\Zf\Maintenance\Provider\FileProvider::setFile
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::isExcluded
      */
@@ -156,7 +187,7 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
         $event->expects($this->once())->method('getRouteMatch')->will($this->returnValue($routeMatch));
         $event->expects($this->any())->method('getApplication')->will($this->returnValue($application));
 
-        $this->provider->setActive(true);
+        $this->provider->setFile(self::$tmpFile);
 
         $this->provider->onRoute($event);
     }

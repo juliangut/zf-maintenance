@@ -6,7 +6,7 @@
  * @license https://raw.githubusercontent.com/juliangut/zf-maintenance/master/LICENSE
  */
 
-namespace Jgut\Zf\MaintenanceTests\Exclusion;
+namespace Jgut\Zf\MaintenanceTests\Provider;
 
 use PHPUnit_Framework_TestCase;
 use Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider;
@@ -16,6 +16,13 @@ use Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider;
  */
 class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
 {
+    protected $provider;
+
+    public function setUp()
+    {
+        $this->provider = new ConfigScheduledProvider();
+    }
+
     /**
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::attach
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::detach
@@ -25,39 +32,35 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
         $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
         $callbackMock = $this->getMock('Zend\\Stdlib\\CallbackHandler', array(), array(), '', false);
 
-        $provider = new ConfigScheduledProvider();
-
         $eventManager
             ->expects($this->once())
             ->method('attach')
             ->with()
             ->will($this->returnValue($callbackMock));
-        $provider->attach($eventManager);
+        $this->provider->attach($eventManager);
 
         $eventManager
             ->expects($this->once())
             ->method('detach')
             ->with($callbackMock)
             ->will($this->returnValue(true));
-        $provider->detach($eventManager);
+        $this->provider->detach($eventManager);
     }
 
     /**
      * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::isActive
      * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::isScheduled
      * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::getScheduleTimes
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
      */
     public function testDefaults()
     {
-        $provider = new ConfigScheduledProvider();
-
         $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
 
-        $this->assertFalse($provider->isActive());
-        $this->assertFalse($provider->isScheduled());
-        $this->assertEquals(array(), $provider->getScheduleTimes());
-        $this->assertNull($provider->onRoute($event));
+        $this->assertFalse($this->provider->isActive());
+        $this->assertFalse($this->provider->isScheduled());
+        $this->assertEquals(array(), $this->provider->getScheduleTimes());
+        $this->assertNull($this->provider->onRoute($event));
     }
 
     /**
@@ -71,32 +74,30 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
      */
     public function testTimes()
     {
-        $provider = new ConfigScheduledProvider();
-
         $start = new \DateTime('now');
         $start->add(new \DateInterval('P1D'));
 
-        $provider->setStart($start);
-        $this->assertEquals($start, $provider->getStart());
-        $this->assertFalse($provider->isActive());
-        $this->assertTrue($provider->isScheduled());
-        $this->assertEquals(array('start' => $start, 'end' => null), $provider->getScheduleTimes());
+        $this->provider->setStart($start);
+        $this->assertEquals($start, $this->provider->getStart());
+        $this->assertFalse($this->provider->isActive());
+        $this->assertTrue($this->provider->isScheduled());
+        $this->assertEquals(array('start' => $start, 'end' => null), $this->provider->getScheduleTimes());
 
-        $provider = new ConfigScheduledProvider();
+        $this->provider = new ConfigScheduledProvider();
 
         $end = new \DateTime('now');
         $end->add(new \DateInterval('P2D'));
 
-        $provider->setEnd($end);
-        $this->assertEquals($end, $provider->getEnd());
-        $this->assertTrue($provider->isActive());
-        $this->assertFalse($provider->isScheduled());
-        $this->assertEquals(array(), $provider->getScheduleTimes());
+        $this->provider->setEnd($end);
+        $this->assertEquals($end, $this->provider->getEnd());
+        $this->assertTrue($this->provider->isActive());
+        $this->assertFalse($this->provider->isScheduled());
+        $this->assertEquals(array(), $this->provider->getScheduleTimes());
 
-        $provider->setStart($start);
-        $this->assertFalse($provider->isActive());
-        $this->assertTrue($provider->isScheduled());
-        $this->assertEquals(array('start' => $start, 'end' => $end), $provider->getScheduleTimes());
+        $this->provider->setStart($start);
+        $this->assertFalse($this->provider->isActive());
+        $this->assertTrue($this->provider->isScheduled());
+        $this->assertEquals(array('start' => $start, 'end' => $end), $this->provider->getScheduleTimes());
     }
 
     /**
@@ -104,14 +105,12 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidEndDate()
     {
-        $provider = new ConfigScheduledProvider();
-
         $start = new \DateTime('now');
-        $provider->setStart($start);
+        $this->provider->setStart($start);
 
         $end = new \DateTime('now');
         $end->sub(new \DateInterval('P2D'));
-        $provider->setEnd($end);
+        $this->provider->setEnd($end);
     }
 
     /**
@@ -119,62 +118,56 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidStartDate()
     {
-        $provider = new ConfigScheduledProvider();
-
         $end = new \DateTime('now');
-        $provider->setEnd($end);
+        $this->provider->setEnd($end);
 
         $start = new \DateTime('now');
         $start->add(new \DateInterval('P2D'));
-        $provider->setStart($start);
+        $this->provider->setStart($start);
     }
 
     /**
      * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setStart
      * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setEnd
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
      */
     public function testBeforeTime()
     {
-        $provider = new ConfigScheduledProvider();
-
         $start = new \DateTime('now');
         $start->add(new \DateInterval('P1D'));
-        $provider->setStart($start);
+        $this->provider->setStart($start);
 
         $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
 
-        $this->assertNull($provider->onRoute($event));
+        $this->assertNull($this->provider->onRoute($event));
 
         $end = new \DateTime('now');
         $end->add(new \DateInterval('P2D'));
-        $provider->setStart($end);
+        $this->provider->setStart($end);
 
-        $this->assertNull($provider->onRoute($event));
+        $this->assertNull($this->provider->onRoute($event));
     }
 
     /**
      * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setStart
      * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::setEnd
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::onRoute
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
      */
     public function testAfterTime()
     {
-        $provider = new ConfigScheduledProvider();
-
         $end = new \DateTime('now');
         $end->sub(new \DateInterval('P1D'));
-        $provider->setEnd($end);
+        $this->provider->setEnd($end);
 
         $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
 
-        $this->assertNull($provider->onRoute($event));
+        $this->assertNull($this->provider->onRoute($event));
 
         $start = new \DateTime('now');
         $start->sub(new \DateInterval('P2D'));
-        $provider->setStart($start);
+        $this->provider->setStart($start);
 
-        $this->assertNull($provider->onRoute($event));
+        $this->assertNull($this->provider->onRoute($event));
     }
 
     /**
@@ -185,26 +178,22 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
      */
     public function testNoRouteMatch()
     {
-        $provider = new ConfigScheduledProvider();
-
         $start = new \DateTime('now');
         $start->sub(new \DateInterval('P1D'));
-        $provider->setStart($start);
+        $this->provider->setStart($start);
 
         $end = new \DateTime('now');
         $end->add(new \DateInterval('P1D'));
-        $provider->setEnd($end);
+        $this->provider->setEnd($end);
 
         $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
         $event->expects($this->any())->method('getRouteMatch')->will($this->returnValue(false));
 
         $event->expects($this->never())->method('setError');
-        $provider->onRoute($event);
+        $this->provider->onRoute($event);
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::setActive
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::onRoute
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::isExcluded
      */
@@ -243,22 +232,18 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
 
         $event->expects($this->never())->method('setError');
 
-        $provider = new ConfigScheduledProvider();
-
         $start = new \DateTime('now');
         $start->sub(new \DateInterval('P1D'));
-        $provider->setStart($start);
+        $this->provider->setStart($start);
 
         $end = new \DateTime('now');
         $end->add(new \DateInterval('P1D'));
-        $provider->setEnd($end);
+        $this->provider->setEnd($end);
 
-        $provider->onRoute($event);
+        $this->provider->onRoute($event);
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::setActive
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::onRoute
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::isExcluded
      */
@@ -283,16 +268,14 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
         $event->expects($this->once())->method('getRouteMatch')->will($this->returnValue($routeMatch));
         $event->expects($this->any())->method('getApplication')->will($this->returnValue($application));
 
-        $provider = new ConfigScheduledProvider();
-
         $start = new \DateTime('now');
         $start->sub(new \DateInterval('P1D'));
-        $provider->setStart($start);
+        $this->provider->setStart($start);
 
         $end = new \DateTime('now');
         $end->add(new \DateInterval('P1D'));
-        $provider->setEnd($end);
+        $this->provider->setEnd($end);
 
-        $provider->onRoute($event);
+        $this->provider->onRoute($event);
     }
 }
