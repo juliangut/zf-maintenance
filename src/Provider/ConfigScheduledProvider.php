@@ -8,8 +8,6 @@
 
 namespace Jgut\Zf\Maintenance\Provider;
 
-use Zend\Mvc\MvcEvent;
-
 /**
  * Scheduled maintenance provider.
  *
