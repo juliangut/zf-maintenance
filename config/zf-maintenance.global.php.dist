@@ -22,6 +22,10 @@ return array(
             'Jgut\Zf\Maintenance\Provider\FileProvider' => array(
                 'file' => __DIR__ . '/maintenance',
             ),
+            'Jgut\Zf\Maintenance\Provider\EnvironmentProvider' => array(
+                'variable' => 'zf-maintenance',
+                'value'    => 'On',
+            ),
         ),
 
         // Exceptions to maintenance mode
