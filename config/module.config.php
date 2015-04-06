@@ -16,6 +16,7 @@ return array(
                 => 'Jgut\Zf\Maintenance\Service\ProviderConfigServiceFactory',
             'ZfMaintenanceFileProvider'
                 => 'Jgut\Zf\Maintenance\Service\ProviderFileServiceFactory',
+
             'ZfMaintenanceEnvironmentProvider'
                 => 'Jgut\Zf\Maintenance\Service\ProviderEnvironmentServiceFactory',
             'ZfMaintenanceConfigScheduledProvider'
