@@ -35,7 +35,7 @@ Configuration example can be found in `config\zf-maintenance.global.php.dist`
 
 Annotated example:
 ```php
-use DateTime:
+use DateTime;
 
 return array(
     'zf-maintenance' => array(
