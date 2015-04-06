@@ -109,6 +109,10 @@ In this case it is usefull to use `maintenanceMessage` view helper to show maint
 
 ### Providers
 
+Maintenance mode providers serve different means to activate maintenance mode
+
+Providers are checked in the order they appear in providers array, when one provider is active the rest of providers are not checked
+
 #### Common attributes
 
 All maintenance providers have a `message` attribute used in maintenance strategy page
@@ -177,6 +181,8 @@ Any provider implementing `Jgut\Zf\Maintenance\Provider\ScheduledProviderInterfa
 
 Conditions to bypass maintenance mode
 
+Exclusions are checked the same way as providers are, in the order they are located in exclusions array, when one exclusion is active (isExcluded) the rest of exclusions are not checked
+
 #### IpExclusion
 
 Excludes IPs from maintenance mode
@@ -216,6 +222,21 @@ $exclusion = new RouteExclusion($excludedRoutes, new RouteMatch);
 ```
 
 ## View helpers
+
+### MaintenanceMessage
+
+`maintenanceMessage` will return the message of current active maintenance provider or empty string if not in maintenance mode
+
+Allows you to show maintenance message when maintenance is in non blocking state or for those users for who exclusions apply
+
+This helper would normally be used on a general template as application header or footer as an informative area. Mind that if in maintenance blocking mode all requests not bound by exclusions will be redirected to maintenance page
+
+```php
+$maintenanceMessage = $this->maintenanceMessage();
+if ($maintenanceMessage !== '') {
+    sprintf('<div class="alert alert-info">%s</div>', $maintenanceMessage);
+}
+```
 
 ### ScheduledMaintenance
 
