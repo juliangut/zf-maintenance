@@ -22,14 +22,14 @@ class ExclusionIpServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $options    = $serviceLocator->get('zf-maintenance-options');
+        $options    = $serviceLocator->get('ZfMaintenanceOptions');
         $exclusions = $options->getExclusions();
 
-        if (!isset($exclusions['Jgut\Zf\Maintenance\Exclusion\IpExclusion'])) {
+        if (!isset($exclusions['ZfMaintenanceIpExclusion'])) {
             throw new \InvalidArgumentException('Config for "Jgut\Zf\Maintenance\Exclusion\IpExclusion" not set');
         }
 
-        $ips = $exclusions['Jgut\Zf\Maintenance\Exclusion\IpExclusion'];
+        $ips = $exclusions['ZfMaintenanceIpExclusion'];
         return new IpExclusion($ips, new RemoteAddress());
     }
 }

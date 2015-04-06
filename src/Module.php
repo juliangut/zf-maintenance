@@ -20,7 +20,7 @@ class Module
         $application    = $event->getApplication();
         $serviceManager = $application->getServiceManager();
         $eventManager   = $application->getEventManager();
-        $options        = $serviceManager->get('zf-maintenance-options');
+        $options        = $serviceManager->get('ZfMaintenanceOptions');
 
         foreach (array_keys($options->getProviders()) as $provider) {
             if ($serviceManager->has($provider)) {
@@ -28,8 +28,10 @@ class Module
             }
         }
 
-        $strategy = $serviceManager->get($options->getMaintenanceStrategy());
-        $eventManager->attach($strategy);
+        if ($serviceManager->has($options->getStrategy())) {
+            $strategy = $serviceManager->get($options->getStrategy());
+            $eventManager->attach($strategy);
+        }
     }
 
     /**

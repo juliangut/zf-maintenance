@@ -40,7 +40,10 @@ class ProviderConfigServiceFactoryTest extends PHPUnit_Framework_TestCase
     public function testCreation()
     {
         $providers = array(
-            'Jgut\Zf\Maintenance\Provider\ConfigProvider' => array('active' => 'true'),
+            'ZfMaintenanceConfigProvider' => array(
+                'active'  => 'true',
+                'message' => 'custom message',
+            ),
         );
 
         $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);

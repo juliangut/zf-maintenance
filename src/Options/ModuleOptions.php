@@ -17,7 +17,7 @@ class ModuleOptions extends AbstractOptions
      *
      * @var string
      */
-    protected $maintenanceStrategy = 'Jgut\Zf\Maintenance\View\maintenanceStrategy';
+    protected $strategy = 'ZfMaintenanceStrategy';
 
     /**
      * Maintenance page template.
@@ -25,6 +25,15 @@ class ModuleOptions extends AbstractOptions
      * @var string
      */
     protected $template = 'zf-maintenance/maintenance';
+
+    /**
+     * Maintenance mode blocking status.
+     *
+     * Whether maintenance blocks access to application.
+     *
+     * @var boolean
+     */
+    protected $block = true;
 
     /**
      * Maintenance providers list.
@@ -54,11 +63,11 @@ class ModuleOptions extends AbstractOptions
     /**
      * Set maintenance strategy.
      *
-     * @param string $maintenanceStrategy
+     * @param string $strategy
      */
-    public function setMaintenanceStrategy($maintenanceStrategy)
+    public function setStrategy($strategy)
     {
-        $this->maintenanceStrategy = (string) $maintenanceStrategy;
+        $this->strategy = (string) $strategy;
     }
 
     /**
@@ -66,9 +75,9 @@ class ModuleOptions extends AbstractOptions
      *
      * @return string
      */
-    public function getMaintenanceStrategy()
+    public function getStrategy()
     {
-        return $this->maintenanceStrategy;
+        return $this->strategy;
     }
 
     /**
@@ -89,6 +98,26 @@ class ModuleOptions extends AbstractOptions
     public function getTemplate()
     {
         return $this->template;
+    }
+
+    /**
+     * Set maintenance blocking status.
+     *
+     * @param boolean $block
+     */
+    public function setBlock($block)
+    {
+        $this->block = (bool) $block;
+    }
+
+    /**
+     * Get maintenance blocking status.
+     *
+     * @return boolean
+     */
+    public function getBlock()
+    {
+        return $this->block;
     }
 
     /**

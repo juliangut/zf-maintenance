@@ -9,31 +9,34 @@
 return array(
     'service_manager' => array(
         'factories' => array(
-            'Jgut\Zf\Maintenance\Options'
+            'ZfMaintenanceOptions'
                 => 'Jgut\Zf\Maintenance\Service\ModuleOptionsServiceFactory',
-            'Jgut\Zf\Maintenance\Provider\ConfigProvider'
+
+            'ZfMaintenanceConfigProvider'
                 => 'Jgut\Zf\Maintenance\Service\ProviderConfigServiceFactory',
-            'Jgut\Zf\Maintenance\Provider\FileProvider'
+            'ZfMaintenanceFileProvider'
                 => 'Jgut\Zf\Maintenance\Service\ProviderFileServiceFactory',
-            'Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider'
+            'ZfMaintenanceEnvironmentProvider'
+                => 'Jgut\Zf\Maintenance\Service\ProviderEnvironmentServiceFactory',
+            'ZfMaintenanceConfigScheduledProvider'
                 => 'Jgut\Zf\Maintenance\Service\ProviderConfigScheduledServiceFactory',
-            'Jgut\Zf\Maintenance\Exclusion\IpExclusion'
+
+            'ZfMaintenanceIpExclusion'
                 => 'Jgut\Zf\Maintenance\Service\ExclusionIpServiceFactory',
-            'Jgut\Zf\Maintenance\Exclusion\RouteExclusion'
+            'ZfMaintenanceRouteExclusion'
                 => 'Jgut\Zf\Maintenance\Service\ExclusionRouteServiceFactory',
-            'Jgut\Zf\Maintenance\View\MaintenanceStrategy'
+
+            'ZfMaintenanceStrategy'
                 => 'Jgut\Zf\Maintenance\Service\MaintenanceStrategyServiceFactory',
-            'Jgut\Zf\Maintenance\Collector\MaintenanceCollector'
+            'ZfMaintenanceDeveloperToolsCollector'
                 => 'Jgut\Zf\Maintenance\Service\MaintenanceCollectorServiceFactory',
-        ),
-        'aliases' => array(
-            'zf-maintenance-options' => 'Jgut\Zf\Maintenance\Options',
         ),
     ),
 
     'view_helpers' => array(
         'factories' => array(
             'scheduledMaintenance' => 'Jgut\Zf\Maintenance\Service\ViewScheduledMaintenanceServiceFactory',
+            'maintenanceMessage'   => 'Jgut\Zf\Maintenance\Service\ViewMaintenanceMessageServiceFactory',
         )
     ),
 
@@ -48,10 +51,13 @@ return array(
 
     'zf-maintenance' => array(
         // Strategy service to be used on maintenance
-        'maintenance_strategy' => 'Jgut\Zf\Maintenance\View\MaintenanceStrategy',
+        'strategy' => 'ZfMaintenanceStrategy',
 
         // Template for the maintenance strategy
         'template' => 'zf-maintenance/maintenance',
+
+        // Maintenance blocks access to application
+        'block' => true,
 
         // Maintenance providers
         'providers' => array(),
@@ -63,7 +69,7 @@ return array(
     'zenddevelopertools' => array(
         'profiler' => array(
             'collectors' => array(
-                'jgut-zf-maintenance-collector' => 'Jgut\Zf\Maintenance\Collector\MaintenanceCollector',
+                'jgut-zf-maintenance-collector' => 'ZfMaintenanceDeveloperToolsCollector',
             ),
         ),
         'toolbar' => array(

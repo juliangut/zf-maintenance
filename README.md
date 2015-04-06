@@ -32,84 +32,210 @@ php composer.phar require zendframework/zend-developer-tools
 
 Configuration example can be found in `config\zf-maintenance.global.php.dist`
 
-Annotated example:
 ```php
-use DateTime:
+use DateTime;
 
 return array(
     'zf-maintenance' => array(
-        /*
-         * Strategy service to be used on maintenance
-         * Will return 503 (service unavailable) error code when maintenance mode is on
-         */
-        'maintenance_strategy' => 'Jgut\Zf\Maintenance\View\MaintenanceStrategy',
+        // Strategy service to be used on maintenance
+        'strategy' => 'ZfMaintenanceStrategy',
 
         // Template for the maintenance strategy
         'template' => 'zf-maintenance/maintenance',
 
+        // Maintenance blocks access to application
+        'block' => true,
+
         /*
          * Maintenance providers
-         * Different means to activate maintenance mod.
-         * Four providers comes bundled with the module:
-         *   ConfigProvider, simplest possible, manual maintenance activation
-         *   ConfigScheduledProvider, sets a time span, start-end strings as accepted by \DateTime or \DateTime objects
-         *   FileProvider, maintenance is determined by the presence of a file
-         *   EnvironmentProvider, looks for an ENV variable and its value if provided
-         * Any provider implementing Jgut\Zf\Maintenance\Provider\ScheduledProviderInterface will be used to determine
-         * future maintenance situations and used on view helper as well as in zend-developer-tools
+         * Different means to activate maintenance mode
          */
         'providers' => array(
-            'Jgut\Zf\Maintenance\Provider\ConfigProvider' => array(
+            'ZfMaintenanceConfigProvider' => array(
                 'active' => false,
             ),
-            'Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider' => array(
-                'start' => '2020-01-01 00:00:00',
-                'end'   => new DateTime('2020-01-02 05:00:00'),
+            'ZfMaintenanceConfigScheduledProvider' => array(
+                'start'   => '2020-01-01 00:00:00',
+                'end'     => new DateTime('2020-01-02 05:00:00'),
+                'message' => 'Undergoing scheduled maintenance tasks',
             ),
-            'Jgut\Zf\Maintenance\Provider\FileProvider' => array(
-                'file' => __DIR__ . '/maintenance',
-            ),
-            'Jgut\Zf\Maintenance\Provider\EnvironmentProvider' => array(
+            'ZfMaintenanceEnvironmentProvider' => array(
                 'variable' => 'zf-maintenance',
                 'value'    => 'On',
+            ),
+            'ZfMaintenanceFileProvider' => array(
+                'file'    => __DIR__ . '/maintenance',
+                'message' => 'We are currently running maintenance proccesses',
             ),
         ),
 
         /*
          * Exceptions to maintenance mode
-         * Provides a way to bypass maintenance mode by fulfilling any of the conditions provided:
-         *   IpExclusion, sets a list of IPs from which access is granted, user's IP is calculated using \Zend\Http\PhpEnvironment\RemoteAddress
-         *   RouteExclusion, sets routes not affected by maintenance mode
+         * Provides a way to bypass maintenance mode by fulfilling any of the conditions
          */
         'exclusions' => array(
-            'Jgut\Zf\Maintenance\Exclusion\IpExclusion' => array(
+            'ZfMaintenanceIpExclusion' => array(
                 '127.0.0.1',    // Localhost
                 '192.168.1.10', // Private network
             ),
-            'Jgut\Zf\Maintenance\Exclusion\RouteExclusion' => array(
+            'ZfMaintenanceRouteExclusion' => array(
                 'home',
+                'admin',
             ),
         ),
     ),
 );
 ```
 
-## View helper
+### Strategy
 
-A view helper `scheduledMaintenance` is bundled with the module that will return an array with the next scheduled
-maintenance time period
+Custom strategy to handle maintenance mode.
+
+To create your own just extend `Jgut\Zf\Maintenance\View\MaintenanceStrategy`
+
+### Template
+
+Template file for maintenance strategy
+
+### Block
+
+By default maintenance mode prevents application from continuing execution by throwing `Zend\Mvc\MvcEvent::EVENT_DISPATCH_ERROR` handled by `Jgut\Zf\Maintenance\View\MaintenanceStrategy`
+
+If you don't want maintenance mode to stop execution and show maintenance page then set block to false.
+
+This can be used in case you are performing maintenance tasks that don't need the application to be shut down, like ddbb backup, ...
+
+In this case it is usefull to use `maintenanceMessage` view helper to show maintenance information
+
+### Providers
+
+#### Common attributes
+
+All maintenance providers have a `message` attribute used in maintenance strategy page
 
 ```php
+$provider = new ConfigProvider();
+$provider->setMessage('custom maintenance mode message');
+```
+
+#### ConfigProvider
+
+Manual provider, set maintenance mode just by setting `active` attribute
+
+```php
+use Jgut\Zf\Maintenance\Provider\ConfigProvider;
+
+$provider = new ConfigProvider();
+$provider->setActive(true);
+```
+
+#### EnvironmentProvider
+
+Environment variable check provider, checks an environment variable to set maintenance mode
+
+```php
+use Jgut\Zf\Maintenance\Provider\EnvironmentProvider;
+
+putenv('zf-maintenance=On');
+
+$provider = new EnvironmentProvider();
+$provider->setVar('zf-maintenance');
+$provider->setValue('On');
+```
+
+#### FileProvider
+
+File provider, verifies the existance of a file to set maintenance mode
+
+```php
+use Jgut\Zf\Maintenance\Provider\FileProvider;
+
+$provider = new FileProvider();
+$provider->setFile(__DIR__ . '/maintenance_file');
+```
+
+#### ConfigScheduledProvider
+
+Manual scheduled maintenance time frame
+
+Maintenance mode will be set on during the time span provided by `start` and `end` attributes (DateTime valid string or object).
+
+If only `start` provided maintenance mode won't stop once started. If only `end` provided maintenance mode will be on from this moment and until end time
+
+```php
+use Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider;
+use DateTime;
+
+$provider = new ConfigScheduledProvider();
+$provider->setStart('2020-01-01 00:00:00');
+$provider->setEnd(new DateTime('2020-01-01 05:00:00')),
+```
+
+Any provider implementing `Jgut\Zf\Maintenance\Provider\ScheduledProviderInterface` will be used to determine future maintenance situations and used on `scheduledMaintenance` view helper as well as in zend-developer-tools
+
+### Exclusions
+
+Conditions to bypass maintenance mode
+
+#### IpExclusion
+
+Excludes IPs from maintenance mode
+
+```php
+use Jgut\Zf\Maintenance\Exclusion\IpExclusion;
+use Zend\Http\PhpEnvironment\RemoteAddress;
+
+$excludedIps = array(
+    '127.0.0.1',
+    '192.168.1.10',
+);
+
+$exclusion = new IpExclusion($excludedIps, new RemoteAddress);
+```
+
+#### RuteExclusion
+
+Excludes routes from maintenance mode
+
+```php
+use Jgut\Zf\Maintenance\Exclusion\RouteExclusion;
+use Zend\Mvc\Router\RouteMatch;
+
+$excludedRoutes = array(
+    'routeName',
+    array(
+        'controller' => 'controllerName',
+    ),
+    array(
+        'controller' => 'controllerName',
+        'action'     => 'actionName',
+    ),
+);
+
+$exclusion = new RouteExclusion($excludedRoutes, new RouteMatch);
+```
+
+## View helpers
+
+### ScheduledMaintenance
+
+`scheduledMaintenance` will return an array with the next scheduled maintenance time period
+
+```php
+$maintenance = $this->scheduledMaintenance();
+// Start or end can be null if not provided
+
+/*
 array(
     'start' => \DateTime,
     'end'   => \DateTime,
 );
-// Start or end can be null if not provided
+*/
 ```
 
 ## ZendDeveloperTools integration
 
-A collector `zf-mainenance-collector` is present for
+A collector `jgut-zf-maintenance-collector` is present for
 [ZendDeveloperTools](https://github.com/zendframework/ZendDeveloperTools) showing current maintenance status and future scheduled maintenance period times
 
 ## License

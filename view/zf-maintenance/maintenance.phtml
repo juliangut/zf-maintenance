@@ -3,7 +3,7 @@
 </div>
 
 <div class="error-message">
-    <h2>This site is under maintenance</h2>
+    <h2><?php $this->translate($this->message) ?></h2>
 </div>
 
 <?php if (isset($this->display_exceptions) && $this->display_exceptions): ?>

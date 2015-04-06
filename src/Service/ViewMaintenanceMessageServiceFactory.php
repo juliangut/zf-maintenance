@@ -10,20 +10,20 @@ namespace Jgut\Zf\Maintenance\Service;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance;
+use Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage;
 
-class ViewScheduledMaintenanceServiceFactory implements FactoryInterface
+class ViewMaintenanceMessageServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance
+     * @return \Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage
      */
     public function createService(ServiceLocatorInterface $helperPluginManager)
     {
         $serviceLocator = $helperPluginManager->getServiceLocator();
         $options        = $serviceLocator->get('ZfMaintenanceOptions');
 
-        return new ScheduledMaintenance($options->getProviders());
+        return new MaintenanceMessage($options->getProviders());
     }
 }

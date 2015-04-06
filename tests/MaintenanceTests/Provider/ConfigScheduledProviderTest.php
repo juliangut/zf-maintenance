@@ -24,30 +24,6 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::attach
-     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::detach
-     */
-    public function testAttachDetach()
-    {
-        $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
-        $callbackMock = $this->getMock('Zend\\Stdlib\\CallbackHandler', array(), array(), '', false);
-
-        $eventManager
-            ->expects($this->once())
-            ->method('attach')
-            ->with()
-            ->will($this->returnValue($callbackMock));
-        $this->provider->attach($eventManager);
-
-        $eventManager
-            ->expects($this->once())
-            ->method('detach')
-            ->with($callbackMock)
-            ->will($this->returnValue(true));
-        $this->provider->detach($eventManager);
-    }
-
-    /**
      * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::isActive
      * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::isScheduled
      * @covers Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider::getScheduleTimes
@@ -98,6 +74,17 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->provider->isActive());
         $this->assertTrue($this->provider->isScheduled());
         $this->assertEquals(array('start' => $start, 'end' => $end), $this->provider->getScheduleTimes());
+
+        $this->provider = new ConfigScheduledProvider();
+
+        $end = new \DateTime('now');
+        $end->sub(new \DateInterval('P2D'));
+
+        $this->provider->setEnd($end);
+        $this->assertEquals($end, $this->provider->getEnd());
+        $this->assertFalse($this->provider->isActive());
+        $this->assertFalse($this->provider->isScheduled());
+        $this->assertEquals(array(), $this->provider->getScheduleTimes());
     }
 
     /**
@@ -204,17 +191,17 @@ class ConfigScheduledProviderTest extends PHPUnit_Framework_TestCase
 
         $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);
         $options->expects($this->once())->method('getExclusions')->will(
-            $this->returnValue(array('Jgut\\Zf\\Maintenance\\Exclusion\\IpExclusion' => ''))
+            $this->returnValue(array('ZfMaintenanceIpExclusion' => ''))
         );
 
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
-        $serviceManager->expects($this->once())->method('has')->will($this->returnValue(true));
+        $serviceManager->expects($this->any())->method('has')->will($this->returnValue(true));
         $serviceManager->expects($this->any())->method('get')->will(
             $this->returnCallback(
                 function () use ($options, $exclusion) {
                     $args = array(
-                        'zf-maintenance-options'                        => $options,
-                        'Jgut\\Zf\\Maintenance\\Exclusion\\IpExclusion' => $exclusion
+                        'ZfMaintenanceOptions'     => $options,
+                        'ZfMaintenanceIpExclusion' => $exclusion
                     );
                     return $args[func_get_arg(0)];
                 }

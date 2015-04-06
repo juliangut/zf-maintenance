@@ -40,7 +40,7 @@ class ProviderEnvironmentServiceFactoryTest extends PHPUnit_Framework_TestCase
     public function testNoVarCreation()
     {
         $providers = array(
-            'Jgut\Zf\Maintenance\Provider\EnvironmentProvider' => array(),
+            'ZfMaintenanceEnvironmentProvider' => array(),
         );
 
         $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);
@@ -60,9 +60,10 @@ class ProviderEnvironmentServiceFactoryTest extends PHPUnit_Framework_TestCase
     public function testCreation()
     {
         $providers = array(
-            'Jgut\Zf\Maintenance\Provider\EnvironmentProvider' => array(
+            'ZfMaintenanceEnvironmentProvider' => array(
                 'variable' => 'zf-maintenance',
                 'value'    => 'On',
+                'message'  => 'custom message',
             ),
         );
 

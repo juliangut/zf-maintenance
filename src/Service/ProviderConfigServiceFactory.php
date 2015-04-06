@@ -21,16 +21,22 @@ class ProviderConfigServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $options   = $serviceLocator->get('zf-maintenance-options');
+        $options   = $serviceLocator->get('ZfMaintenanceOptions');
         $providers = $options->getProviders();
 
-        if (!isset($providers['Jgut\Zf\Maintenance\Provider\ConfigProvider'])) {
+        if (!isset($providers['ZfMaintenanceConfigProvider'])) {
             throw new \InvalidArgumentException('Config for "Jgut\Zf\Maintenance\Provider\ConfigProvider" not set');
         }
 
         $provider = new ConfigProvider();
 
-        $providerConfig = $providers['Jgut\Zf\Maintenance\Provider\ConfigProvider'];
+        $provider->setBlock($options->getBlock());
+
+        $providerConfig = $providers['ZfMaintenanceConfigProvider'];
+
+        if (isset($providerConfig['message'])) {
+            $provider->setMessage($providerConfig['message']);
+        }
 
         if (isset($providerConfig['active'])) {
             $provider->setActive($providerConfig['active']);

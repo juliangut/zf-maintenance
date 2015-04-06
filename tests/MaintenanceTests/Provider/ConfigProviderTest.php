@@ -26,11 +26,21 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::attach
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::detach
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::setMessage
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::getMessage
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::setBlock
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::getBlock
      */
     public function testAttachDetach()
     {
         $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
         $callbackMock = $this->getMock('Zend\\Stdlib\\CallbackHandler', array(), array(), '', false);
+
+        $this->provider->setMessage('custom message');
+        $this->assertEquals('custom message', $this->provider->getMessage());
+
+        $this->provider->setBlock(false);
+        $this->assertFalse($this->provider->getBlock());
 
         $eventManager
             ->expects($this->once())
@@ -48,18 +58,6 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::isActive
-     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
-     */
-    public function testNotIsActive()
-    {
-        $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
-
-        $this->assertFalse($this->provider->isActive());
-        $this->assertNull($this->provider->onRoute($event));
-    }
-
-    /**
      * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::setActive
      * @covers Jgut\Zf\Maintenance\Provider\ConfigProvider::isActive
      */
@@ -68,6 +66,19 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
         $this->provider->setActive(true);
 
         $this->assertTrue($this->provider->isActive());
+    }
+
+    /**
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::onRoute
+     */
+    public function testNotIsActive()
+    {
+        $this->provider->setActive(true);
+        $this->provider->setBlock(false);
+
+        $event = $this->getMock('Zend\\Mvc\\MvcEvent', array(), array(), '', false);
+
+        $this->assertNull($this->provider->onRoute($event));
     }
 
     /**
@@ -97,17 +108,30 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
 
         $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);
         $options->expects($this->once())->method('getExclusions')->will(
-            $this->returnValue(array('Jgut\\Zf\\Maintenance\\Exclusion\\IpExclusion' => ''))
+            $this->returnValue(array(
+                'ZfMaintenanceRouteExclusion' => '',
+                'ZfMaintenanceIpExclusion'    => '',
+            ))
         );
 
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
-        $serviceManager->expects($this->once())->method('has')->will($this->returnValue(true));
+        $serviceManager->expects($this->any())->method('has')->will(
+            $this->returnCallback(
+                function () {
+                    $args = array(
+                        'ZfMaintenanceOptions',
+                        'ZfMaintenanceIpExclusion',
+                    );
+                    return in_array(func_get_arg(0), $args);
+                }
+            )
+        );
         $serviceManager->expects($this->any())->method('get')->will(
             $this->returnCallback(
                 function () use ($options, $exclusion) {
                     $args = array(
-                        'zf-maintenance-options'                        => $options,
-                        'Jgut\\Zf\\Maintenance\\Exclusion\\IpExclusion' => $exclusion
+                        'ZfMaintenanceOptions'     => $options,
+                        'ZfMaintenanceIpExclusion' => $exclusion
                     );
                     return $args[func_get_arg(0)];
                 }

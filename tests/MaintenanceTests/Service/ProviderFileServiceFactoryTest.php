@@ -35,12 +35,35 @@ class ProviderFileServiceFactoryTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers Jgut\Zf\Maintenance\Service\ProviderFileServiceFactory::createService
+     * @expectedException InvalidArgumentException
+     */
+    public function testNoFileNoCreation()
+    {
+        $providers = array(
+            'ZfMaintenanceFileProvider' => array(),
+        );
+
+        $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);
+        $options->expects($this->any())->method('getProviders')->will($this->returnValue($providers));
+
+        $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
+        $serviceManager->expects($this->once())->method('get')->will($this->returnValue($options));
+
+        $factory = new ProviderFileServiceFactory();
+        $factory->createService($serviceManager);
+    }
+
+    /**
+     * @covers Jgut\Zf\Maintenance\Service\ProviderFileServiceFactory::createService
      * @covers Jgut\Zf\Maintenance\Provider\FileProvider::setFile
      */
     public function testCreation()
     {
         $providers = array(
-            'Jgut\Zf\Maintenance\Provider\FileProvider' => array('file' => sys_get_temp_dir() . '/maintenance'),
+            'ZfMaintenanceFileProvider' => array(
+                'file'    => sys_get_temp_dir() . '/maintenance',
+                'message' => 'custom message',
+            ),
         );
 
         $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);

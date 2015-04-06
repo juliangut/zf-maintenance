@@ -10,20 +10,20 @@ namespace Jgut\Zf\Maintenance\View\Helper;
 
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Jgut\Zf\Maintenance\Provider\ScheduledProviderInterface;
+use Jgut\Zf\Maintenance\Provider\ProviderInterface;
 
 /**
  * Allows to retrieve scheduled maintenance period times in views.
  */
-class ScheduledMaintenance extends AbstractHelper
+class MaintenanceMessage extends AbstractHelper
 {
     /**
-     * @return array
+     * @return string
      */
     public function __invoke()
     {
         if (!count($this->providers)) {
-            return array();
+            return '';
         }
 
         $helperManager  = $this->getServiceLocator();
@@ -32,12 +32,12 @@ class ScheduledMaintenance extends AbstractHelper
         foreach (array_keys($this->providers) as $providerName) {
             if ($serviceManager->has($providerName)) {
                 $provider = $serviceManager->get($providerName);
-                if ($provider instanceof ScheduledProviderInterface && $provider->isScheduled()) {
-                    return $provider->getScheduleTimes();
+                if ($provider instanceof ProviderInterface && $provider->isActive()) {
+                    return $provider->getMessage();
                 }
             }
         }
 
-        return array();
+        return '';
     }
 }

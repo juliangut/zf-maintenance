@@ -41,9 +41,10 @@ class ProviderConfigScheduledServiceFactoryTest extends PHPUnit_Framework_TestCa
     public function testCreation()
     {
         $providers = array(
-            'Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider' => array(
-                'start' => 'now',
-                'end'   => 'now',
+            'ZfMaintenanceConfigScheduledProvider' => array(
+                'start'   => 'now',
+                'end'     => 'now',
+                'message' => 'custom message',
             ),
         );
 

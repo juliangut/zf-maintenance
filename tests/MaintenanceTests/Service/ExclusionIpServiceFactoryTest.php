@@ -42,7 +42,7 @@ class ExclusionIpServiceFactoryTest extends PHPUnit_Framework_TestCase
     public function testCreation()
     {
         $exclusions = array(
-            'Jgut\Zf\Maintenance\Exclusion\IpExclusion' => array(),
+            'ZfMaintenanceIpExclusion' => array(),
         );
 
         $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);

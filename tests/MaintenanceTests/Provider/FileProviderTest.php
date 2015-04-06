@@ -38,30 +38,6 @@ class FileProviderTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::attach
-     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::detach
-     */
-    public function testAttachDetach()
-    {
-        $eventManager = $this->getMock('Zend\\EventManager\\EventManagerInterface');
-        $callbackMock = $this->getMock('Zend\\Stdlib\\CallbackHandler', array(), array(), '', false);
-
-        $eventManager
-            ->expects($this->once())
-            ->method('attach')
-            ->with()
-            ->will($this->returnValue($callbackMock));
-        $this->provider->attach($eventManager);
-
-        $eventManager
-            ->expects($this->once())
-            ->method('detach')
-            ->with($callbackMock)
-            ->will($this->returnValue(true));
-        $this->provider->detach($eventManager);
-    }
-
-    /**
      * @covers Jgut\Zf\Maintenance\Provider\FileProvider::setFile
      * @covers Jgut\Zf\Maintenance\Provider\FileProvider::getFile
      */
@@ -137,8 +113,8 @@ class FileProviderTest extends PHPUnit_Framework_TestCase
             $this->returnCallback(
                 function () use ($options, $exclusion) {
                     $args = array(
-                        'zf-maintenance-options'                        => $options,
-                        'Jgut\\Zf\\Maintenance\\Exclusion\\IpExclusion' => $exclusion
+                        'ZfMaintenanceOptions'     => $options,
+                        'ZfMaintenanceIpExclusion' => $exclusion
                     );
                     return $args[func_get_arg(0)];
                 }
