@@ -29,7 +29,10 @@ class ExclusionIpServiceFactory implements FactoryInterface
             throw new \InvalidArgumentException('Config for "Jgut\Zf\Maintenance\Exclusion\IpExclusion" not set');
         }
 
+        $ipProvider = new RemoteAddress();
+        $ipProvider->setUseProxy(true);
+
         $ips = $exclusions['ZfMaintenanceIpExclusion'];
-        return new IpExclusion($ips, new RemoteAddress());
+        return new IpExclusion($ips, $ipProvider);
     }
 }
