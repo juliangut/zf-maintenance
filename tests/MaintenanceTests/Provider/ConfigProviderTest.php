@@ -29,7 +29,7 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::setMessage
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::getMessage
      * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::setBlock
-     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::getBlock
+     * @covers Jgut\Zf\Maintenance\Provider\AbstractProvider::isBlocked
      */
     public function testAttachDetach()
     {
@@ -40,7 +40,7 @@ class ConfigProviderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('custom message', $this->provider->getMessage());
 
         $this->provider->setBlock(false);
-        $this->assertFalse($this->provider->getBlock());
+        $this->assertFalse($this->provider->isBlocked());
 
         $eventManager
             ->expects($this->once())

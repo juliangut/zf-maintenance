@@ -67,7 +67,7 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
      */
     public function onRoute(MvcEvent $event)
     {
-        if (!$this->getBlock() || !$this->isActive()) {
+        if (!$this->isBlocked() || !$this->isActive()) {
             return;
         }
 
@@ -141,7 +141,7 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
     /**
      * @return boolean
      */
-    public function getBlock()
+    public function isBlocked()
     {
         return $this->block;
     }

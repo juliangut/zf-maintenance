@@ -30,7 +30,7 @@ class ProviderConfigServiceFactory implements FactoryInterface
 
         $provider = new ConfigProvider();
 
-        $provider->setBlock($options->getBlock());
+        $provider->setBlock($options->isBlocked());
 
         $providerConfig = $providers['ZfMaintenanceConfigProvider'];
 

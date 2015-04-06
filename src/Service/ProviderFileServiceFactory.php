@@ -30,7 +30,7 @@ class ProviderFileServiceFactory implements FactoryInterface
 
         $provider = new FileProvider();
 
-        $provider->setBlock($options->getBlock());
+        $provider->setBlock($options->isBlocked());
 
         $providerConfig = $providers['ZfMaintenanceFileProvider'];
 

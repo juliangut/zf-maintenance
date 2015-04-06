@@ -47,7 +47,7 @@ class ModuleOptionsTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('ZfMaintenanceStrategy', $options->getStrategy());
         $this->assertEquals('zf-maintenance/maintenance', $options->getTemplate());
-        $this->assertTrue($options->getBlock());
+        $this->assertTrue($options->isBlocked());
         $this->assertInternalType('array', $options->getProviders());
         $this->assertInternalType('array', $options->getExclusions());
     }
@@ -64,7 +64,7 @@ class ModuleOptionsTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('myStrategy', $options->getStrategy());
         $this->assertEquals('myTemplate', $options->getTemplate());
-        $this->assertFalse($options->getBlock());
+        $this->assertFalse($options->isBlocked());
         $this->assertCount(1, $options->getProviders());
         $this->assertCount(2, $options->getExclusions());
     }

@@ -32,7 +32,7 @@ class ProviderEnvironmentServiceFactory implements FactoryInterface
 
         $provider = new EnvironmentProvider();
 
-        $provider->setBlock($options->getBlock());
+        $provider->setBlock($options->isBlocked());
 
         $providerConfig = $providers['ZfMaintenanceEnvironmentProvider'];
 

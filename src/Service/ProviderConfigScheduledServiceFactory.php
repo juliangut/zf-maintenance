@@ -33,7 +33,7 @@ class ProviderConfigScheduledServiceFactory implements FactoryInterface
 
         $provider = new ConfigScheduledProvider();
 
-        $provider->setBlock($options->getBlock());
+        $provider->setBlock($options->isBlocked());
 
         $providerConfig = $providers['ZfMaintenanceConfigScheduledProvider'];
 

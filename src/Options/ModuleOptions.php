@@ -115,7 +115,7 @@ class ModuleOptions extends AbstractOptions
      *
      * @return boolean
      */
-    public function getBlock()
+    public function isBlocked()
     {
         return $this->block;
     }
