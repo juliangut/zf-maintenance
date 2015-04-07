@@ -112,6 +112,12 @@ array(
 A collector `zf-mainenance-collector` is present for
 [ZendDeveloperTools](https://github.com/zendframework/ZendDeveloperTools) showing current maintenance status and future scheduled maintenance period times
 
+## Contributing
+
+Found a bug or have a feature request? [Please open a new issue](https://github.com/juliangut/zf-maintenance/issues). Have a look at existing issues before
+
+See file [CONTRIBUTING.md](https://github.com/juliangut/zf-maintenance/blob/master/CONTRIBUTING.md)
+
 ## License
 
 ### Release under BSD-3-Clause License.
