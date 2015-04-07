@@ -15,6 +15,8 @@ return array(
                 => 'Jgut\Zf\Maintenance\Service\ProviderConfigServiceFactory',
             'Jgut\Zf\Maintenance\Provider\FileProvider'
                 => 'Jgut\Zf\Maintenance\Service\ProviderFileServiceFactory',
+            'Jgut\Zf\Maintenance\Provider\EnvironmentProvider'
+                => 'Jgut\Zf\Maintenance\Service\ProviderEnvironmentServiceFactory',
             'Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider'
                 => 'Jgut\Zf\Maintenance\Service\ProviderConfigScheduledServiceFactory',
             'Jgut\Zf\Maintenance\Exclusion\IpExclusion'

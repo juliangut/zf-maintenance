@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/juliangut/zf-maintenance.svg?branch=master)](https://travis-ci.org/juliangut/zf-maintenance)
+[![Code Climate](https://codeclimate.com/github/juliangut/zf-maintenance/badges/gpa.svg)](https://codeclimate.com/github/juliangut/zf-maintenance)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/juliangut/zf-maintenance/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/juliangut/zf-maintenance/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/juliangut/zf-maintenance/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/juliangut/zf-maintenance/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/juliangut/zf-maintenance/v/stable.svg)](https://packagist.org/packages/juliangut/zf-maintenance)
@@ -34,7 +35,7 @@ Configuration example can be found in `config\zf-maintenance.global.php.dist`
 
 Annotated example:
 ```php
-use DateTime:
+use DateTime;
 
 return array(
     'zf-maintenance' => array(
