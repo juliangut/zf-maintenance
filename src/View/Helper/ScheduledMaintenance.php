@@ -37,7 +37,7 @@ class ScheduledMaintenance extends AbstractHelper implements ServiceLocatorAware
     }
 
     /**
-     * @return boolean|array
+     * @return false|array
      */
     public function __invoke()
     {

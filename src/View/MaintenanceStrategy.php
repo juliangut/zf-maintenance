@@ -76,7 +76,7 @@ class MaintenanceStrategy implements ListenerAggregateInterface
         }
 
         $viewVariables = array(
-           'error'  => $event->getParam('error'),
+            'error'  => $event->getParam('error'),
         );
 
         $model = new ViewModel($viewVariables);

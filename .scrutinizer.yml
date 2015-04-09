@@ -47,8 +47,7 @@ tools:
     php_code_sniffer:
         enabled: true
         config:
-            include_standards:
-                - phpcs.xml
+            include_standards: phpcs.xml
     php_cpd:
         enabled: true
     php_mess_detector:
@@ -66,11 +65,14 @@ tools:
     sensiolabs_security_checker:
         enabled: true
 
+before_commands:
+    - 'composer install --no-interaction --prefer-source'
+
 build:
     tests:
         override:
             -
                 command: 'phpunit -c phpunit.xml'
                 coverage:
-                    file: 'build/logs/clover.xml'
-                    format: 'php-clover'
+                    file: build/logs/clover.xml
+                    format: php-clover

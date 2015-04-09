@@ -24,7 +24,7 @@ class ModuleOptionsServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return \AcademiqBase\Options\ModuleOptions
+     * @return \Jgut\Zf\Maintenance\Options\ModuleOptions
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
