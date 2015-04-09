@@ -47,13 +47,15 @@ tools:
     php_code_sniffer:
         enabled: true
         config:
-            include_standards: phpcs.xml
+            include_standards:
+                - phpcs.xml
     php_cpd:
         enabled: true
     php_mess_detector:
         enabled: true
         config:
-            ruleset: phpmd.xml
+            ruleset:
+                - phpmd.xml
     php_loc:
         enabled: true
     php_pdepend:
