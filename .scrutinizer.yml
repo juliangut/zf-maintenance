@@ -54,8 +54,7 @@ tools:
     php_mess_detector:
         enabled: true
         config:
-            ruleset:
-                - phpmd.xml
+            ruleset: phpmd.xml
     php_loc:
         enabled: true
     php_pdepend:
