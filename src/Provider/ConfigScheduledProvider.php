@@ -85,7 +85,7 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
      */
     public function isActive()
     {
-        $now = new \DateTime('now');
+        $now = new \DateTime();
 
         if (!$this->start && !$this->end) {
             return false;
@@ -106,7 +106,7 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
      */
     public function isScheduled()
     {
-        $now = new \DateTime('now');
+        $now = new \DateTime();
 
         return $this->start && $now < $this->start;
     }
