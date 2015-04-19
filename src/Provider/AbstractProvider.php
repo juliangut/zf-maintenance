@@ -24,6 +24,20 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
     protected $maintenanceDescription = 'Maintenance mode active on Jgut\Zf\Maintenance\Provider\ProviderInterface';
 
     /**
+     * Maintenance mode message.
+     *
+     * @var string
+     */
+    protected $message = 'Undergoing maintenance tasks';
+
+    /**
+     * Whether maintenance mode blocks application execution
+     *
+     * @var boolean
+     */
+    protected $block = true;
+
+    /**
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
@@ -53,7 +67,7 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
      */
     public function onRoute(MvcEvent $event)
     {
-        if (!$this->isActive()) {
+        if (!$this->isBlocked() || !$this->isActive()) {
             return;
         }
 
@@ -69,6 +83,7 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
         $event->setError(static::ERROR);
 
         $event->setParam('exception', new MaintenanceException($this->maintenanceDescription));
+        $event->setParam('message', $this->getMessage());
 
         $application = $event->getApplication();
         $application->getEventManager()->trigger(MvcEvent::EVENT_DISPATCH_ERROR, $event);
@@ -83,17 +98,51 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
     protected function isExcluded(MvcEvent $event)
     {
         $serviceManager = $event->getApplication()->getServiceManager();
-        $options        = $serviceManager->get('zf-maintenance-options');
+        $options        = $serviceManager->get('ZfMaintenanceOptions');
 
         foreach (array_keys($options->getExclusions()) as $exclusionName) {
-            if ($serviceManager->has($exclusionName)) {
-                $exclusion = $serviceManager->get($exclusionName);
-                if ($exclusion->isExcluded()) {
-                    return true;
-                }
+            if (!$serviceManager->has($exclusionName)) {
+                continue;
+            }
+
+            $exclusion = $serviceManager->get($exclusionName);
+            if ($exclusion->isExcluded()) {
+                return true;
             }
         }
 
         return false;
+    }
+
+    /**
+     * @param string $message
+     */
+    public function setMessage($message)
+    {
+        $this->message = (string) $message;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param boolean $block
+     */
+    public function setBlock($block)
+    {
+        $this->block = (bool) $block;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isBlocked()
+    {
+        return $this->block;
     }
 }

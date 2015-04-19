@@ -21,14 +21,14 @@ class ExclusionRouteServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $options    = $serviceLocator->get('zf-maintenance-options');
+        $options    = $serviceLocator->get('ZfMaintenanceOptions');
         $exclusions = $options->getExclusions();
 
-        if (!isset($exclusions['Jgut\Zf\Maintenance\Exclusion\RouteExclusion'])) {
+        if (!isset($exclusions['ZfMaintenanceRouteExclusion'])) {
             throw new \InvalidArgumentException('Config for "Jgut\Zf\Maintenance\Exclusion\RouteExclusion" not set');
         }
 
-        $routes     = $exclusions['Jgut\Zf\Maintenance\Exclusion\RouteExclusion'];
+        $routes     = $exclusions['ZfMaintenanceRouteExclusion'];
         $routeMatch = $serviceLocator->get('Application')->getMvcEvent()->getRouteMatch();
 
         return new RouteExclusion($routes, $routeMatch);

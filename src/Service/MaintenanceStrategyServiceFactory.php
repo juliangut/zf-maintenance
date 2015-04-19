@@ -24,7 +24,7 @@ class MaintenanceStrategyServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $options = $serviceLocator->get('zf-maintenance-options');
+        $options = $serviceLocator->get('ZfMaintenanceOptions');
 
         return new MaintenanceStrategy($options->getTemplate());
     }

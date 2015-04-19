@@ -8,6 +8,8 @@
 
 namespace Jgut\Zf\Maintenance\Exclusion;
 
+use Zend\Http\PhpEnvironment\RemoteAddress;
+
 class IpExclusion implements ExclusionInterface
 {
     /**
@@ -16,15 +18,15 @@ class IpExclusion implements ExclusionInterface
     protected $ips;
 
     /**
-     * @var Object
+     * @var \Zend\Http\PhpEnvironment\RemoteAddress
      */
     protected $ipProvider;
 
     /**
      * @param array $ips
-     * @param Object $ipProvider
+     * @param \Zend\Http\PhpEnvironment\RemoteAddress $ipProvider
      */
-    public function __construct(array $ips, $ipProvider)
+    public function __construct(array $ips, RemoteAddress $ipProvider)
     {
         $this->ips = $ips;
         $this->ipProvider = $ipProvider;

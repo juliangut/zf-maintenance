@@ -10,47 +10,50 @@ namespace Jgut\Zf\Maintenance\Service;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Jgut\Zf\Maintenance\Provider\EnvironmentProvider;
+use Jgut\Zf\Maintenance\Provider\CrontabProvider;
 
-class ProviderEnvironmentServiceFactory implements FactoryInterface
+class ProviderCrontabServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \Jgut\Zf\Maintenance\Provider\EnvironmentProvider
+     * @return \Jgut\Zf\Maintenance\Provider\CrontabProvider
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $options   = $serviceLocator->get('ZfMaintenanceOptions');
         $providers = $options->getProviders();
 
-        if (!isset($providers['ZfMaintenanceEnvironmentProvider'])) {
+        if (!isset($providers['ZfMaintenanceCrontabProvider'])) {
             throw new \InvalidArgumentException(
-                'Config for "Jgut\Zf\Maintenance\Provider\EnvironmentProvider" not set'
+                'Config for "Jgut\Zf\Maintenance\Provider\CrontabProvider" not set'
             );
         }
 
-        $provider = new EnvironmentProvider();
+        $provider = new CrontabProvider();
 
         $provider->setBlock($options->isBlocked());
 
-        $providerConfig = $providers['ZfMaintenanceEnvironmentProvider'];
+        $providerConfig = $providers['ZfMaintenanceCrontabProvider'];
 
         if (isset($providerConfig['message'])) {
             $provider->setMessage($providerConfig['message']);
         }
 
-        if (!isset($providerConfig['variable'])) {
+        if (!isset($providerConfig['expression'])) {
             throw new \InvalidArgumentException(
-                'Environment variable for "Jgut\Zf\Maintenance\Provider\EnvironmentProvider" not set'
+                'Expression for "Jgut\Zf\Maintenance\Provider\CrontabProvider" not set'
+            );
+        }
+        $provider->setExpression($providerConfig['expression']);
+
+        if (!isset($providerConfig['interval'])) {
+            throw new \InvalidArgumentException(
+                'Interval for "Jgut\Zf\Maintenance\Provider\CrontabProvider" not set'
             );
         }
 
-        $provider->setVar($providerConfig['variable']);
-
-        if (isset($providerConfig['value'])) {
-            $provider->setValue($providerConfig['value']);
-        }
+        $provider->setInterval($providerConfig['interval']);
 
         return $provider;
     }

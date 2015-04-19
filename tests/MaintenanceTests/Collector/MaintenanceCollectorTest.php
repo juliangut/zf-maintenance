@@ -44,7 +44,22 @@ class MaintenanceCollectorTest extends PHPUnit_Framework_TestCase
      */
     public function testReturnActiveSchedule()
     {
-        $scheduleTimes = array('start' => new \DateTime('now'), 'end' => null);
+        $startTime = new \DateTime();
+        $startTime->add(new \DateInterval('P1D'));
+        $endTime = new \DateTime();
+        $endTime->add(new \DateInterval('P10D'));
+        $cronTimes = array('start' => $startTime, 'end' => $endTime);
+
+        $cronProvider =$this->getMock('Jgut\\Zf\\Maintenance\\Provider\\CrontabProvider', array(), array(), '', false);
+        $cronProvider->expects($this->any())->method('isActive')->will($this->returnValue(false));
+        $cronProvider->expects($this->any())->method('isScheduled')->will($this->returnValue(true));
+        $cronProvider->expects($this->any())->method('getScheduleTimes')->will(
+            $this->returnValue($cronTimes)
+        );
+
+        $startTime = new \DateTime();
+        $startTime->add(new \DateInterval('P5D'));
+        $scheduleTimes = array('start' => $startTime, 'end' => null);
 
         $scheduledProvider =
             $this->getMock('Jgut\\Zf\\Maintenance\\Provider\\ConfigScheduledProvider', array(), array(), '', false);
@@ -67,10 +82,12 @@ class MaintenanceCollectorTest extends PHPUnit_Framework_TestCase
         $serviceManager->expects($this->any())->method('has')->will($this->returnValue(true));
         $serviceManager->expects($this->any())->method('get')->will(
             $this->returnCallback(
-                function () use ($configProvider, $scheduledProvider) {
+                function () use ($configProvider, $scheduledProvider, $cronProvider) {
                     $args = array(
-                        'Jgut\\Zf\\Maintenance\\Provider\\ConfigProvider'          => $configProvider,
-                        'Jgut\\Zf\\Maintenance\\Provider\\ConfigScheduledProvider' => $scheduledProvider
+                        'Jgut\\Zf\\Maintenance\\Provider\\ConfigProvider'           => $configProvider,
+                        'Jgut\\Zf\\Maintenance\\Provider\\ConfigScheduledProvider'  => $scheduledProvider,
+                        'Jgut\\Zf\\Maintenance\\Provider\\CrontabProvider'          => $cronProvider,
+                        'Jgut\\Zf\\Maintenance\\Provider\\DuplicateCrontabProvider' => $cronProvider,
                     );
                     return $args[func_get_arg(0)];
                 }
@@ -84,14 +101,16 @@ class MaintenanceCollectorTest extends PHPUnit_Framework_TestCase
         $event->expects($this->once())->method('getApplication')->will($this->returnValue($application));
 
         $providers = array(
-            'Jgut\\Zf\\Maintenance\\Provider\\ConfigProvider'          => '',
-            'Jgut\\Zf\\Maintenance\\Provider\\ConfigScheduledProvider' => '',
+            'Jgut\\Zf\\Maintenance\\Provider\\ConfigProvider'           => '',
+            'Jgut\\Zf\\Maintenance\\Provider\\ConfigScheduledProvider'  => '',
+            'Jgut\\Zf\\Maintenance\\Provider\\CrontabProvider'          => '',
+            'Jgut\\Zf\\Maintenance\\Provider\\DuplicateCrontabProvider' => '',
         );
 
         $collector = new MaintenanceCollector($providers);
         $collector->collect($event);
 
         $this->assertTrue($collector->isActive());
-        $this->assertEquals(2, count($collector->getScheduleTimes()));
+        $this->assertEquals(3, count($collector->getScheduleTimes()));
     }
 }

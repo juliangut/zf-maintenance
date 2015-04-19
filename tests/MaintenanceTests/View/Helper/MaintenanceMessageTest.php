@@ -9,27 +9,27 @@
 namespace Jgut\Zf\MaintenanceTests\View\Helper;
 
 use PHPUnit_Framework_TestCase;
-use Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance;
+use Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage;
 
 /**
- * @covers Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance
+ * @covers Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage
  */
-class ScheduledMaintenanceTests extends PHPUnit_Framework_TestCase
+class MaintenanceMessageTests extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance::__invoke
+     * @covers Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage::__invoke
      */
     public function testDefault()
     {
-        $helper = new ScheduledMaintenance();
+        $helper = new MaintenanceMessage();
 
-        $this->assertEquals(array(), $helper->__invoke());
+        $this->assertEquals('', $helper->__invoke());
     }
 
     public function testReturnEmpty()
     {
-        $provider = $this->getMock('Jgut\\Zf\\Maintenance\\Provider\\ScheduledProviderInterface');
-        $provider->expects($this->any())->method('isScheduled')->will($this->returnValue(false));
+        $provider = $this->getMock('Jgut\\Zf\\Maintenance\\Provider\\ConfigProvider');
+        $provider->expects($this->any())->method('isActive')->will($this->returnValue(false));
 
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
         $serviceManager->expects($this->any())->method('has')->will($this->returnValue(true));
@@ -38,31 +38,28 @@ class ScheduledMaintenanceTests extends PHPUnit_Framework_TestCase
         $helperManager = $this->getMock('Zend\\View\\HelperPluginManager', array(), array(), '', false);
         $helperManager->expects($this->once())->method('getServiceLocator')->will($this->returnValue($serviceManager));
 
-        $providers = array('Jgut\\Zf\\Maintenance\\Provider\\ConfigScheduledProvider' => '');
+        $providers = array('ZfMaintenanceConfigProvider' => '');
 
-        $helper = new ScheduledMaintenance($providers);
+        $helper = new MaintenanceMessage($providers);
         $helper->setServiceLocator($helperManager);
 
         $this->assertEquals($helperManager, $helper->getServiceLocator());
 
-        $this->assertEquals(array(), $helper->__invoke());
+        $this->assertEquals('', $helper->__invoke());
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance::setServiceLocator
-     * @covers Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance::getServiceLocator
-     * @covers Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance::__invoke
+     * @covers Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage::setServiceLocator
+     * @covers Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage::getServiceLocator
+     * @covers Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage::__invoke
      */
     public function testReturnSchedule()
     {
-        $scheduleTimes = array(
-            'start' => new \DateTime('now'),
-            'end'   => null
-        );
+        $message = 'custom maintenance message';
 
-        $provider = $this->getMock('Jgut\\Zf\\Maintenance\\Provider\\ScheduledProviderInterface');
-        $provider->expects($this->any())->method('isScheduled')->will($this->returnValue(true));
-        $provider->expects($this->any())->method('getScheduleTimes')->will($this->returnValue($scheduleTimes));
+        $provider = $this->getMock('Jgut\\Zf\\Maintenance\\Provider\\ConfigProvider');
+        $provider->expects($this->any())->method('isActive')->will($this->returnValue(true));
+        $provider->expects($this->any())->method('getMessage')->will($this->returnValue($message));
 
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
         $serviceManager->expects($this->any())->method('has')->will($this->returnValue(true));
@@ -71,13 +68,13 @@ class ScheduledMaintenanceTests extends PHPUnit_Framework_TestCase
         $helperManager = $this->getMock('Zend\\View\\HelperPluginManager', array(), array(), '', false);
         $helperManager->expects($this->once())->method('getServiceLocator')->will($this->returnValue($serviceManager));
 
-        $providers = array('ZfMaintenanceConfigScheduledProvider' => '');
+        $providers = array('ZfMaintenanceConfigProvider' => '');
 
-        $helper = new ScheduledMaintenance($providers);
+        $helper = new MaintenanceMessage($providers);
         $helper->setServiceLocator($helperManager);
 
         $this->assertEquals($helperManager, $helper->getServiceLocator());
 
-        $this->assertEquals($scheduleTimes, $helper->__invoke());
+        $this->assertEquals($message, $helper->__invoke());
     }
 }

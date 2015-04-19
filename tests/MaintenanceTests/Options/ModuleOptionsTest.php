@@ -17,25 +17,26 @@ use Jgut\Zf\Maintenance\Options\ModuleOptions;
 class ModuleOptionsTest extends PHPUnit_Framework_TestCase
 {
     protected $options = array(
-        'maintenance_strategy' => 'myStrategy',
-        'template'             => 'myTemplate',
-        'providers'            => array(
-            'Jgut\Zf\Maintenance\Provider\ConfigProvider' => array(
+        'strategy'  => 'myStrategy',
+        'template'  => 'myTemplate',
+        'block'     => false,
+        'providers' => array(
+            'ZfMaintenanceConfigProvider' => array(
                 'active' => false,
             ),
         ),
-        'exclusions'           => array(
-            'Jgut\Zf\Maintenance\Exclusion\IpExclusion'    => array(
+        'exclusions' => array(
+            'ZfMaintenanceIpExclusion' => array(
                 '127.0.0.1',
             ),
-            'Jgut\Zf\Maintenance\Exclusion\RouteExclusion' => array(
+            'ZfMaintenanceRouteExclusion' => array(
                 'home',
             ),
         ),
     );
 
     /**
-     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getMaintenanceStrategy
+     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getStrategy
      * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getTemplate
      * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getProviders
      * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getExclusions
@@ -44,14 +45,15 @@ class ModuleOptionsTest extends PHPUnit_Framework_TestCase
     {
         $options = new ModuleOptions(array());
 
-        $this->assertEquals('Jgut\Zf\Maintenance\View\maintenanceStrategy', $options->getMaintenanceStrategy());
+        $this->assertEquals('ZfMaintenanceStrategy', $options->getStrategy());
         $this->assertEquals('zf-maintenance/maintenance', $options->getTemplate());
+        $this->assertTrue($options->isBlocked());
         $this->assertInternalType('array', $options->getProviders());
         $this->assertInternalType('array', $options->getExclusions());
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getMaintenanceStrategy
+     * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getStrategy
      * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getTemplate
      * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getProviders
      * @covers Jgut\Zf\Maintenance\Options\ModuleOptions::getExclusions
@@ -60,8 +62,9 @@ class ModuleOptionsTest extends PHPUnit_Framework_TestCase
     {
         $options = new ModuleOptions($this->options);
 
-        $this->assertEquals('myStrategy', $options->getMaintenanceStrategy());
+        $this->assertEquals('myStrategy', $options->getStrategy());
         $this->assertEquals('myTemplate', $options->getTemplate());
+        $this->assertFalse($options->isBlocked());
         $this->assertCount(1, $options->getProviders());
         $this->assertCount(2, $options->getExclusions());
     }

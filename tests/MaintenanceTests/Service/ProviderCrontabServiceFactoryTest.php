@@ -9,16 +9,16 @@
 namespace Jgut\Zf\MaintenanceTests\Service;
 
 use PHPUnit_Framework_TestCase;
-use Jgut\Zf\Maintenance\Service\ProviderEnvironmentServiceFactory;
-use Jgut\Zf\Maintenance\Provider\EnvironmentProvider;
+use Jgut\Zf\Maintenance\Service\ProviderCrontabServiceFactory;
+use Jgut\Zf\Maintenance\Provider\CrontabProvider;
 
 /**
- * @covers Jgut\Zf\Maintenance\Service\ProviderEnvironmentServiceFactory
+ * @covers Jgut\Zf\Maintenance\Service\ProviderCrontabServiceFactory
  */
-class ProviderEnvironmentServiceFactoryTest extends PHPUnit_Framework_TestCase
+class ProviderCrontabServiceFactoryTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * @covers Jgut\Zf\Maintenance\Service\ProviderEnvironmentServiceFactory::createService
+     * @covers Jgut\Zf\Maintenance\Service\ProviderCrontabServiceFactory::createService
      * @expectedException InvalidArgumentException
      */
     public function testNoCreation()
@@ -29,18 +29,18 @@ class ProviderEnvironmentServiceFactoryTest extends PHPUnit_Framework_TestCase
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
         $serviceManager->expects($this->once())->method('get')->will($this->returnValue($options));
 
-        $factory = new ProviderEnvironmentServiceFactory();
+        $factory = new ProviderCrontabServiceFactory();
         $factory->createService($serviceManager);
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Service\ProviderEnvironmentServiceFactory::createService
+     * @covers Jgut\Zf\Maintenance\Service\ProviderCrontabServiceFactory::createService
      * @expectedException InvalidArgumentException
      */
-    public function testNoVarCreation()
+    public function testMissingExpression()
     {
         $providers = array(
-            'ZfMaintenanceEnvironmentProvider' => array(),
+            'ZfMaintenanceCrontabProvider' => array(),
         );
 
         $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);
@@ -49,21 +49,19 @@ class ProviderEnvironmentServiceFactoryTest extends PHPUnit_Framework_TestCase
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
         $serviceManager->expects($this->once())->method('get')->will($this->returnValue($options));
 
-        $factory = new ProviderEnvironmentServiceFactory();
+        $factory = new ProviderCrontabServiceFactory();
         $factory->createService($serviceManager);
     }
 
     /**
-     * @covers Jgut\Zf\Maintenance\Service\ProviderEnvironmentServiceFactory::createService
-     * @covers Jgut\Zf\Maintenance\Provider\FileProvider::setFile
+     * @covers Jgut\Zf\Maintenance\Service\ProviderCrontabServiceFactory::createService
+     * @expectedException InvalidArgumentException
      */
-    public function testCreation()
+    public function testMissingInterval()
     {
         $providers = array(
-            'ZfMaintenanceEnvironmentProvider' => array(
-                'variable' => 'zf-maintenance',
-                'value'    => 'On',
-                'message'  => 'custom message',
+            'ZfMaintenanceCrontabProvider' => array(
+                'expression' => '@monthly',
             ),
         );
 
@@ -73,9 +71,32 @@ class ProviderEnvironmentServiceFactoryTest extends PHPUnit_Framework_TestCase
         $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
         $serviceManager->expects($this->once())->method('get')->will($this->returnValue($options));
 
-        $factory = new ProviderEnvironmentServiceFactory();
-        $environmentProvider = $factory->createService($serviceManager);
+        $factory = new ProviderCrontabServiceFactory();
+        $factory->createService($serviceManager);
+    }
 
-        $this->assertTrue($environmentProvider instanceof EnvironmentProvider);
+    /**
+     * @covers Jgut\Zf\Maintenance\Service\ProviderCrontabServiceFactory::createService
+     */
+    public function testCreation()
+    {
+        $providers = array(
+            'ZfMaintenanceCrontabProvider' => array(
+                'expression' => '@monthly',
+                'interval'   => 'P1D',
+                'message'    => 'custom message',
+            ),
+        );
+
+        $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);
+        $options->expects($this->any())->method('getProviders')->will($this->returnValue($providers));
+
+        $serviceManager = $this->getMock('Zend\\ServiceManager\\ServiceManager', array(), array(), '', false);
+        $serviceManager->expects($this->once())->method('get')->will($this->returnValue($options));
+
+        $factory = new ProviderCrontabServiceFactory();
+        $scheduledProvider = $factory->createService($serviceManager);
+
+        $this->assertTrue($scheduledProvider instanceof CrontabProvider);
     }
 }

@@ -12,6 +12,7 @@ use ZendDeveloperTools\Collector\CollectorInterface;
 use Zend\Mvc\MvcEvent;
 use Jgut\Zf\Maintenance\Provider\ScheduledProviderInterface;
 use Jgut\Zf\Maintenance\Provider\ProviderInterface;
+use \DateTime;
 
 /**
  * Collects maintenance mode status and values
@@ -65,18 +66,19 @@ class MaintenanceCollector implements CollectorInterface
             if ($serviceManager->has($providerName)) {
                 $provider = $serviceManager->get($providerName);
 
-                if ($provider instanceof ScheduledProviderInterface
-                    && !count($this->scheduleTimes)
-                    && $provider->isScheduled()
-                ) {
-                    $this->scheduleTimes = $provider->getScheduleTimes();
+                if ($provider instanceof ProviderInterface) {
+                    $this->active = $this->active || $provider->isActive();
                 }
 
-                if ($provider instanceof ProviderInterface && !$this->active) {
-                    $this->active = $provider->isActive();
+                if ($provider instanceof ScheduledProviderInterface
+                    && $provider->isScheduled() && !$provider->isActive()
+                ) {
+                    $this->scheduleTimes[] = $provider->getScheduleTimes();
                 }
             }
         }
+
+        usort($this->scheduleTimes, array($this, 'sortTimes'));
     }
 
     /**
@@ -109,5 +111,20 @@ class MaintenanceCollector implements CollectorInterface
     public function getPriority()
     {
         return static::PRIORITY;
+    }
+
+    /**
+     * Sort by start time
+     *
+     * @param array $aTime
+     * @param array $bTime
+     */
+    protected function sortTimes(array $aTime, array $bTime)
+    {
+        if ($aTime['start'] === $bTime['start']) {
+            return 0;
+        }
+
+        return ($aTime['start'] < $bTime['start']) ? -1 : 1;
     }
 }

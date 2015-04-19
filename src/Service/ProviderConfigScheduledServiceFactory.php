@@ -22,10 +22,10 @@ class ProviderConfigScheduledServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $options   = $serviceLocator->get('zf-maintenance-options');
+        $options   = $serviceLocator->get('ZfMaintenanceOptions');
         $providers = $options->getProviders();
 
-        if (!isset($providers['Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider'])) {
+        if (!isset($providers['ZfMaintenanceConfigScheduledProvider'])) {
             throw new \InvalidArgumentException(
                 'Config for "Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider" not set'
             );
@@ -33,7 +33,13 @@ class ProviderConfigScheduledServiceFactory implements FactoryInterface
 
         $provider = new ConfigScheduledProvider();
 
-        $providerConfig = $providers['Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider'];
+        $provider->setBlock($options->isBlocked());
+
+        $providerConfig = $providers['ZfMaintenanceConfigScheduledProvider'];
+
+        if (isset($providerConfig['message'])) {
+            $provider->setMessage($providerConfig['message']);
+        }
 
         if (isset($providerConfig['start'])) {
             $start = $providerConfig['start'];

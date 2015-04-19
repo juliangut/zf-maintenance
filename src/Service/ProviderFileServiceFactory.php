@@ -21,16 +21,28 @@ class ProviderFileServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $options   = $serviceLocator->get('zf-maintenance-options');
+        $options   = $serviceLocator->get('ZfMaintenanceOptions');
         $providers = $options->getProviders();
 
-        if (!isset($providers['Jgut\Zf\Maintenance\Provider\FileProvider'])) {
+        if (!isset($providers['ZfMaintenanceFileProvider'])) {
             throw new \InvalidArgumentException('Config for "Jgut\Zf\Maintenance\Provider\FileProvider" not set');
         }
 
         $provider = new FileProvider();
 
-        $providerConfig = $providers['Jgut\Zf\Maintenance\Provider\FileProvider'];
+        $provider->setBlock($options->isBlocked());
+
+        $providerConfig = $providers['ZfMaintenanceFileProvider'];
+
+        if (isset($providerConfig['message'])) {
+            $provider->setMessage($providerConfig['message']);
+        }
+
+        if (!isset($providerConfig['file'])) {
+            throw new \InvalidArgumentException(
+                'File for "Jgut\Zf\Maintenance\Provider\FileProvider" not set'
+            );
+        }
 
         if (isset($providerConfig['file'])) {
             $provider->setFile($providerConfig['file']);

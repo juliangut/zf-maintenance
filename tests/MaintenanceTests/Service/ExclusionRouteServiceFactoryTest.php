@@ -42,7 +42,7 @@ class ExclusionRouteServiceFactoryTest extends PHPUnit_Framework_TestCase
     public function testCreation()
     {
         $exclusions = array(
-            'Jgut\Zf\Maintenance\Exclusion\RouteExclusion' => array(),
+            'ZfMaintenanceRouteExclusion' => array(),
         );
 
         $options = $this->getMock('Jgut\\Zf\\Maintenance\\Options\\ModuleOptions', array(), array(), '', false);
@@ -61,8 +61,8 @@ class ExclusionRouteServiceFactoryTest extends PHPUnit_Framework_TestCase
             $this->returnCallback(
                 function () use ($options, $application) {
                     $args = array(
-                        'Application'            => $application,
-                        'zf-maintenance-options' => $options,
+                        'Application'          => $application,
+                        'ZfMaintenanceOptions' => $options,
                     );
                     return $args[func_get_arg(0)];
                 }
