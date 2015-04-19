@@ -24,7 +24,7 @@ class IpExclusion implements ExclusionInterface
 
     /**
      * @param array $ips
-     * @param Object $ipProvider
+     * @param \Zend\Http\PhpEnvironment\RemoteAddress $ipProvider
      */
     public function __construct(array $ips, RemoteAddress $ipProvider)
     {

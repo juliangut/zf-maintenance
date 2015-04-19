@@ -25,7 +25,7 @@ class CrontabProvider extends AbstractProvider implements ScheduledProviderInter
         'Schdeuled maintenance mode active on Jgut\Zf\Maintenance\Provider\CrontabProvider';
 
     /**
-     * @var Cron\CronExpression
+     * @var \Cron\CronExpression
      */
     protected $cronExpression;
 
