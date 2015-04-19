@@ -68,11 +68,16 @@ return array(
                 'file'    => __DIR__ . '/maintenance',
                 'message' => 'We are currently running maintenance proccesses',
             ),
+            'ZfMaintenanceCrontabProvider' => array(
+                'expression' => '0 0 1 * *', // @monthly
+                'interval'   => 'PT1H', // 1 hour
+                'message'    => 'We are currently running maintenance proccesses',
+            ),
         ),
 
         /*
          * Exceptions to maintenance mode
-         * Provides a way to bypass maintenance mode by fulfilling any of the conditions
+         * Provides a way to bypass maintenance mode by fulfilling at least one of the conditions
          */
         'exclusions' => array(
             'ZfMaintenanceIpExclusion' => array(
@@ -159,9 +164,13 @@ $provider = new FileProvider();
 $provider->setFile(__DIR__ . '/maintenance_file');
 ```
 
+#### Scheduled Providers
+
+Any provider implementing `Jgut\Zf\Maintenance\Provider\ScheduledProviderInterface` will be used to determine future maintenance situations and used on `scheduledMaintenance` view helper as well as in zend-developer-tools
+
 #### ConfigScheduledProvider
 
-Manual scheduled maintenance time frame
+Manually scheduled maintenance time frame
 
 Maintenance mode will be set on during the time span provided by `start` and `end` attributes (DateTime valid string or object).
 
@@ -176,7 +185,33 @@ $provider->setStart('2020-01-01 00:00:00');
 $provider->setEnd(new DateTime('2020-01-01 05:00:00')),
 ```
 
-Any provider implementing `Jgut\Zf\Maintenance\Provider\ScheduledProviderInterface` will be used to determine future maintenance situations and used on `scheduledMaintenance` view helper as well as in zend-developer-tools
+#### CrontabProvider
+
+Scheduled maintenance based on [CRON expression syntax](https://en.wikipedia.org/wiki/Cron#CRON_expression)
+
+```
+ *    *    *    *    *    *
+ |    |    |    |    |    |
+ |    |    |    |    |    +--- Year [optional]
+ |    |    |    |    +-------- Day of week (0-7) (Sunday=0|7)
+ |    |    |    +------------- Month (1-12)
+ |    |    +------------------ Day of month (1-31)
+ |    +----------------------- Hour (0-23)
+ +---------------------------- Minute (0-59)
+```
+
+Maintenance mode will be set on during the time span provided by CRON expression and `interval` attribute (valid DateInterval specification string).
+
+```php
+use Jgut\Zf\Maintenance\Provider\CrontabProvider;
+
+$provider = new CrontabProvider();
+$provider->setExpression('@monthly');
+$provider->setInterval('PT1H'),
+// Maintenance will be on the 1st of every month at 0h:00m during 1 hour
+```
+
+*Uses [ Michael Dowling (mtdowling) cron-expression](https://github.com/mtdowling/cron-expression/tree/master)*
 
 ### Exclusions
 
