@@ -78,9 +78,7 @@ class MaintenanceCollector implements CollectorInterface
             }
         }
 
-        if (count($this->scheduleTimes)) {
-            usort($this->scheduleTimes, array($this, 'sortTimes'));
-        }
+        usort($this->scheduleTimes, array($this, 'sortTimes'));
     }
 
     /**
