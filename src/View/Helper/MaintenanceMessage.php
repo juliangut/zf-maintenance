@@ -8,8 +8,6 @@
 
 namespace Jgut\Zf\Maintenance\View\Helper;
 
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Jgut\Zf\Maintenance\Provider\ProviderInterface;
 
 /**

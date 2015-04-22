@@ -12,7 +12,6 @@ use ZendDeveloperTools\Collector\CollectorInterface;
 use Zend\Mvc\MvcEvent;
 use Jgut\Zf\Maintenance\Provider\ScheduledProviderInterface;
 use Jgut\Zf\Maintenance\Provider\ProviderInterface;
-use \DateTime;
 
 /**
  * Collects maintenance mode status and values
