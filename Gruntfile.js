@@ -11,21 +11,21 @@ module.exports = function(grunt) {
             tests: 'tests',
             browse: 'build/browse',
             coverage: 'build/coverage',
-            reports: 'build/reports'
+            logs: 'build/logs'
         },
 
         mkdir: {
             reports: {
                 options: {
-                    create: ['<%= dirs.reports %>']
+                    create: ['<%= dirs.logs %>']
                 }
             }
         },
         touch: {
             reports: {
                 src: [
-                    '<%= dirs.reports %>/phpmd.xml',
-                    '<%= dirs.reports %>/phpcpd.xml'
+                    '<%= dirs.logs %>/pmd.xml',
+                    '<%= dirs.logs %>/pmd-cpd.xml'
                 ],
             }
         },
@@ -42,12 +42,13 @@ module.exports = function(grunt) {
         phpcs: {
             options: {
                 bin: '<%= dirs.bin %>/phpcs',
+                extensions: ['php'],
                 standard: 'PSR2'
             },
             reports: {
                 options: {
                     report: 'checkstyle',
-                    reportFile: '<%= dirs.reports %>/checkstyle.xml',
+                    reportFile: '<%= dirs.logs %>/checkstyle.xml',
                     ignoreExitCode: true
                 },
                 dir: [
@@ -70,7 +71,7 @@ module.exports = function(grunt) {
             reports: {
                 options: {
                     reportFormat: 'xml',
-                    reportFile: '<%= dirs.reports %>/phpmd.xml'
+                    reportFile: '<%= dirs.logs %>/pmd.xml'
                 },
                 dir: '<%= dirs.source %>'
             },
@@ -88,8 +89,7 @@ module.exports = function(grunt) {
             },
             reports: {
                 options: {
-                    reportFile: '<%= dirs.reports %>/phpcpd.xml',
-                    resultFile: '<%= dirs.reports %>/phpcpd.xml'
+                    reportFile: '<%= dirs.logs %>/pmd-cpd.xml'
                 },
                 dir: '<%= dirs.source %>'
             },
@@ -101,27 +101,34 @@ module.exports = function(grunt) {
             phploc: {
                 command: [
                     'php <%= dirs.bin %>/phploc',
-                    '--log-xml <%= dirs.reports %>/phploc.xml',
-                    '--log-csv <%= dirs.reports %>/phploc.cvs',
+                    '--count-tests',
+                    '--log-xml <%= dirs.logs %>/phploc.xml',
+                    '--log-csv <%= dirs.logs %>/phploc.cvs',
                     '--quiet',
-                    '<%= dirs.source %>'
+                    '<%= dirs.source %>',
+                    '<%= dirs.tests %>'
                 ].join(' ')
             },
             pdepend: {
                 command: [
                     'php <%= dirs.bin %>/pdepend',
-                    '--summary-xml=<%= dirs.reports %>/pdepend.xml',
-                    '--jdepend-chart=<%= dirs.reports %>/chart.svg',
-                    '--overview-pyramid=<%= dirs.reports %>/pyramid.svg',
+                    '--jdepend-xml=<%= dirs.logs %>/jdepend.xml',
+                    '--jdepend-chart=<%= dirs.logs %>/dependencies.svg',
+                    '--overview-pyramid=<%= dirs.logs %>/overview-pyramid.svg',
                     '<%= dirs.source %>'
                 ].join(' ')
             },
             phpcb: {
                 command: [
                     'php <%= dirs.bin %>/phpcb',
-                    '--log=<%= dirs.reports %>',
+                    '--log=<%= dirs.logs %>',
                     '--source=<%= dirs.source %>',
                     '--output=<%= dirs.browse %>'
+                ].join(' ')
+            },
+            phpdox: {
+                command: [
+                    'php <%= dirs.bin %>/phpdox'
                 ].join(' ')
             }
         },
@@ -132,9 +139,9 @@ module.exports = function(grunt) {
             },
             reports: {
                 options: {
-                    logJunit: '<%= dirs.reports %>/junit.xml',
-                    coverageClover: '<%= dirs.reports %>/clover.xml',
-                    coverageCrap4j: '<%= dirs.reports %>/crap4j.xml',
+                    logJunit: '<%= dirs.logs %>/junit.xml',
+                    coverageClover: '<%= dirs.logs %>/clover.xml',
+                    coverageCrap4j: '<%= dirs.logs %>/crap4j.xml',
                     coverageHtml: '<%= dirs.coverage %>'
                 }
             },
@@ -163,7 +170,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('check', ['phplint', 'phpcs:stdout', 'phpmd:stdout', 'phpcpd:stdout']);
     grunt.registerTask('test', ['phplint', 'phpunit:stdout']);
-    grunt.registerTask('report', ['phplint', 'mkdir:reports', 'touch:reports', 'phpcs:reports', 'phpmd:reports', 'phpcpd:reports', 'shell:phploc', 'shell:pdepend', 'phpunit:reports', 'shell:phpcb']);
+    grunt.registerTask('report', ['phplint', 'mkdir:reports', 'touch:reports', 'phpcs:reports', 'phpmd:reports', 'phpcpd:reports', 'shell:phploc', 'shell:pdepend', 'phpunit:reports', 'shell:phpcb', 'shell:phpdox']);
 
     grunt.registerTask('default', ['check', 'phpunit:stdout']);
 };

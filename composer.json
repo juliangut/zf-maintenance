@@ -28,7 +28,9 @@
     "phploc/phploc": "~2.0.0",
     "pdepend/pdepend": "~2.0",
     "phpunit/phpunit": "~4.5",
-    "mayflower/php-codebrowser": "~1.1"
+    "mayflower/php-codebrowser": "~1.1",
+    "nikic/php-parser": "1.0.0",
+    "theseer/phpdox": "~0.6"
   },
   "suggest": {
     "zendframework/zend-developer-tools": "If you want to see maintanenace status and schedule"
