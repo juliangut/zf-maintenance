@@ -1,43 +1,46 @@
 {
-    "name": "juliangut/zf-maintenance",
-    "description": "Zend Framework maintenance module",
-    "keywords": [
-        "zf2",
-        "maintenance"
-    ],
-    "homepage": "https://github.com/juliangut/zf-maintenance",
-    "type": "library",
-    "license": "BSD-3-Clause",
-    "authors": [
-        {
-            "name": "Julián Gutiérrez",
-            "email": "juliangut@gmail.com",
-            "homepage": "http://juliangut.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.3",
-        "zendframework/zendframework": "~2.3",
-        "mtdowling/cron-expression": "~1.0"
-    },
-    "require-dev": {
-        "zendframework/zend-developer-tools": "dev-master",
-        "phpunit/phpunit": "~4.5",
-        "squizlabs/php_codesniffer": "~2",
-        "phpmd/phpmd": "~2.2",
-        "sebastian/phpcpd": "~2.0"
-    },
-    "suggest": {
-        "zendframework/zend-developer-tools": "If you want to see maintanenace status and schedule"
-    },
-    "autoload": {
-        "psr-4": {
-            "Jgut\\Zf\\Maintenance\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Jgut\\Zf\\MaintenanceTests\\": "tests/MaintenanceTests/"
-        }
+  "name": "juliangut/zf-maintenance",
+  "description": "Zend Framework maintenance module",
+  "keywords": [
+    "zf2",
+    "maintenance"
+  ],
+  "homepage": "https://github.com/juliangut/zf-maintenance",
+  "type": "library",
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Julián Gutiérrez",
+      "email": "juliangut@gmail.com",
+      "homepage": "http://juliangut.com"
     }
+  ],
+  "require": {
+    "php": ">=5.3.3",
+    "zendframework/zendframework": "~2.3",
+    "mtdowling/cron-expression": "~1.0"
+  },
+  "require-dev": {
+    "zendframework/zend-developer-tools": "dev-master",
+    "squizlabs/php_codesniffer": "~2",
+    "phpmd/phpmd": "~2.2",
+    "sebastian/phpcpd": "~2.0",
+    "phploc/phploc": "~2.1",
+    "pdepend/pdepend": "~2.0",
+    "phpunit/phpunit": "~4.5",
+    "mayflower/php-codebrowser": "~1.1"
+  },
+  "suggest": {
+    "zendframework/zend-developer-tools": "If you want to see maintanenace status and schedule"
+  },
+  "autoload": {
+    "psr-4": {
+      "Jgut\\Zf\\Maintenance\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Jgut\\Zf\\MaintenanceTests\\": "tests/MaintenanceTests/"
+    }
+  }
 }

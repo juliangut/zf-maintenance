@@ -1,9 +1,10 @@
-[![Build Status](https://travis-ci.org/juliangut/zf-maintenance.svg?branch=master)](https://travis-ci.org/juliangut/zf-maintenance)
-[![Code Climate](https://codeclimate.com/github/juliangut/zf-maintenance/badges/gpa.svg)](https://codeclimate.com/github/juliangut/zf-maintenance)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/juliangut/zf-maintenance/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/juliangut/zf-maintenance/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/juliangut/zf-maintenance/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/juliangut/zf-maintenance/?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/juliangut/zf-maintenance/v/stable.svg)](https://packagist.org/packages/juliangut/zf-maintenance)
-[![Total Downloads](https://poser.pugx.org/juliangut/zf-maintenance/downloads.svg)](https://packagist.org/packages/juliangut/zf-maintenance)
+[![Latest Version](https://img.shields.io/github/release/juliangut/zf-maintenance.svg?style=flat-square)](https://packagist.org/packages/juliangut/zf-maintenance)
+[![License](https://img.shields.io/packagist/l/juliangut/zf-maintenance.svg?style=flat-square)](https://github.com/juliangut/zf-maintenance/blob/master/LICENSE)
+
+[![Build status](https://img.shields.io/travis/juliangut/zf-maintenance.svg?style=flat-square)](https://travis-ci.org/juliangut/zf-maintenance)
+[![Code Quality](https://img.shields.io/scrutinizer/g/juliangut/zf-maintenance.svg?style=flat-square)](https://scrutinizer-ci.com/g/juliangut/zf-maintenance)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/juliangut/zf-maintenance.svg?style=flat-square)](https://scrutinizer-ci.com/g/juliangut/zf-maintenance)
+[![Total Downloads](https://img.shields.io/packagist/dt/juliangut/zf-maintenance.svg?style=flat-square)](https://packagist.org/packages/juliangut/zf-maintenance)
 
 # Juliangut Zend Framework Maintenance Module
 
@@ -206,12 +207,13 @@ Maintenance mode will be set on during the time span provided by CRON expression
 use Jgut\Zf\Maintenance\Provider\CrontabProvider;
 
 $provider = new CrontabProvider();
-$provider->setExpression('@monthly');
-$provider->setInterval('PT1H'),
-// Maintenance will be on the 1st of every month at 0h:00m during 1 hour
+$provider->setExpression('@monthly'); // 0 0 1 * *
+$provider->setInterval('PT1H'), // 1 hour
+
+// Maintenance will be ON the 1st of every month at 0:00 during 1 hour
 ```
 
-*Uses [ Michael Dowling (mtdowling) cron-expression](https://github.com/mtdowling/cron-expression/tree/master)*
+*Uses [Michael Dowling (mtdowling) cron-expression](https://github.com/mtdowling/cron-expression/tree/master)*
 
 ### Exclusions
 

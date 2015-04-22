@@ -1,28 +1,33 @@
 {
-    "name": "juliangut-zf-maintenance",
-    "description": "Zend Framework maintenance module",
-    "keywords": [
-        "zf2",
-        "maintenance"
-    ],
-    "homepage": "https://github.com/juliangut/zf-maintenance",
-    "author": {
-        "name": "Julián Gutiérrez",
-        "email": "juliangut@gmail.com",
-        "url": "http://juliangut.com"
-    },
-    "dependencies": {},
-    "devDependencies": {
-        "grunt": "~0.4.5",
-        "load-grunt-tasks": "~0.6.0",
-        "grunt-phplint": "~0.0.5",
-        "grunt-phpunit": "~0.3.5",
-        "grunt-phpcs": "~0.2.3",
-        "grunt-phpmd": "~0.1.1",
-        "grunt-phpcpd": "~0.1.3"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:juliangut/zf-maintenance.git"
-    }
+  "name": "juliangut-zf-maintenance",
+  "description": "Zend Framework maintenance module",
+  "keywords": [
+    "zf2",
+    "maintenance"
+  ],
+  "homepage": "https://github.com/juliangut/zf-maintenance",
+  "author": {
+    "name": "Julián Gutiérrez",
+    "email": "juliangut@gmail.com",
+    "url": "http://juliangut.com"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "load-grunt-tasks": "~0.6.0",
+    "time-grunt": "~1.1.1",
+    "grunt-mkdir": "~0.1.2",
+    "grunt-touch": "~0.1.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-shell": "~1.1.2",
+    "grunt-phplint": "~0.0.5",
+    "grunt-phpcs": "~0.2.3",
+    "grunt-phpmd": "~0.1.1",
+    "grunt-phpcpd": "~0.1.4",
+    "grunt-phpunit": "~0.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:juliangut/zf-maintenance.git"
+  }
 }
