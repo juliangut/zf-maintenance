@@ -13,8 +13,7 @@
         stopOnSkipped="false"
         stopOnIncomplete="false"
         syntaxCheck="false"
-        verbose="true"
-        >
+        verbose="true">
     <testsuites>
         <testsuite>
             <directory suffix="Test.php">./tests</directory>
@@ -25,9 +24,6 @@
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
-            <exclude>
-                <directory suffix="Interface.php">./src</directory>
-            </exclude>
         </whitelist>
     </filter>
 
