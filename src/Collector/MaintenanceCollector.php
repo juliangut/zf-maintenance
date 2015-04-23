@@ -20,7 +20,7 @@ use Jgut\Zf\Maintenance\Provider\ProviderInterface;
  */
 class MaintenanceCollector implements CollectorInterface
 {
-    const NAME     = 'jgut-zf-maintenance-collector';
+    const NAME = 'jgut-zf-maintenance-collector';
 
     const PRIORITY = 150;
 
@@ -32,11 +32,15 @@ class MaintenanceCollector implements CollectorInterface
     protected $active = false;
 
     /**
+     * Maintenance scheduled times
+     *
      * @var array
      */
     protected $scheduleTimes = array();
 
     /**
+     * List of Jgut\Zf\Maintenance\Provider\AbstractProvider
+     *
      * @var array
      */
     protected $providers = array();
@@ -81,6 +85,8 @@ class MaintenanceCollector implements CollectorInterface
     }
 
     /**
+     * Check maintenance mode
+     *
      * @return boolean
      */
     public function isActive()
@@ -89,6 +95,8 @@ class MaintenanceCollector implements CollectorInterface
     }
 
     /**
+     * Get maintenance scheduled times
+     *
      * @return array
      */
     public function getScheduleTimes()

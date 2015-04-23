@@ -14,6 +14,9 @@ use Zend\Mvc\MvcEvent;
 use Zend\Mvc\Router\RouteMatch;
 use Jgut\Zf\Maintenance\Exception\MaintenanceException;
 
+/**
+ * Abstract base class for maintenance providers
+ */
 abstract class AbstractProvider implements ProviderInterface, ListenerAggregateInterface
 {
     /**
@@ -38,6 +41,8 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
     protected $block = true;
 
     /**
+     * List of callback listeners
+     *
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
@@ -115,6 +120,8 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
     }
 
     /**
+     * Set maintenance mode message
+     *
      * @param string $message
      */
     public function setMessage($message)
@@ -123,6 +130,8 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
     }
 
     /**
+     * Get maintenance mode message
+     *
      * @return string
      */
     public function getMessage()
@@ -131,6 +140,8 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
     }
 
     /**
+     * Set blocking state on maintenance mode
+     *
      * @param boolean $block
      */
     public function setBlock($block)
@@ -139,6 +150,8 @@ abstract class AbstractProvider implements ProviderInterface, ListenerAggregateI
     }
 
     /**
+     * Get blocking state on maintenance mode
+     *
      * @return boolean
      */
     public function isBlocked()

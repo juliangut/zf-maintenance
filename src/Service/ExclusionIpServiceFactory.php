@@ -10,15 +10,19 @@ namespace Jgut\Zf\Maintenance\Service;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Jgut\Zf\Maintenance\Exclusion\IpExclusion;
 use Zend\Http\PhpEnvironment\RemoteAddress;
+use Jgut\Zf\Maintenance\Exclusion\IpExclusion;
 
+/**
+ * Factory responsible of instantiating {@see Jgut\Zf\Maintenance\Exclusion\IpExclusion}
+ */
 class ExclusionIpServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \Jgut\Zf\Maintenance\Exclusion\IpExclusion
+     * @return Jgut\Zf\Maintenance\Exclusion\IpExclusion
+     * @throws \InvalidArgumentException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

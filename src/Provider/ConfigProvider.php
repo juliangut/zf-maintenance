@@ -9,7 +9,7 @@
 namespace Jgut\Zf\Maintenance\Provider;
 
 /**
- * Basic manual maintenance provider.
+ * Basic manual maintenance provider
  */
 class ConfigProvider extends AbstractProvider
 {
@@ -30,7 +30,6 @@ class ConfigProvider extends AbstractProvider
      * Set maintenance mode active.
      *
      * @param boolean $active
-     * @return void
      */
     public function setActive($active)
     {

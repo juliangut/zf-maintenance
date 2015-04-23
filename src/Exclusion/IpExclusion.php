@@ -10,14 +10,21 @@ namespace Jgut\Zf\Maintenance\Exclusion;
 
 use Zend\Http\PhpEnvironment\RemoteAddress;
 
+/**
+ * Maintenance exclusion by IP
+ */
 class IpExclusion implements ExclusionInterface
 {
     /**
+     * List of IP to be excluded
+     *
      * @var array
      */
     protected $ips;
 
     /**
+     * IP Address provider
+     *
      * @var \Zend\Http\PhpEnvironment\RemoteAddress
      */
     protected $ipProvider;

@@ -10,6 +10,9 @@ namespace Jgut\Zf\Maintenance;
 
 use Zend\Mvc\MvcEvent;
 
+/**
+ * Juliangut Zend Framework Maintenance module
+ */
 class Module
 {
     /**

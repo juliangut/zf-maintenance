@@ -16,20 +16,27 @@ use Zend\Stdlib\ResponseInterface as Response;
 use Zend\Http\Response as HttpResponse;
 use Zend\View\Model\ViewModel;
 
+/**
+ * Maintenance view strategy for maintenance mode
+ */
 class MaintenanceStrategy implements ListenerAggregateInterface
 {
     /**
+     * Maintenance template
+     *
      * @var string
      */
     protected $template;
 
     /**
+     * List of callback listeners
+     *
      * @var \Zend\Stdlib\CallbackHandler[]
      */
     protected $listeners = array();
 
     /**
-     * @param string $template name of the template to use on unauthorized requests
+     * @param string $template
      */
     public function __construct($template)
     {
@@ -60,7 +67,6 @@ class MaintenanceStrategy implements ListenerAggregateInterface
      * Modifies the response object with maintenance content.
      *
      * @param MvcEvent $event
-     * @return void
      */
     public function onDispatchError(MvcEvent $event)
     {
@@ -93,6 +99,8 @@ class MaintenanceStrategy implements ListenerAggregateInterface
     }
 
     /**
+     * Set maintenance template
+     *
      * @param string $template
      */
     public function setTemplate($template)
@@ -101,6 +109,8 @@ class MaintenanceStrategy implements ListenerAggregateInterface
     }
 
     /**
+     * Get maintenance template
+     *
      * @return string
      */
     public function getTemplate()

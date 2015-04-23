@@ -11,11 +11,13 @@ namespace Jgut\Zf\Maintenance\View\Helper;
 use Jgut\Zf\Maintenance\Provider\ScheduledProviderInterface;
 
 /**
- * Allows to retrieve scheduled maintenance period times in views.
+ * Allows to retrieve next scheduled maintenance times
  */
 class ScheduledMaintenance extends AbstractHelper
 {
     /**
+     * Get maintenance mode message if maintenance is On
+     *
      * @return array
      */
     public function __invoke()

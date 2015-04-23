@@ -9,9 +9,9 @@
 namespace Jgut\Zf\Maintenance\Provider;
 
 /**
- * File presence maintenance provider.
+ * File presence maintenance provider
  *
- * If file exists maintenance mode is considered to be On.
+ * If file exists maintenance mode is considered to be On
  */
 class FileProvider extends AbstractProvider
 {
@@ -21,15 +21,16 @@ class FileProvider extends AbstractProvider
     protected $maintenanceDescription = 'File maintenance mode active on Jgut\Zf\Maintenance\Provider\FileProvider';
 
     /**
-     * File path.
+     * File path
      *
      * @var string
      */
     protected $file;
 
     /**
+     * Set file path
+     *
      * @param string $file
-     * @return void
      */
     public function setFile($file)
     {
@@ -37,6 +38,8 @@ class FileProvider extends AbstractProvider
     }
 
     /**
+     * Get file path
+     *
      * @return string
      */
     public function getFile()

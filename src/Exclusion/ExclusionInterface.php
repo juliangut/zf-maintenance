@@ -8,6 +8,9 @@
 
 namespace Jgut\Zf\Maintenance\Exclusion;
 
+/**
+ * Maintenance exclusions interface
+ */
 interface ExclusionInterface
 {
     /**

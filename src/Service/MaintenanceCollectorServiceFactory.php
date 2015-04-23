@@ -12,12 +12,15 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Jgut\Zf\Maintenance\Collector\MaintenanceCollector;
 
+/**
+ * Factory responsible of instantiating {@see Jgut\Zf\Maintenance\Collector\MaintenanceCollector}
+ */
 class MaintenanceCollectorServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \Jgut\Zf\Maintenance\Collector\MaintenanceCollector
+     * @return Jgut\Zf\Maintenance\Collector\MaintenanceCollector
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

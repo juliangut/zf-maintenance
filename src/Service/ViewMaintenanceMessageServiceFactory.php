@@ -12,12 +12,15 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage;
 
+/**
+ * Factory responsible of instantiating {@see Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage}
+ */
 class ViewMaintenanceMessageServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage
+     * @return Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage
      */
     public function createService(ServiceLocatorInterface $helperPluginManager)
     {

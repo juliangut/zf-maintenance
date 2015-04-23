@@ -8,6 +8,9 @@
 
 namespace Jgut\Zf\Maintenance\Provider;
 
+/**
+ * Scheduled maintenance provider interface
+ */
 interface ScheduledProviderInterface extends ProviderInterface
 {
     /**

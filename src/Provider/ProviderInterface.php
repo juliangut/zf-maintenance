@@ -10,6 +10,9 @@ namespace Jgut\Zf\Maintenance\Provider;
 
 use Zend\Mvc\MvcEvent;
 
+/**
+ * Maintenance provider interface
+ */
 interface ProviderInterface
 {
     /**
@@ -28,7 +31,6 @@ interface ProviderInterface
      * Verifies maintenance mode.
      *
      * @param  MvcEvent $event
-     * @return void
      */
     public function onRoute(MvcEvent $event);
 }

@@ -12,15 +12,22 @@ use Zend\View\Helper\AbstractHelper as ViewHelper;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
+/**
+ * Abstract base class for view helpers
+ */
 class AbstractHelper extends ViewHelper implements ServiceLocatorAwareInterface
 {
     /**
+     * List of Jgut\Zf\Maintenance\Provider\AbstractProvider
+     *
      * @var array
      */
     protected $providers;
 
     /**
-     * @var \Zend\ServiceManager\ServiceLocatorInterface
+     * Zend Framework Service Locator
+     *
+     * @var Zend\ServiceManager\ServiceLocatorInterface
      */
     protected $serviceLocator;
 

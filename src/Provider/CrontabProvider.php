@@ -25,16 +25,22 @@ class CrontabProvider extends AbstractProvider implements ScheduledProviderInter
         'Schdeuled maintenance mode active on Jgut\Zf\Maintenance\Provider\CrontabProvider';
 
     /**
+     * Cron expression handler
+     *
      * @var \Cron\CronExpression
      */
     protected $cronExpression;
 
     /**
+     * Maintenance mode interval time
+     *
      * @var string
      */
     protected $interval = '';
 
     /**
+     * Set CRON expression
+     *
      * CRON expression syntax:
      *   *    *    *    *    *    *
      *   |    |    |    |    |    |
@@ -46,7 +52,7 @@ class CrontabProvider extends AbstractProvider implements ScheduledProviderInter
      *   +---------------------------- Minute (0-59)
      *
      * @param string $expression
-     * @return void
+     * @throws \InvalidArgumentException
      */
     public function setExpression($expression)
     {
@@ -61,6 +67,8 @@ class CrontabProvider extends AbstractProvider implements ScheduledProviderInter
     }
 
     /**
+     * Get CRON expression
+     *
      * @return string
      */
     public function getExpression()
@@ -72,7 +80,7 @@ class CrontabProvider extends AbstractProvider implements ScheduledProviderInter
      * Sets a valid \DateInterval specification string
      *
      * @param string $interval
-     * @return void
+     * @throws \InvalidArgumentException
      */
     public function setInterval($interval)
     {
@@ -87,6 +95,8 @@ class CrontabProvider extends AbstractProvider implements ScheduledProviderInter
     }
 
     /**
+     * Get maintenance interval time
+     *
      * @return string
      */
     public function getInterval()

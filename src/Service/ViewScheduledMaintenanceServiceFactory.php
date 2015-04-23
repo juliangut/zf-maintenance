@@ -12,12 +12,15 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance;
 
+/**
+ * Factory responsible of instantiating {@see Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance}
+ */
 class ViewScheduledMaintenanceServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance
+     * @return Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance
      */
     public function createService(ServiceLocatorInterface $helperPluginManager)
     {

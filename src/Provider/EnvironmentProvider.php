@@ -9,9 +9,9 @@
 namespace Jgut\Zf\Maintenance\Provider;
 
 /**
- * Environment variable maintenance provider.
+ * Environment variable maintenance provider
  *
- * If environment variable is set (if value provided then set to that value) maintenance mode is considered to be On.
+ * If environment variable is set (if value provided then set to that value) maintenance mode is considered to be On
  */
 class EnvironmentProvider extends AbstractProvider
 {
@@ -36,8 +36,9 @@ class EnvironmentProvider extends AbstractProvider
     protected $value;
 
     /**
+     * Set environment variable
+     *
      * @param string $var
-     * @return void
      */
     public function setVar($var)
     {
@@ -45,6 +46,8 @@ class EnvironmentProvider extends AbstractProvider
     }
 
     /**
+     * Get environment variable
+     *
      * @return string
      */
     public function getVar()
@@ -53,8 +56,9 @@ class EnvironmentProvider extends AbstractProvider
     }
 
     /**
+     * Set environment variable value
+     *
      * @param mixed $value
-     * @return void
      */
     public function setValue($value)
     {
@@ -62,6 +66,8 @@ class EnvironmentProvider extends AbstractProvider
     }
 
     /**
+     * Get environment variable value
+     *
      * @return mixed
      */
     public function getValue()

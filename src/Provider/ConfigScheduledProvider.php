@@ -8,8 +8,10 @@
 
 namespace Jgut\Zf\Maintenance\Provider;
 
+use \DateTime;
+
 /**
- * Scheduled maintenance provider.
+ * Scheduled maintenance provider
  *
  * Maintenance mode is considered to be On if current date is
  *   - higher than start if only start is defined
@@ -39,10 +41,12 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
     protected $end;
 
     /**
+     * Set scheduled start time
+     *
      * @param \DateTime $start
-     * @return void
+     * @throws \InvalidArgumentException
      */
-    public function setStart(\DateTime $start)
+    public function setStart(DateTime $start)
     {
         if ($this->end && $start > $this->end) {
             throw new \InvalidArgumentException('Start time should come before end time');
@@ -52,6 +56,8 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
     }
 
     /**
+     * Get scheduled start time
+     *
      * @return \DateTime
      */
     public function getStart()
@@ -60,10 +66,12 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
     }
 
     /**
+     * Set scheduled end time
+     *
      * @param \DateTime $end
-     * @return void
+     * @throws \InvalidArgumentException
      */
-    public function setEnd(\DateTime $end)
+    public function setEnd(DateTime $end)
     {
         if ($this->start && $end < $this->start) {
             throw new \InvalidArgumentException('End time should come after start time');
@@ -73,6 +81,8 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
     }
 
     /**
+     * Get scheduled end time
+     *
      * @return \DateTime
      */
     public function getEnd()
@@ -85,7 +95,7 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
      */
     public function isActive()
     {
-        $now = new \DateTime();
+        $now = new DateTime();
 
         if (!$this->start && !$this->end) {
             return false;
@@ -106,7 +116,7 @@ class ConfigScheduledProvider extends AbstractProvider implements ScheduledProvi
      */
     public function isScheduled()
     {
-        $now = new \DateTime();
+        $now = new DateTime();
 
         return $this->start && $now < $this->start;
     }

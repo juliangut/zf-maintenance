@@ -12,12 +12,16 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Jgut\Zf\Maintenance\Exclusion\RouteExclusion;
 
+/**
+ * Factory responsible of instantiating {@see Jgut\Zf\Maintenance\Exclusion\RouteExclusion}
+ */
 class ExclusionRouteServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \Jgut\Zf\Maintenance\Exclusion\RouteExclusion
+     * @return Jgut\Zf\Maintenance\Exclusion\RouteExclusion
+     * @throws \InvalidArgumentException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

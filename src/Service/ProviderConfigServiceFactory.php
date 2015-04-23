@@ -12,12 +12,16 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Jgut\Zf\Maintenance\Provider\ConfigProvider;
 
+/**
+ * Factory responsible of instantiating {@see Jgut\Zf\Maintenance\Provider\ConfigProvider}
+ */
 class ProviderConfigServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \Jgut\Zf\Maintenance\Provider\ConfigProvider
+     * @return Jgut\Zf\Maintenance\Provider\ConfigProvider
+     * @throws \InvalidArgumentException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

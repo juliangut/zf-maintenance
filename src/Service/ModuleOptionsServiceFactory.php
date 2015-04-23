@@ -12,6 +12,9 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Jgut\Zf\Maintenance\Options\ModuleOptions;
 
+/**
+ * Factory responsible of instantiating {@see Jgut\Zf\Maintenance\Options\ModuleOptions}
+ */
 class ModuleOptionsServiceFactory implements FactoryInterface
 {
     /**
@@ -24,7 +27,7 @@ class ModuleOptionsServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return \Jgut\Zf\Maintenance\Options\ModuleOptions
+     * @return Jgut\Zf\Maintenance\Options\ModuleOptions
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

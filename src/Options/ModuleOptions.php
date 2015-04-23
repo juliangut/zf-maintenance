@@ -10,6 +10,9 @@ namespace Jgut\Zf\Maintenance\Options;
 
 use Zend\Stdlib\AbstractOptions;
 
+/**
+ * Module's options container
+ */
 class ModuleOptions extends AbstractOptions
 {
     /**
@@ -51,6 +54,8 @@ class ModuleOptions extends AbstractOptions
 
     /**
      * {@inheritDoc}
+     *
+     * @param array|\Traversable $options
      */
     public function __construct($options = null)
     {

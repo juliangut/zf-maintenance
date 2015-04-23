@@ -10,14 +10,21 @@ namespace Jgut\Zf\Maintenance\Exclusion;
 
 use Zend\Mvc\Router\RouteMatch;
 
+/**
+ * Maintenance exclusions by route
+ */
 class RouteExclusion implements ExclusionInterface
 {
     /**
+     * List of routes to be excluded
+     *
      * @var array
      */
     protected $routes;
 
     /**
+     * Routes provider
+     *
      * @var \Zend\Mvc\Router\RouteMatch
      */
     protected $routeMatch;
@@ -64,6 +71,6 @@ class RouteExclusion implements ExclusionInterface
      */
     protected function getRoutePath(array $route)
     {
-        return $route['controller'] . '/' . (isset($route['action']) ? $route['action'] : '');
+        return $route['controller'] . (isset($route['action']) ? '/' . $route['action'] : '');
     }
 }

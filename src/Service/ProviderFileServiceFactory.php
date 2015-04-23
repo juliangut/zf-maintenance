@@ -12,12 +12,16 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Jgut\Zf\Maintenance\Provider\FileProvider;
 
+/**
+ * Factory responsible of instantiating {@see Jgut\Zf\Maintenance\Provider\FileProvider}
+ */
 class ProviderFileServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \Jgut\Zf\Maintenance\Provider\FileProvider
+     * @return Jgut\Zf\Maintenance\Provider\FileProvider
+     * @throws \InvalidArgumentException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

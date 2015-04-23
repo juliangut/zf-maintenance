@@ -13,14 +13,14 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Jgut\Zf\Maintenance\View\MaintenanceStrategy;
 
 /**
- * Factory responsible of instantiating {@see \Jgut\Zf\Maintenance\View\MaintenanceStrategy}
+ * Factory responsible of instantiating {@see Jgut\Zf\Maintenance\View\MaintenanceStrategy}
  */
 class MaintenanceStrategyServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \Jgut\Zf\Maintenance\View\MaintenanceStrategy
+     * @return Jgut\Zf\Maintenance\View\MaintenanceStrategy
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

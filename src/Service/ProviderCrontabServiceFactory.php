@@ -12,12 +12,16 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Jgut\Zf\Maintenance\Provider\CrontabProvider;
 
+/**
+ * Factory responsible of instantiating {@see Jgut\Zf\Maintenance\Provider\CrontabProvider}
+ */
 class ProviderCrontabServiceFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
      *
-     * @return \Jgut\Zf\Maintenance\Provider\CrontabProvider
+     * @return Jgut\Zf\Maintenance\Provider\CrontabProvider
+     * @throws \InvalidArgumentException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
