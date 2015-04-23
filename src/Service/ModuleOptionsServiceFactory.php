@@ -27,7 +27,7 @@ class ModuleOptionsServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return Jgut\Zf\Maintenance\Options\ModuleOptions
+     * @return ModuleOptions
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

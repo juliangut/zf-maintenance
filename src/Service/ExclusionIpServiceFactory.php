@@ -21,7 +21,7 @@ class ExclusionIpServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return Jgut\Zf\Maintenance\Exclusion\IpExclusion
+     * @return IpExclusion
      * @throws \InvalidArgumentException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
