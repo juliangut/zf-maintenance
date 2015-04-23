@@ -20,7 +20,7 @@ class ViewScheduledMaintenanceServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return Jgut\Zf\Maintenance\View\Helper\ScheduledMaintenance
+     * @return ScheduledMaintenance
      */
     public function createService(ServiceLocatorInterface $helperPluginManager)
     {

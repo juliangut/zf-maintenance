@@ -21,7 +21,7 @@ class ProviderConfigScheduledServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return Jgut\Zf\Maintenance\Provider\ConfigScheduledProvider
+     * @return ConfigScheduledProvider
      * @throws \InvalidArgumentException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

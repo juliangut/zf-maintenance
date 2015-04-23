@@ -20,7 +20,7 @@ class ProviderCrontabServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return Jgut\Zf\Maintenance\Provider\CrontabProvider
+     * @return CrontabProvider
      * @throws \InvalidArgumentException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
