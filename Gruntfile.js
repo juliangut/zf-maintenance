@@ -9,6 +9,7 @@ module.exports = function(grunt) {
             bin: 'vendor/bin',
             source: 'src',
             tests: 'tests',
+            api: 'build/api',
             browse: 'build/browse',
             coverage: 'build/coverage',
             logs: 'build/logs'
@@ -125,11 +126,15 @@ module.exports = function(grunt) {
                     '--source=<%= dirs.source %>',
                     '--output=<%= dirs.browse %>'
                 ].join(' ')
-            },
-            phpdox: {
-                command: [
-                    'php <%= dirs.bin %>/phpdox'
-                ].join(' ')
+            }
+        },
+        phpdocumentor: {
+            reports: {
+                options: {
+                    bin: '<%= dirs.bin %>/phpdoc.php',
+                    directory : '<%= dirs.source %>',
+                    target : '<%= dirs.api %>'
+                }
             }
         },
         phpunit: {
@@ -170,7 +175,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('check', ['phplint', 'phpcs:stdout', 'phpmd:stdout', 'phpcpd:stdout']);
     grunt.registerTask('test', ['phplint', 'phpunit:stdout']);
-    grunt.registerTask('report', ['phplint', 'mkdir:reports', 'touch:reports', 'phpcs:reports', 'phpmd:reports', 'phpcpd:reports', 'shell:phploc', 'shell:pdepend', 'phpunit:reports', 'shell:phpcb', 'shell:phpdox']);
+    grunt.registerTask('report', ['phplint', 'mkdir:reports', 'touch:reports', 'phpcs:reports', 'phpmd:reports', 'phpcpd:reports', 'shell:phploc', 'shell:pdepend', 'phpunit:reports', 'shell:phpcb', 'phpdocumentor:reports']);
 
     grunt.registerTask('default', ['check', 'phpunit:stdout']);
 };
