@@ -20,7 +20,7 @@ class MaintenanceStrategyServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return Jgut\Zf\Maintenance\View\MaintenanceStrategy
+     * @return MaintenanceStrategy
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {

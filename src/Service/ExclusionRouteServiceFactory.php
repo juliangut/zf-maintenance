@@ -20,7 +20,7 @@ class ExclusionRouteServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return Jgut\Zf\Maintenance\Exclusion\RouteExclusion
+     * @return RouteExclusion
      * @throws \InvalidArgumentException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
