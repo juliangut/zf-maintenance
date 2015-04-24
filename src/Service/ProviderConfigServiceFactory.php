@@ -20,7 +20,7 @@ class ProviderConfigServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return Jgut\Zf\Maintenance\Provider\ConfigProvider
+     * @return ConfigProvider
      * @throws \InvalidArgumentException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

@@ -20,7 +20,7 @@ class ProviderFileServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return Jgut\Zf\Maintenance\Provider\FileProvider
+     * @return FileProvider
      * @throws \InvalidArgumentException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

@@ -20,7 +20,7 @@ class ViewMaintenanceMessageServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return Jgut\Zf\Maintenance\View\Helper\MaintenanceMessage
+     * @return MaintenanceMessage
      */
     public function createService(ServiceLocatorInterface $helperPluginManager)
     {

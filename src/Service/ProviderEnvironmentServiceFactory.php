@@ -20,7 +20,7 @@ class ProviderEnvironmentServiceFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      *
-     * @return Jgut\Zf\Maintenance\Provider\EnvironmentProvider
+     * @return EnvironmentProvider
      * @throws \InvalidArgumentException
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
